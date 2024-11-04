@@ -16,6 +16,7 @@ namespace MochiBTS.Editor
         private NodeSearchWindow searchWindow;
         private readonly RhTreeSettings settings;
         public RhTree tree;
+
         public RhTreeView()
         {
             settings = RhTreeSettings.GetOrCreateSettings();
@@ -30,12 +31,14 @@ namespace MochiBTS.Editor
             styleSheets.Add(styleSheet);
 
             Undo.undoRedoPerformed += OnUndoRedo;
-            viewTransformChanged += _ => {
+            viewTransformChanged += _ =>
+            {
                 if (tree is null) return;
                 tree.transformPosition = viewTransform.position;
                 tree.transformScale = viewTransform.scale; //Lost if recompiled...
             };
         }
+
         public void AddSearchWindow(RhTreeEditor editor)
         {
             searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
@@ -44,11 +47,13 @@ namespace MochiBTS.Editor
             nodeCreationRequest = ctx =>
                 SearchWindow.Open(new SearchWindowContext(ctx.screenMousePosition), searchWindow);
         }
+
         private void OnUndoRedo()
         {
             PopulateView(tree);
             AssetDatabase.SaveAssets();
         }
+
         public void PopulateView(RhTree treeParam)
         {
             tree = treeParam;
@@ -56,48 +61,66 @@ namespace MochiBTS.Editor
             DeleteElements(graphElements);
             graphViewChanged += OnGraphViewChanged;
             tree.nodes.ForEach(CreateNodeView);
-            tree.nodes.ForEach(n => {
-                var children = RhTree.GetChildren(n);
-                children.ForEach(c => {
-                    var parentView = FindNodeView(n);
-                    var childView = FindNodeView(c);
-                    //var edge = parentView.output.ConnectTo(childView.input);
-                    //AddElement(edge);
-                    throw new NotImplementedException();
+            tree.nodes.ForEach(n =>
+            {
+                //connect output ports
+                n.OutputPorts.ForEach(p =>
+                {
+                    if (p is null) return;
+                    var outputP = FindPort(p);
+                    foreach (var connectedPort in p.GetConnectedPorts())
+                    {
+                        if (connectedPort is null) return;
+                        var inputP = FindPort(connectedPort);
+                        var edge = outputP.ConnectTo(inputP);
+                        AddElement(edge);
+                    }
                 });
             });
             if (tree.transformScale == Vector3.zero) tree.transformScale = Vector3.one;
             UpdateViewTransform(tree.transformPosition, tree.transformScale);
-
         }
 
-        private NodeView FindNodeView(RhNode node)
+        private Port FindPort(RhPort port)
         {
-            return GetNodeByGuid(node.guid) as NodeView;
+            return GetPortByGuid(port.GUID);
         }
+
         private GraphViewChange OnGraphViewChanged(GraphViewChange graphviewchange)
         {
-            graphviewchange.elementsToRemove?.ForEach(e => {
-                switch (e) {
+            graphviewchange.elementsToRemove?.ForEach(e =>
+            {
+                switch (e)
+                {
                     case NodeView nodeView:
                         tree.DeleteNode(nodeView.node);
                         break;
                     case Edge edge:
-                        {
-                            if (edge.output.node is NodeView parentView && edge.input.node is NodeView childView)
-                                RhTree.RemoveChild(parentView.node, childView.node);
-                            break;
-                        }
+                    {
+                        if (edge.output.node is NodeView parentView && edge.input.node is NodeView childView)
+                            RhTree.RemoveConnection(
+                                parentView.node,
+                                edge.output.viewDataKey,
+                                childView.node,
+                                edge.input.viewDataKey);
+                        break;
+                    }
                 }
             });
 
-            graphviewchange.edgesToCreate?.ForEach(edge => {
+            graphviewchange.edgesToCreate?.ForEach(edge =>
+            {
                 if (edge.output.node is NodeView parentView && edge.input.node is NodeView childView)
-                    RhTree.AddChild(parentView.node, childView.node);
+                    RhTree.AddConnection(
+                        parentView.node,
+                        edge.output.viewDataKey,
+                        childView.node,
+                        edge.input.viewDataKey);
             });
 
             if (graphviewchange.movedElements is not null)
-                nodes.ForEach(n => {
+                nodes.ForEach(n =>
+                {
                     if (n is NodeView nodeView)
                         nodeView.SortChildren();
                 });
@@ -106,7 +129,8 @@ namespace MochiBTS.Editor
 
         private void CreateNodeView(RhNode node)
         {
-            var nodeView = new NodeView(node) {
+            var nodeView = new NodeView(node)
+            {
                 onNodeSelected = onNodeSelected
             };
             AddElement(nodeView);
@@ -136,6 +160,7 @@ namespace MochiBTS.Editor
             node.position = position;
             CreateNodeView(node);
         }
+
         public void CreateNode(Type type)
         {
             var node = tree.CreateNode(type);
@@ -144,9 +169,13 @@ namespace MochiBTS.Editor
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
-            return ports.ToList().Where(endPort => endPort.direction != startPort.direction && endPort.node != startPort.node).ToList();
+            return ports.ToList()
+                .Where(endPort => endPort.direction != startPort.direction &&
+                                  endPort.node != startPort.node &&
+                                  endPort.portType == startPort.portType)
+                .ToList();
         }
-        
+
         public new class UxmlFactory : UxmlFactory<RhTreeView, UxmlTraits>
         {
         }

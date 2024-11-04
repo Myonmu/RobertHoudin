@@ -76,6 +76,7 @@ namespace MochiBTS.Editor
                     outputPort.AcceptedType);
                 output.portName = "";
                 output.style.flexDirection = FlexDirection.ColumnReverse;
+                output.viewDataKey = outputPort.GUID;
                 outputContainer.Add(output);
             }
         }
@@ -87,7 +88,7 @@ namespace MochiBTS.Editor
                 Port input;
                 switch (inputPort)
                 {
-                    case RhMultiPort:
+                    case IRhMultiPort:
                         input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Multi,
                             inputPort.AcceptedType);
                         break;
@@ -98,6 +99,7 @@ namespace MochiBTS.Editor
                 }
                 input.portName = "";
                 input.style.flexDirection = FlexDirection.Column;
+                input.viewDataKey = inputPort.GUID;
                 inputContainer.Add(input);
             }
         }

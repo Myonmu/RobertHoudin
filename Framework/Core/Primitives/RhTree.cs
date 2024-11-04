@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -83,24 +84,30 @@ namespace RobertHoudin.Framework.Core.Primitives
             AssetDatabase.SaveAssets();
         }
 
-        public static void AddChild(RhNode parent, RhNode child)
+        public static void AddConnection(RhNode from, string fromPortGuid, RhNode to, string toPortGuid)
         {
-            if (parent is null || child is null) return;
-            Undo.RecordObject(parent, "RH Tree (AddChild)");
+            if (from is null || to is null) return;
+            var fromPort = from.GetOutputPortByGUID(fromPortGuid);
+            var toPort = to.GetInputPortByGUID(toPortGuid);
+            if (fromPort is null || toPort is null) return;
             
-            child.AssignParent(parent);
-            EditorUtility.SetDirty(parent);
-
+            Undo.RecordObject(from, "RH Tree (Connect)");
+            fromPort.Connect(toPort);
+            toPort.Connect(fromPort);
+            EditorUtility.SetDirty(from);
         }
 
-        public static void RemoveChild(RhNode parent, RhNode child)
+        public static void RemoveConnection(RhNode from, string fromPortGuid, RhNode to, string toPortGuid)
         {
-            if (parent is null || child is null) return;
-            Undo.RecordObject(parent, "RH Tree (RemoveChild)");
+            if (from is null || to is null) return;
+            var fromPort = from.GetOutputPortByGUID(fromPortGuid);
+            var toPort = to.GetInputPortByGUID(toPortGuid);
+            if (fromPort is null || toPort is null) return;
             
-            child.AssignParent(null);
-            EditorUtility.SetDirty(parent);
-
+            Undo.RecordObject(from, "RH Tree (Disconnect)");
+            fromPort.Disconnect(toPort);
+            toPort.Disconnect(fromPort);
+            EditorUtility.SetDirty(from);
         }
 
 
@@ -109,6 +116,17 @@ namespace RobertHoudin.Framework.Core.Primitives
         public static List<RhNode> GetChildren(RhNode parent)
         {
             throw new NotImplementedException();
+        }
+
+        [Button]
+        public void Test()
+        {
+            foreach (var node in nodes)
+            {
+                node.ResetNode();
+            }
+            resultNode.EvaluateNode(null, null);
+            Debug.Log(resultNode.OutputPorts[0].GetValue());
         }
 
     }

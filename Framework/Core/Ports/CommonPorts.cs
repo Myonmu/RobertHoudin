@@ -14,4 +14,6 @@ namespace TATools.MochiBTS.Core.Ports
     [Serializable] public class QuaternionPort: RhSinglePort<Quaternion> { }
     [Serializable] public class Vector3IntPort: RhSinglePort<Vector3Int> { }
     [Serializable] public class Vector2IntPort: RhSinglePort<Vector2Int> { }
+
+    [Serializable] public class MultiIntPort : RhMultiPort<int> { }
 }

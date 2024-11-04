@@ -1,14 +1,14 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/MochiBTS/Editor/Node/NodeViewStyle.uss?fileID=7433441132597879392&amp;guid=7474b33d9060f214caa8db4590ff9f10&amp;type=3#NodeViewStyle" />
+    <Style src="project://database/Assets/RenderPipeline/HLOD/Editor/NodeViewStyle.uss?fileID=7433441132597879392&amp;guid=7474b33d9060f214caa8db4590ff9f10&amp;type=3#NodeViewStyle" />
     <ui:VisualElement name="node-state" />
     <ui:VisualElement name="selection-border">
         <ui:VisualElement name="node-border" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-image: none;">
             <ui:VisualElement name="contents" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-items: stretch; background-image: none;">
                 <ui:VisualElement name="top">
-                    <ui:VisualElement name="input" style="padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px;" />
+                    <ui:VisualElement name="input" style="padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px; flex-direction: row; justify-content: center;" />
                     <ui:VisualElement name="divider" class="vertical" />
-                    <ui:VisualElement name="title" style="padding-left: 3px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px;">
-                        <ui:Label name="title-label" text="RootNode" class="unity-text-element unity-label" style="-unity-font: url(&apos;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&apos;); -unity-font-style: bold; -unity-text-align: upper-center; color: rgb(255, 255, 255); font-size: 16px;">
+                    <ui:VisualElement name="title" style="padding-left: 3px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px; height: 40px;">
+                        <ui:Label name="title-label" text="RootNode" class="unity-text-element unity-label" style="-unity-font: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); -unity-font-style: bold; -unity-text-align: upper-center; color: rgb(255, 255, 255); font-size: 16px;">
                             <ui:VisualElement name="selection-border" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 1px; bottom: 0;" />
                         </ui:Label>
                         <ui:VisualElement name="title-button-container">
@@ -18,15 +18,15 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; align-items: stretch; align-self: center; justify-content: flex-start;">
-                        <ui:VisualElement name="nodeIcon" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); -unity-background-scale-mode: scale-to-fit; align-items: stretch; min-width: 64px; min-height: 64px; -unity-text-align: middle-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 20px; margin-bottom: 20px; flex-direction: column;" />
-                        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: space-between; align-items: center; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
+                        <ui:VisualElement name="nodeIcon" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); -unity-background-scale-mode: scale-to-fit; align-items: stretch; min-width: 64px; min-height: 64px; -unity-text-align: middle-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 20px; margin-bottom: 20px; flex-direction: column; display: none;" />
+                        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: space-between; align-items: center; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; display: none;">
                             <ui:Label tabindex="-1" text="Description goes here" display-tooltip-when-elided="true" name="description" style="padding-left: 4px; padding-right: 4px; padding-top: 4px; padding-bottom: 4px; flex-shrink: 1; flex-grow: 1; max-width: none; flex-wrap: wrap;" />
                             <ui:Label tabindex="-1" text="Less important Info" display-tooltip-when-elided="true" name="subInfo" style="-unity-text-align: upper-center; color: rgb(224, 255, 16); -unity-text-outline-width: 0; -unity-font-style: bold; font-size: 12px; background-color: rgba(255, 0, 155, 0);" />
                             <ui:Label tabindex="-1" text="Relevant Info" display-tooltip-when-elided="true" name="info" style="-unity-text-align: upper-center; color: rgb(255, 90, 173); -unity-text-outline-width: 0; -unity-font-style: bold; font-size: 18px;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="divider" class="vertical" />
-                    <ui:VisualElement name="output" style="padding-bottom: 5px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                    <ui:VisualElement name="output" style="padding-bottom: 5px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-direction: row; align-items: center; justify-content: center;" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

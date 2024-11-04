@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
-using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
