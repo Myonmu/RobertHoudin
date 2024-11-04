@@ -1,0 +1,4 @@
+﻿{
+  "name": "RobertHoudin.Runtime.Variables",
+  "references":[ "RobertHoudin.Runtime.Primitives" ]
+}
