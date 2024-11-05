@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using UnityEngine;
 
@@ -7,11 +8,29 @@ namespace RobertHoudin.Framework.Core.Primitives.Nodes
 {
     public abstract class RhNode : ScriptableObject
     {
-        [field: SerializeReference]
-        public virtual List<RhPort> InputPorts => new();
-        [field: SerializeReference]
-        public virtual List<RhPort> OutputPorts => new();
-        
+        private List<RhPort> _inputPortsCache = null;
+
+        public virtual List<RhPort> InputPorts
+        {
+            get
+            {
+                _inputPortsCache ??= GetType().GetFields(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(x => x.GetCustomAttribute<RhInputPortAttribute>() is not null)
+                    .Select(x => x.GetValue(this) as RhPort).ToList();
+                return _inputPortsCache;
+            }
+        }
+
+        private List<RhPort> _outputPortsCache = null;
+
+        public virtual List<RhPort> OutputPorts
+        {
+            get { _outputPortsCache ??= GetType().GetFields(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(x => x.GetCustomAttribute<RhOutputPortAttribute>() is not null)
+                    .Select(x => x.GetValue(this) as RhPort).ToList();
+                return _outputPortsCache;}
+        }
+
         [HideInInspector] public RhNodeStatus status;
         [HideInInspector] public string guid;
         [HideInInspector] public Vector2 position;
@@ -20,7 +39,7 @@ namespace RobertHoudin.Framework.Core.Primitives.Nodes
         [HideInInspector] public string subInfo;
         public virtual string Tooltip { get; }
 
-        public void EvaluateNode(Agent agent, Blackboard blackboard)
+        public void EvaluateNode(RhExecutionContext context)
         {
             if (status is not RhNodeStatus.Idle)
             {
@@ -28,14 +47,14 @@ namespace RobertHoudin.Framework.Core.Primitives.Nodes
             }
 
             status = RhNodeStatus.WaitingForDependency;
-            OnBeginEvaluate(agent, blackboard);
+            OnBeginEvaluate(context);
             // requires all parent nodes to finish evaluating
             foreach (var inputPort in InputPorts)
             {
                 foreach (var port in inputPort.GetConnectedPorts())
                 {
                     if (port == null) continue;
-                    port.node.EvaluateNode(agent, blackboard);
+                    port.node.EvaluateNode(context);
                     port.ForwardValue(inputPort);
                     if (port.node.status is RhNodeStatus.Failed)
                     {
@@ -44,7 +63,8 @@ namespace RobertHoudin.Framework.Core.Primitives.Nodes
                     }
                 }
             }
-            status = OnEvaluate(agent, blackboard) ? RhNodeStatus.Success : RhNodeStatus.Failed;
+
+            status = OnEvaluate(context) ? RhNodeStatus.Success : RhNodeStatus.Failed;
         }
 
         public virtual RhNode Clone()
@@ -56,19 +76,24 @@ namespace RobertHoudin.Framework.Core.Primitives.Nodes
         {
             foreach (var inputPort in InputPorts)
             {
-                if(inputPort == null)continue;
+                if (inputPort == null) continue;
                 inputPort.node = this;
             }
+
             foreach (var outputPort in OutputPorts)
             {
-                if(outputPort == null)continue;
+                if (outputPort == null) continue;
                 outputPort.node = this;
             }
+
             status = RhNodeStatus.Idle;
         }
 
-        protected virtual void OnBeginEvaluate(Agent agent, Blackboard blackboard){}
-        protected abstract bool OnEvaluate(Agent agent, Blackboard blackboard);
+        protected virtual void OnBeginEvaluate(RhExecutionContext context)
+        {
+        }
+
+        protected abstract bool OnEvaluate(RhExecutionContext context);
 
         public virtual void UpdateInfo()
         {
@@ -97,10 +122,10 @@ namespace RobertHoudin.Framework.Core.Primitives.Nodes
         {
             return OutputPorts.FirstOrDefault(x => x != null && x.GUID == guid);
         }
+
         public RhPort GetInputPortByGUID(string guid)
         {
             return InputPorts.FirstOrDefault(x => x != null && x.GUID == guid);
         }
-        
     }
 }

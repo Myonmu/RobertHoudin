@@ -9,18 +9,11 @@ namespace RobertHoudin.NodeLibrary
     public class SumNode : RhNode
 
     {
-        public MultiIntPort inputs;
-        public IntPort output;
+        [RhInputPort] public MultiIntPort inputs;
+        [RhOutputPort] public IntPort output;
+        
 
-        public override List<RhPort> InputPorts => new() { inputs };
-
-        public override List<RhPort> OutputPorts => new() { output };
-
-        protected override void OnBeginEvaluate(Agent agent, Blackboard blackboard)
-        {
-        }
-
-        protected override bool OnEvaluate(Agent agent, Blackboard blackboard)
+        protected override bool OnEvaluate(RhExecutionContext context)
         {
             var sum = 0;
             inputs.ForEachConnected(i => sum += i);

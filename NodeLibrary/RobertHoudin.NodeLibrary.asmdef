@@ -1,0 +1,7 @@
+﻿{
+  "name": "RobertHoudin.NodeLibrary",
+  "references": [
+    "RobertHoudin.Ports",
+    "RobertHoudin.Runtime.Primitives"
+  ]
+}

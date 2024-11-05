@@ -15,13 +15,15 @@ namespace RobertHoudin.Framework.Core.Primitives
     {
         public RhNode resultNode;
         [HideInInspector] public List<RhNode> nodes = new();
-        public Blackboard blackboard;
         //View Transform
         [HideInInspector] public Vector3 transformScale;
         [HideInInspector] public Vector3 transformPosition;
-        public void EvaluateTree(Agent agent, bool forceExecute = false)
+        public void EvaluateTree(RhPropertyBlock propertyBlock)
         {
-             resultNode.EvaluateNode(agent, blackboard);
+             resultNode.EvaluateNode(new RhExecutionContext()
+             {
+                 propertyBlock = propertyBlock
+             });
         }
 
         private static void Traverse(RhNode node, Action<RhNode> visitor)
@@ -42,7 +44,6 @@ namespace RobertHoudin.Framework.Core.Primitives
                 if (n is null) return;
                 tree.nodes.Add(n);
             });
-            if (tree.blackboard is not null) tree.blackboard = blackboard.Clone();
             return tree;
         }
 
@@ -125,7 +126,7 @@ namespace RobertHoudin.Framework.Core.Primitives
             {
                 node.ResetNode();
             }
-            resultNode.EvaluateNode(null, null);
+            resultNode.EvaluateNode(null);
             Debug.Log(resultNode.OutputPorts[0].GetValue());
         }
 

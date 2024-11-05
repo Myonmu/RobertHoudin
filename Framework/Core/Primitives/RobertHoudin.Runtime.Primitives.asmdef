@@ -1,3 +1,5 @@
 ﻿{
-  "name": "RobertHoudin.Runtime.Primitives"
+  "name": "RobertHoudin.Runtime.Primitives",
+  "references": [
+  ]
 }

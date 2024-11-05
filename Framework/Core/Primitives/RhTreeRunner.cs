@@ -6,7 +6,7 @@ namespace RobertHoudin.Framework.Core.Primitives
     public class RhTreeRunner : IListener
     {
         public RhTree tree;
-        public Agent agent;
+        public RhPropertyBlock agent;
         public void Init()
         {
             tree = tree.Clone();

@@ -21,6 +21,7 @@ namespace MochiBTS.Editor
             Add(container);
         }
 
+        /*
         public void UpdateBlackBoard(RhTree tree)
         {
             Clear();
@@ -32,7 +33,7 @@ namespace MochiBTS.Editor
                     editor.OnInspectorGUI();
             });
             Add(container);
-        }
+        }*/
         public void UpdateVariableBoard(VariableBoard variableBoard)
         {
             Clear();
@@ -45,7 +46,7 @@ namespace MochiBTS.Editor
             });
             Add(container);
         }
-        public void UpdateAgent(Agent agent)
+        public void UpdateAgent(RhPropertyBlock agent)
         {
             Clear();
             Object.DestroyImmediate(editor);

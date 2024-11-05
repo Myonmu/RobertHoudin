@@ -178,7 +178,7 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
             return (T)b.GetType().GetField(fieldName).GetValue(b);
         }
 
-        public static T GetValueFromAgent<T>(Agent a, string fieldName)
+        public static T GetValueFromAgent<T>(RhPropertyBlock a, string fieldName)
         {
             return (T)a.GetType().GetField(fieldName).GetValue(a);
         }

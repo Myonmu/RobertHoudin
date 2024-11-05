@@ -11,6 +11,8 @@ namespace RobertHoudin.Framework.Editor.Data
             GUIContent label)
         {
             GUI.Box(position, GUIContent.none);
+            var enumVal = property.FindPropertyRelative("sourceType");
+            
             var maxWidth = position.width;
             var xmin = position.xMin;
             position.height = EditorGUIUtility.singleLineHeight;
@@ -21,7 +23,8 @@ namespace RobertHoudin.Framework.Editor.Data
             EditorGUI.PropertyField(position, property.FindPropertyRelative("sourceName"), GUIContent.none);
             position.x += position.width;
             EditorGUI.PropertyField(position, property.FindPropertyRelative("sourceType"), GUIContent.none);
-            var enumVal = property.FindPropertyRelative("sourceType");
+            
+            if(enumVal.enumValueIndex < 0) enumVal.enumValueIndex = 0;
             var type = enumVal.enumNames[enumVal.enumValueIndex];
             if (type != "None") {
                 GUI.contentColor = Color.white;
@@ -38,6 +41,7 @@ namespace RobertHoudin.Framework.Editor.Data
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             var enumVal = property.FindPropertyRelative("sourceType");
+            if (enumVal.enumValueIndex < 0) return EditorGUIUtility.singleLineHeight;
             var type = enumVal.enumNames[enumVal.enumValueIndex];
             if (type == "None") return EditorGUIUtility.singleLineHeight * 4.4f;
             return EditorGUIUtility.singleLineHeight * 2;

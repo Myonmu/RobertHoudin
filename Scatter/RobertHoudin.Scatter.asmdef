@@ -1,0 +1,7 @@
+﻿{
+  "name": "RobertHoudin.Scatter",
+  "references": [
+    "RobertHoudin.Runtime.Primitives",
+    "RobertHoudin.Ports"
+  ]
+}

@@ -11,7 +11,7 @@ namespace MochiBTS.Editor
     {
         [SerializeField]
         private VisualTreeAsset visualTree;
-        private Agent agent;
+        private RhPropertyBlock agent;
         private InspectorView blackboardView;
         //private SerializedProperty blackboardProperty;
 
@@ -62,7 +62,7 @@ namespace MochiBTS.Editor
             //     treeObject?.ApplyModifiedProperties();
             // };
             treeView.onNodeSelected = OnNodeSelectionChanged;
-            root.Q<Button>("blackboardButton").clicked += () => blackboardView?.UpdateBlackBoard(treeView.tree);
+            //root.Q<Button>("blackboardButton").clicked += () => blackboardView?.UpdateBlackBoard(treeView.tree);
             root.Q<Button>("variableButton").clicked +=
                 () => blackboardView?.UpdateVariableBoard(variableBoard);
             root.Q<Button>("agentButton").clicked +=
@@ -82,7 +82,7 @@ namespace MochiBTS.Editor
                     treeView?.PopulateView(tree);
             }
 
-            if (tree != null) blackboardView?.UpdateBlackBoard(tree);
+            //if (tree != null) blackboardView?.UpdateBlackBoard(tree);
             //     treeObject = new SerializedObject(tree);
             //     blackboardProperty = treeObject.FindProperty("blackboard");
 

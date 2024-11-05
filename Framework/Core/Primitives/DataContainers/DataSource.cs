@@ -1,4 +1,5 @@
 using System;
+using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Utilities;
 
 namespace RobertHoudin.Framework.Core.Primitives.DataContainers
@@ -8,59 +9,57 @@ namespace RobertHoudin.Framework.Core.Primitives.DataContainers
     {
         public SourceType sourceType;
         public string sourceName;
+
         /// <summary>
         /// Value of the data source. Must Bind the data source before accessing this field
         /// </summary>
         public T value;
+
         private Action<T> setter;
         private Func<T> getter;
 
-        public T GetValue(Agent agent, Blackboard blackboard)
+        public T GetValue(RhExecutionContext context, RhNode node)
         {
-            InitializeBindings(agent, blackboard);
-            value = sourceType switch {
-                SourceType.BlackBoard => getter.Invoke(),
-                SourceType.Agent => getter.Invoke(),
-                SourceType.VariableBoard => agent.variableBoard.GetValue<T>(sourceName),
+            InitializeBindings(context, node);
+            value = sourceType switch
+            {
+                SourceType.PropertyBlock => getter.Invoke(),
+                SourceType.Port => getter.Invoke(),
                 _ => value
             };
             return value;
         }
 
-        public void SetValue(T val, Agent agent, Blackboard blackboard)
+        public void SetValue(T val, RhExecutionContext context, RhNode node)
         {
-            InitializeBindings(agent,blackboard);
-            switch (sourceType) {
-                case SourceType.BlackBoard:
+            InitializeBindings(context, node);
+            switch (sourceType)
+            {
+                case SourceType.PropertyBlock:
                     setter.Invoke(val);
-                    break;
-                case SourceType.Agent:
-                    setter.Invoke(val);
-                    break;
-                case SourceType.VariableBoard:
-                    agent.variableBoard.SetValue(sourceName, val);
                     break;
                 case SourceType.None:
                     value = val;
+                    break;
+                case SourceType.Port:
+                    setter.Invoke(val);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        public void InitializeBindings(Agent agent, Blackboard blackboard)
+        public void InitializeBindings(RhExecutionContext context, RhNode node)
         {
             switch (sourceType)
             {
-                case SourceType.BlackBoard:
-                    getter ??= ReflectionUtils.CreateGetter<T>(blackboard, sourceName);
-                    setter ??= ReflectionUtils.CreateSetter<T>(blackboard, sourceName);
+                case SourceType.PropertyBlock:
+                    getter ??= ReflectionUtils.CreateGetter<T>(context.propertyBlock, sourceName);
+                    setter ??= ReflectionUtils.CreateSetter<T>(context.propertyBlock, sourceName);
                     break;
-                case SourceType.Agent:
-                    getter ??= ReflectionUtils.CreateGetter<T>(agent, sourceName);
-                    setter ??= ReflectionUtils.CreateSetter<T>(agent, sourceName);
-                    break;
-                case SourceType.VariableBoard:
+                case SourceType.Port:
+                    getter ??= () => (T)node.InputPorts[int.Parse(sourceName)].GetValue();
+                    setter ??= (v) => node.InputPorts[int.Parse(sourceName)].SetValue(v);
                     break;
                 case SourceType.None:
                     break;

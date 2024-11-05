@@ -1,0 +1,6 @@
+﻿{
+  "name": "RobertHoudin.Ports",
+  "references": [
+    "RobertHoudin.Runtime.Primitives"
+  ]
+}

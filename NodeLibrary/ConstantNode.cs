@@ -9,17 +9,11 @@ namespace RobertHoudin.NodeLibrary
     public class ConstantNode : RhNode
     {
         public DataSource<int> value;
-        public IntPort port;
+        [RhOutputPort] public IntPort port;
 
-        public override List<RhPort> OutputPorts => new(){port};
-
-        protected override void OnBeginEvaluate(Agent agent, Blackboard blackboard)
+        protected override bool OnEvaluate(RhExecutionContext context)
         {
-        }
-
-        protected override bool OnEvaluate(Agent agent, Blackboard blackboard)
-        {
-            port.value = value.GetValue(agent, blackboard);
+            port.value = value.GetValue(context, this);
             return true;
         }
     }
