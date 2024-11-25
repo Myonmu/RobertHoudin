@@ -131,6 +131,7 @@ namespace MochiBTS.Editor
         {
             node.OnBecomeOutputNode();
             var prev = treeView.tree.SetResultNode(node.node);
+            if (prev == node.node) return;
             if (prev == null) return;
             (treeView.FindNode(prev) as NodeView)?.OnBecomeNonOutputNode();
         }

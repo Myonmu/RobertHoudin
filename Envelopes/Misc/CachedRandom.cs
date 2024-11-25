@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = System.Random;
@@ -16,12 +15,11 @@ namespace TATools.RobertHoudin
     [Serializable]
     public class CachedRandom
     {
-        [OnValueChanged("Regenerate")]
         public int seed;
         private List<float> _cache = new();
         private Random _random = new();
-        [OnValueChanged("Regenerate")] public Vector2 range = new Vector2(-1, 1);
-        [FormerlySerializedAs("envelop")] [OnValueChanged("Regenerate")] [SerializeReference] public IEnvelope envelope;
+        public Vector2 range = new Vector2(-1, 1);
+        [FormerlySerializedAs("envelop")] [SerializeReference] public IEnvelope envelope;
 
         public void RegenerateIfDirty()
         {

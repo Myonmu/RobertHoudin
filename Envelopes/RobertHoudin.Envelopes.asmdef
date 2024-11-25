@@ -1,0 +1,6 @@
+﻿{
+  "name": "RobertHoudin.Envelopes",
+  "defineConstraints": [
+    "ODIN_EDITOR"
+  ]
+}

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
-using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -157,8 +156,7 @@ namespace RobertHoudin.Framework.Core.Primitives
                 port.GetConnectedPortGuids().RemoveAll(x => string.IsNullOrEmpty(x) || !_portCollection.ContainsKey(x));
             }
         }
-
-        [Button]
+        
         public void Test()
         {
             ResetTree();

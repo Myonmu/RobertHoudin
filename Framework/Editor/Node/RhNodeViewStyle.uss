@@ -130,3 +130,21 @@ VisualElement {
     white-space: normal;
     max-width: 150px;
 }
+
+.output-flag {
+    border-left-color: rgb(60, 213, 119);
+    border-right-color: rgb(60, 213, 119);
+    border-top-color: rgb(60, 213, 119);
+    border-bottom-color: rgb(60, 213, 119);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    color: rgb(140, 255, 141);
+    -unity-font-style: bold;
+    background-color: rgb(48, 80, 59);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
