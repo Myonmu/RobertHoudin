@@ -1,8 +1,8 @@
 ﻿using System;
-using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Core.Primitives.Ports;
 using UnityEngine;
 
-namespace TATools.MochiBTS.Core.Ports
+namespace TATools.RobertHoudin.Framework.Core.Ports
 {
     [Serializable] public class Texture2DPort: RhSinglePort<Texture2D> { }
     [Serializable] public class FloatPort: RhSinglePort<float> { }

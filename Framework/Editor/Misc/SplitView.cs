@@ -1,5 +1,6 @@
 ﻿using UnityEngine.UIElements;
-namespace MochiBTS.Editor
+
+namespace RobertHoudin.Framework.Editor.Misc
 {
     public class SplitView : TwoPaneSplitView
     {

@@ -1,5 +1,6 @@
 using System;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Core.Primitives.Ports;
 using RobertHoudin.Framework.Core.Primitives.Utilities;
 
 namespace RobertHoudin.Framework.Core.Primitives.DataContainers
@@ -7,7 +8,7 @@ namespace RobertHoudin.Framework.Core.Primitives.DataContainers
     [Serializable]
     public class DataSource<T>
     {
-        public SourceType sourceType;
+        public SourceType sourceType = SourceType.Port;
         public string sourceName;
 
         /// <summary>
@@ -21,10 +22,14 @@ namespace RobertHoudin.Framework.Core.Primitives.DataContainers
         public T GetValue(RhExecutionContext context, RhNode node)
         {
             InitializeBindings(context, node);
+            return GetValue();
+        }
+
+        public T GetValue()
+        {
             value = sourceType switch
             {
                 SourceType.PropertyBlock => getter.Invoke(),
-                SourceType.Port => getter.Invoke(),
                 _ => value
             };
             return value;
@@ -42,7 +47,7 @@ namespace RobertHoudin.Framework.Core.Primitives.DataContainers
                     value = val;
                     break;
                 case SourceType.Port:
-                    setter.Invoke(val);
+                    value = val;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -58,9 +63,6 @@ namespace RobertHoudin.Framework.Core.Primitives.DataContainers
                     setter ??= ReflectionUtils.CreateSetter<T>(context.propertyBlock, sourceName);
                     break;
                 case SourceType.Port:
-                    getter ??= () => (T)node.InputPorts[int.Parse(sourceName)].GetValue();
-                    setter ??= (v) => node.InputPorts[int.Parse(sourceName)].SetValue(v);
-                    break;
                 case SourceType.None:
                     break;
             }

@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MochiBTS.Editor;
 using RobertHoudin.Framework.Core.Primitives;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Core.Primitives.Ports;
+using RobertHoudin.Framework.Editor.Node;
+using RobertHoudin.Framework.Editor.Settings;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace MochiBTS.Editor
+namespace RobertHoudin.Framework.Editor.Tree
 {
     public class RhTreeView : GraphView
     {
         public Action<NodeView> onNodeSelected;
+        public Action<NodeView> onSetOutputFlag;
         private NodeSearchWindow searchWindow;
         private readonly RhTreeSettings settings;
         public RhTree tree;
@@ -64,14 +69,14 @@ namespace MochiBTS.Editor
             tree.nodes.ForEach(n =>
             {
                 //connect output ports
-                n.OutputPorts.ForEach(p =>
+                n.OutputPortsGeneric.ForEach(p =>
                 {
                     if (p is null) return;
                     var outputP = FindPort(p);
-                    foreach (var connectedPort in p.GetConnectedPorts())
+                    foreach (var connectedPort in p.GetConnectedPortGuids())
                     {
                         if (connectedPort is null) return;
-                        var inputP = FindPort(connectedPort);
+                        var inputP = GetPortByGuid(connectedPort);
                         var edge = outputP.ConnectTo(inputP);
                         AddElement(edge);
                     }
@@ -80,10 +85,15 @@ namespace MochiBTS.Editor
             if (tree.transformScale == Vector3.zero) tree.transformScale = Vector3.one;
             UpdateViewTransform(tree.transformPosition, tree.transformScale);
         }
-
-        private Port FindPort(RhPort port)
+        
+        public Port FindPort(RhPort port)
         {
             return GetPortByGuid(port.GUID);
+        }
+
+        public UnityEditor.Experimental.GraphView.Node FindNode(RhNode node)
+        {
+            return GetNodeByGuid(node.GUID);
         }
 
         private GraphViewChange OnGraphViewChanged(GraphViewChange graphviewchange)
@@ -129,9 +139,11 @@ namespace MochiBTS.Editor
 
         private void CreateNodeView(RhNode node)
         {
-            var nodeView = new NodeView(node)
+            if (node == null) return;
+            var nodeView = new NodeView(node, tree.resultNode == node)
             {
-                onNodeSelected = onNodeSelected
+                onNodeSelected = onNodeSelected,
+                onSetOutputFlag = onSetOutputFlag
             };
             AddElement(nodeView);
         }

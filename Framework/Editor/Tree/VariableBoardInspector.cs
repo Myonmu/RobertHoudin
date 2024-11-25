@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MochiBTS.Editor.VariableDrawers;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.MochiVariable;
+using RobertHoudin.Framework.Editor.VariableDrawers;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace MochiBTS.Editor
+namespace RobertHoudin.Framework.Editor.Tree
 {
     [CustomEditor(typeof(VariableBoard))]
     public class VariableBoardInspector : UnityEditor.Editor

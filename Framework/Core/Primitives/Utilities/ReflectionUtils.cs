@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
@@ -213,6 +215,20 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
             if (field is not null) return CreateGetter<T>(container, field);
             var prop = container.GetType().GetProperty(fieldName);
             return (Func<T>)prop?.GetGetMethod().CreateDelegate(typeof(Action<T>), container);
+        }
+
+        public static List<T> GetFieldsImplementing<T>(object container)
+        {
+            return container.GetType().GetFields()
+                .Where(x => x.FieldType.GetInterfaces().Contains(typeof(T)))
+                .Select(x => (T)x.GetValue(container)).ToList();
+        }
+
+        public static T GetFirstFieldImplementing<T>(object container)
+        {
+            var f = container.GetType().GetFields()
+                .First(x => x.FieldType.GetInterfaces().Contains(typeof(T)));
+            return (T)f.GetValue(container);
         }
     }
 }

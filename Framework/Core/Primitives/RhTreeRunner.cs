@@ -9,7 +9,6 @@ namespace RobertHoudin.Framework.Core.Primitives
         public RhPropertyBlock agent;
         public void Init()
         {
-            tree = tree.Clone();
             ResetTree();
         }
         public void ResetTree()

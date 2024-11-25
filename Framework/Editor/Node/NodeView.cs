@@ -1,21 +1,26 @@
 ﻿using System;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Core.Primitives.Ports;
+using RobertHoudin.Framework.Editor.Settings;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Node = UnityEditor.Experimental.GraphView.Node;
 
-namespace MochiBTS.Editor
+namespace RobertHoudin.Framework.Editor.Node
 {
-    public sealed class NodeView : Node
+    public sealed class NodeView : UnityEditor.Experimental.GraphView.Node
     {
         internal static RhTreeSettings settings;
         public readonly RhNode node;
         public Action<NodeView> onNodeSelected;
+        public Action<NodeView> onSetOutputFlag;
 
-        public NodeView(RhNode nodeRef) :
+        public VisualElement loopStartContainer;
+        public VisualElement loopResultContainer;
+
+        public NodeView(RhNode nodeRef, bool isOutput) :
             base(AssetDatabase.GetAssetPath(RhTreeSettings.GetOrCreateSettings().nodeXml))
         {
             var settings = RhTreeSettings.GetOrCreateSettings();
@@ -23,14 +28,18 @@ namespace MochiBTS.Editor
             // Construct the node view from fed Node instance
             node = nodeRef;
             title = nodeRef.name.Replace("Node", "");
-            viewDataKey = node.guid;
+            viewDataKey = node.GUID;
             style.left = node.position.x;
             style.top = node.position.y;
             tooltip = node.Tooltip;
 
+            loopStartContainer = this.Q<VisualElement>("loopStart");
+            loopResultContainer = this.Q<VisualElement>("loopResult");
+
 
             CreateInputPorts();
             CreateOutputPorts();
+            CreateOtherPorts();
 
             //Add base uss class labels
             SetupClasses();
@@ -51,12 +60,21 @@ namespace MochiBTS.Editor
             subInfoLabel.bindingPath = "subInfo";
             subInfoLabel.Bind(serializedObject);
 
+            var outputFlag = this.Q<Button>("OutputFlag");
+            outputFlag.clicked += () => { onSetOutputFlag(this); };
+            if (isOutput)
+            {
+                outputFlag.AddToClassList("output-flag");
+            }
+
             var icon = this.Q<VisualElement>("nodeIcon");
             if (settings == null) settings = RhTreeSettings.GetOrCreateSettings();
             var iconImage = settings != null ? settings.GetIcon(nodeRef) : null;
             if (iconImage == null)
                 return;
             icon.style.backgroundImage = new StyleBackground(iconImage);
+
+
             //Debug.Log(iconImage.name);
         }
 
@@ -65,7 +83,6 @@ namespace MochiBTS.Editor
         /// </summary>
         private void SetupClasses()
         {
-            
         }
 
         private void CreateOutputPorts()
@@ -75,6 +92,7 @@ namespace MochiBTS.Editor
                 var output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi,
                     outputPort.AcceptedType);
                 output.portName = "";
+                output.tooltip = $"{output.name} ({outputPort.GetType().Name})";
                 output.style.flexDirection = FlexDirection.ColumnReverse;
                 output.viewDataKey = outputPort.GUID;
                 outputContainer.Add(output);
@@ -97,10 +115,39 @@ namespace MochiBTS.Editor
                             inputPort.AcceptedType);
                         break;
                 }
+
                 input.portName = "";
+                input.tooltip = $"{inputPort.name} ({inputPort.GetType().Name})";
                 input.style.flexDirection = FlexDirection.Column;
                 input.viewDataKey = inputPort.GUID;
                 inputContainer.Add(input);
+            }
+        }
+
+        public void CreateOtherPorts()
+        {
+            foreach (var p in node.GetPortsWithAttribute<RhLoopItemPortAttribute>())
+            {
+                Port port = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi,
+                    p.AcceptedType);
+
+                port.portName = "";
+                port.tooltip = $"{p.name} ({p.GetType().Name})";
+                port.style.flexDirection = FlexDirection.Column;
+                port.viewDataKey = p.GUID;
+                loopStartContainer.Add(port);
+            }
+            
+            foreach (var p in node.GetPortsWithAttribute<RhLoopResultPortAttribute>())
+            {
+                Port port = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single,
+                    p.AcceptedType);
+
+                port.portName = "";
+                port.tooltip = $"{p.name} ({p.GetType().Name})";
+                port.style.flexDirection = FlexDirection.Column;
+                port.viewDataKey = p.GUID;
+                loopResultContainer.Add(port);
             }
         }
 
@@ -142,6 +189,18 @@ namespace MochiBTS.Editor
         private static void ClearCache()
         {
             settings = RhTreeSettings.GetOrCreateSettings();
+        }
+
+        public void OnBecomeOutputNode()
+        {
+            var outputFlag = this.Q<Button>("OutputFlag");
+            outputFlag.AddToClassList("output-flag");
+        }
+
+        public void OnBecomeNonOutputNode()
+        {
+            var outputFlag = this.Q<Button>("OutputFlag");
+            outputFlag.RemoveFromClassList("output-flag");
         }
     }
 }

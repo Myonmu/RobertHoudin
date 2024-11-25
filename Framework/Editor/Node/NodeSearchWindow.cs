@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MochiBTS.Editor;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Editor.Tree;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
-namespace MochiBTS.Editor
+
+namespace RobertHoudin.Framework.Editor.Node
 {
     public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
     {

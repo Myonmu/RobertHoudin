@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using RobertHoudin.Framework.Core.Primitives.MochiVariable;
 using UnityEditor;
 using UnityEngine;
 
-namespace MochiBTS.Editor.VariableDrawers
+namespace RobertHoudin.Framework.Editor.VariableDrawers
 {
     [Serializable]
     public class GoBindingSourceEntry: BindingSourceEntryBase

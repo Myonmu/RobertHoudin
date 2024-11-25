@@ -5,7 +5,7 @@ using System.Reflection;
 using RobertHoudin.Framework.Core.Primitives.MochiVariable;
 using UnityEditor;
 
-namespace MochiBTS.Editor.VariableDrawers
+namespace RobertHoudin.Framework.Editor.VariableDrawers
 {
     public class BindingSourceEntryBase
     {

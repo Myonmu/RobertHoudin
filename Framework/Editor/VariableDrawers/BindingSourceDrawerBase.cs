@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace MochiBTS.Editor.VariableDrawers
+namespace RobertHoudin.Framework.Editor.VariableDrawers
 {
     public class BindingSourceDrawerBase: PropertyDrawer
     {

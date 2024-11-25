@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using RobertHoudin.Framework.Core.Primitives.DataContainers;
-using RobertHoudin.Framework.Core.Primitives.Nodes;
-using TATools.MochiBTS.Core.Ports;
-using UnityEngine;
+﻿using RobertHoudin.Framework.Core.Primitives.Nodes;
+using TATools.RobertHoudin.Framework.Core.Ports;
 
 namespace RobertHoudin.NodeLibrary
 {
@@ -17,7 +14,7 @@ namespace RobertHoudin.NodeLibrary
         {
             var sum = 0;
             inputs.ForEachConnected(i => sum += i);
-            output.value = sum;
+            output.SetValueNoBoxing(sum);
             return true;
         }
     }

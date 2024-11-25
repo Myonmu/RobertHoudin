@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 //Adjusted version based on The Kiwi Coder's original version. 
-namespace MochiBTS.Editor
+namespace RobertHoudin.Framework.Editor.Settings
 {
     internal class RhTreeSettings : ScriptableObject
     {

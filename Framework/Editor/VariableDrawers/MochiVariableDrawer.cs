@@ -1,7 +1,8 @@
 ﻿using RobertHoudin.Framework.Core.Primitives.MochiVariable;
 using UnityEditor;
 using UnityEngine;
-namespace MochiBTS.Editor.VariableDrawers
+
+namespace RobertHoudin.Framework.Editor.VariableDrawers
 {
     [CustomPropertyDrawer(typeof(MochiVariable<>), true)]
     public class MochiVariableDrawer : PropertyDrawer

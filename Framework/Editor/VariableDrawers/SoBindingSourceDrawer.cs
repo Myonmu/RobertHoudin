@@ -7,7 +7,7 @@ using RobertHoudin.Framework.Core.Primitives.MochiVariable;
 using UnityEditor;
 using UnityEngine;
 
-namespace MochiBTS.Editor.VariableDrawers
+namespace RobertHoudin.Framework.Editor.VariableDrawers
 {
     [CustomPropertyDrawer(typeof(SoBindingSource<>))]
     public class SoBindingSourceDrawer : BindingSourceDrawerBase

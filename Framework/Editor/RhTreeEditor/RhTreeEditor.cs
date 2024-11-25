@@ -1,6 +1,11 @@
 using System;
 using RobertHoudin.Framework.Core.Primitives;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
+using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Editor.Misc;
+using RobertHoudin.Framework.Editor.Node;
+using RobertHoudin.Framework.Editor.Settings;
+using RobertHoudin.Framework.Editor.Tree;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -62,6 +67,7 @@ namespace MochiBTS.Editor
             //     treeObject?.ApplyModifiedProperties();
             // };
             treeView.onNodeSelected = OnNodeSelectionChanged;
+            treeView.onSetOutputFlag = OnSetOutputFlag;
             //root.Q<Button>("blackboardButton").clicked += () => blackboardView?.UpdateBlackBoard(treeView.tree);
             root.Q<Button>("variableButton").clicked +=
                 () => blackboardView?.UpdateVariableBoard(variableBoard);
@@ -119,6 +125,14 @@ namespace MochiBTS.Editor
         private void OnNodeSelectionChanged(NodeView node)
         {
             inspectorView.UpdateSelection(node);
+        }
+
+        private void OnSetOutputFlag(NodeView node)
+        {
+            node.OnBecomeOutputNode();
+            var prev = treeView.tree.SetResultNode(node.node);
+            if (prev == null) return;
+            (treeView.FindNode(prev) as NodeView)?.OnBecomeNonOutputNode();
         }
 
         [OnOpenAsset]
