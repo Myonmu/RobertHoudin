@@ -3,8 +3,14 @@
 ![GIF 2024-12-15 22-56-45](https://github.com/user-attachments/assets/7f1170de-8f5b-4781-b99d-8d83c865109d)
 
 A Houdini-like node evaluation framework with (hopefully) common tech art functions.
+
 The project is *useable* but still needs quality of life improvements to be suitable to integrate in large scale production.
+
 At the moment, the code base contains a minor amount of behaviour tree concepts, because it is derived from an earlier behaviour tree plugin MochiBTS
+
+### Why "Robert Houdin"?
+
+If your name is actually Robert Houdin then it is a coincidence. The project is named after the famous French magician, and the reason being, well, Harry *Houdini* is also a famous and remarkable figure in the history of prestidigitation. Plus, *Houdin* is so similar to *Houdini* so I couldn't help it.
 
 ## Current API
 ![image](https://github.com/user-attachments/assets/3843c96b-4818-4b0e-886e-7053546df9f9)
