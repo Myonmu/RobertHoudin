@@ -7,9 +7,9 @@ namespace RobertHoudin.NodeLibrary.Vector
 {
     public class ConstructVector3: RhNode
     {
-        [RhInputPort] public FloatPortDs xPort;
-        [RhInputPort] public FloatPortDs yPort;
-        [RhInputPort] public FloatPortDs zPort;
+        [RhInputPort] public NumberPortDs xPort;
+        [RhInputPort] public NumberPortDs yPort;
+        [RhInputPort] public NumberPortDs zPort;
         [RhOutputPort] public Vector3Port output;
         
         protected override bool OnEvaluate(RhExecutionContext context)

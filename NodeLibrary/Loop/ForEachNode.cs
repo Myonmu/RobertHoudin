@@ -30,8 +30,7 @@ namespace RobertHoudin.NodeLibrary.Loop
 
         public override List<RhPort> OutputPortsGeneric
         {
-            get
-            {
+            get {
                 if (_outputPortsGenericCache == null)
                 {
                     _outputPortsGenericCache = this.GetPortsWithAttribute<RhOutputPortAttribute>();
@@ -43,8 +42,7 @@ namespace RobertHoudin.NodeLibrary.Loop
 
         public override List<RhPort> InputPortsGeneric
         {
-            get
-            {
+            get {
                 if (_inputPortsGenericCache == null)
                 {
                     _inputPortsGenericCache = this.GetPortsWithAttribute<RhInputPortAttribute>();
@@ -92,7 +90,7 @@ namespace RobertHoudin.NodeLibrary.Loop
         /// <param name="i">item index</param>
         /// <returns></returns>
         protected abstract T Extract(InputPort input, int i);
-        
+
         /// <summary>
         /// Given index i, place the item in the output collection.
         /// </summary>
@@ -101,15 +99,37 @@ namespace RobertHoudin.NodeLibrary.Loop
         /// <param name="value">item to put</param>
         protected abstract void Put(OutputPort outputPort, int i, U value);
 
+        protected void ResetNodeStatusInLoop()
+        {
+            void ResetRecursive(RhNode node)
+            {
+                if (node is null) return;
+                if (node == this) return;
+                node.status = RhNodeStatus.Idle;
+                foreach (var inputPort in node.InputPortsGeneric)
+                {
+                    foreach (var connectedPort in inputPort.GetConnectedPorts())
+                    {
+                        ResetRecursive(connectedPort.node);
+                    }
+                }
+            }
+            foreach (var port in itemResult.GetConnectedPorts())
+            {
+                ResetRecursive(port.node);
+            }
+        }
+
         protected override bool OnEvaluate(RhExecutionContext context)
         {
             // todo: stub
             for (int i = 0; i < GetInputCollectionSize(collectionInput); i++)
             {
+                ResetNodeStatusInLoop();
                 itemPort.SetValueNoBoxing(Extract(collectionInput, i));
                 foreach (var connectedPort in itemResult.GetConnectedPorts())
                 {
-                    connectedPort.node.EvaluateNode(context, EvalMode.Loop);
+                    connectedPort.node.EvaluateNode(context);
                     connectedPort.ForwardValue(itemResult);
                 }
                 Put(collectionOutput, i, itemResult.GetValueNoBoxing());

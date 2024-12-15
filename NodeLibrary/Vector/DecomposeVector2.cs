@@ -7,8 +7,8 @@ namespace RobertHoudin.NodeLibrary.Vector
     public class DecomposeVector2 : RhNode
     {
         [RhInputPort] public Vector2PortDs inputPort;
-        [RhOutputPort] public FloatPort x;
-        [RhOutputPort] public FloatPort y;
+        [RhOutputPort] public NumberPort x;
+        [RhOutputPort] public NumberPort y;
         
         protected override bool OnEvaluate(RhExecutionContext context)
         {

@@ -33,7 +33,7 @@ namespace RobertHoudin.Framework.Core.Primitives
         /// </summary>
         private Dictionary<string, RhPort> _portCollection = new();
 
-        public void EvaluateTree(RhPropertyBlock propertyBlock)
+        public void EvaluateTree(IRhPropertyBlock propertyBlock)
         {
             resultNode.EvaluateNode(new RhExecutionContext()
             {
@@ -192,15 +192,6 @@ namespace RobertHoudin.Framework.Core.Primitives
                 }
             }
             return false;
-        }
-
-        [Button]
-        public void Test()
-        {
-            ResetTree();
-            resultNode.EvaluateNode(null);
-            var val = resultNode.OutputPorts[0].GetValue();
-            Debug.Log(val);
         }
     }
 }

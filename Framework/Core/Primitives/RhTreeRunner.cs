@@ -1,12 +1,13 @@
 ﻿using RobertHoudin.Framework.Core.Primitives.DataContainers;
-using RobertHoudin.Framework.Core.Primitives.Events;
+using UnityEngine;
 
 namespace RobertHoudin.Framework.Core.Primitives
 {
-    public class RhTreeRunner : IListener
+    public class RhTreeRunner : MonoBehaviour
     {
         public RhTree tree;
-        public RhPropertyBlock agent;
+        [SerializeReference]
+        public IRhPropertyBlock propertyBlock;
         public void Init()
         {
             ResetTree();
@@ -15,9 +16,11 @@ namespace RobertHoudin.Framework.Core.Primitives
         {
             tree.ResetTree();
         }
-        public void Update()
+        [ContextMenu("Execute RhTree")]
+        public void Execute()
         {
-            tree.EvaluateTree(agent);
+            ResetTree();
+            tree.EvaluateTree(propertyBlock);
         }
     }
 }

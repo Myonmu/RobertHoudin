@@ -8,6 +8,8 @@ namespace RobertHoudin.Scatter.ScatterDataConstruction
         [RhInputPort] public Vector3PortDs pos;
         [RhInputPort] public QuaternionPortDs rot;
         [RhInputPort] public Vector3PortDs scale;
+        [RhInputPort] public Vector3PortDs normal;
+        [RhInputPort] public IntPortDs objectId;
         [RhOutputPort] public ScatterDataPort data;
 
         protected override bool OnEvaluate(RhExecutionContext context)
@@ -16,7 +18,9 @@ namespace RobertHoudin.Scatter.ScatterDataConstruction
             {
                 pos = pos.GetValueNoBoxing(),
                 rotation = rot.GetValueNoBoxing(),
-                scale = scale.GetValueNoBoxing()
+                scale = scale.GetValueNoBoxing(),
+                normal = normal.GetValueNoBoxing(),
+                objectId = objectId.GetValueNoBoxing(),
             });
             return true;
         }

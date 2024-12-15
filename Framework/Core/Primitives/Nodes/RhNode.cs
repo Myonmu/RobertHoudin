@@ -8,6 +8,9 @@ namespace RobertHoudin.Framework.Core.Primitives.Nodes
 {
     public abstract class RhNode : ScriptableObject
     {
+        #if !RH_DEBUG
+        [HideInInspector]
+        #endif
         public RhTree tree;
         private List<RhPort> _inputPortsCache = null;
 

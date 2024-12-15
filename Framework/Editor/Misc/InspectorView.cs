@@ -55,8 +55,9 @@ namespace RobertHoudin.Framework.Editor.Misc
             Add(container);
         }
 
-        public void UpdateAgent(RhPropertyBlock agent)
+        public void UpdateAgent(IRhPropertyBlock agent)
         {
+            /*
             Clear();
             Object.DestroyImmediate(editor);
             if (agent is null) return;
@@ -66,6 +67,7 @@ namespace RobertHoudin.Framework.Editor.Misc
                     editor.OnInspectorGUI();
             });
             Add(container);
+            */
         }
 #if !UNITY_6000_0_OR_NEWER
         public new class UxmlFactory : UxmlFactory<InspectorView, UxmlTraits>

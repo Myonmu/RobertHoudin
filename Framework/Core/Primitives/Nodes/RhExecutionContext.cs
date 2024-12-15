@@ -9,6 +9,6 @@ namespace RobertHoudin.Framework.Core.Primitives.Nodes
     /// </summary>
     public class RhExecutionContext
     {
-        public RhPropertyBlock propertyBlock;
+        public IRhPropertyBlock propertyBlock;
     }
 }

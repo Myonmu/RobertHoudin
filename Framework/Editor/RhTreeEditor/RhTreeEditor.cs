@@ -16,7 +16,7 @@ namespace RobertHoudin.Framework.Editor.RhTreeEditor
     {
         [SerializeField]
         private VisualTreeAsset visualTree;
-        private RhPropertyBlock agent;
+        private IRhPropertyBlock agent;
         private InspectorView blackboardView;
         //private SerializedProperty blackboardProperty;
 

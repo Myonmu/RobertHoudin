@@ -65,6 +65,13 @@ namespace RobertHoudin.Scatter
         public void PlaceObject(in ScatterData data, in int objectRef);
     }
 
+    public interface IObjectProvider
+    {
+        public GameObject GetObjectByIndex(int objectId);
+        int MinIndex { get; }
+        int MaxIndex { get; }
+    }
+
     public interface IFilterContext
     {
         IScatterPipeline Pipeline { get; set; }

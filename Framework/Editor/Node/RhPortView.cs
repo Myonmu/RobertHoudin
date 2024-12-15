@@ -1,5 +1,7 @@
 ﻿using System;
+using RobertHoudin.Framework.Core.Primitives.Utilities;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using UnityEngine.UIElements;
 namespace RobertHoudin.Framework.Editor.Node
 {
@@ -23,6 +25,10 @@ namespace RobertHoudin.Framework.Editor.Node
         }
         protected RhPortView(Orientation portOrientation, Direction portDirection, Capacity portCapacity, Type type) : base(portOrientation, portDirection, portCapacity, type)
         {
+            if (type == typeof(Number))
+            {
+                portColor = new Color(1f, 0.7f, 0.5f);
+            }
         }
     }
 }

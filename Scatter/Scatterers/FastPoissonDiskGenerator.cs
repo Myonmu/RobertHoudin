@@ -21,36 +21,40 @@ namespace RobertHoudin.Scatter.Scatterers
         public class PoissonDiskConstraint
         {
             [FormerlySerializedAs("points")] public List<Vector2> existingPoints;
+            public bool IsValid()
+            {
+                return existingPoints != null && existingPoints.Count > 0;
+            }
         }
 
         private class Settings
         {
-            public Vector2 BottomLeft;
-            public Vector2 TopRight;
-            public Vector2 Center;
-            public Rect Dimension;
+            public Vector2 bottomLeft;
+            public Vector2 topRight;
+            public Vector2 center;
+            public Rect dimension;
 
-            public Vector2 MinimumDistance;
-            public int IterationPerPoint;
+            public Vector2 minimumDistance;
+            public int iterationPerPoint;
 
-            public float CellSize;
-            public int GridWidth;
-            public int GridHeight;
+            public float cellSize;
+            public int gridWidth;
+            public int gridHeight;
         }
 
         private class Bags
         {
-            public Vector2?[,] Grid;
+            public Vector2?[,] grid;
 
             /// <summary>
             /// Result points
             /// </summary>
-            public List<Vector2> SamplePoints;
+            public List<Vector2> samplePoints;
 
             /// <summary>
             /// Points that can be used to generate new points in the next iteration
             /// </summary>
-            public List<Vector2> ActivePoints;
+            public List<Vector2> activePoints;
         }
 
     #endregion
@@ -92,7 +96,7 @@ namespace RobertHoudin.Scatter.Scatterers
         public List<Vector2> Sample(Vector2 bottomLeft, Vector2 topRight, Vector2 minimumDistance,
             int iterationPerPoint, PoissonDiskConstraint constraint)
         {
-            var useConstraint = constraint is not null;
+            var useConstraint = constraint is not null && constraint.IsValid();
             gen = new Random();
             var settings = BuildSettings(
                 bottomLeft,
@@ -103,13 +107,13 @@ namespace RobertHoudin.Scatter.Scatterers
 
             var bags = new Bags()
             {
-                Grid = new Vector2?[settings.GridWidth + 1, settings.GridHeight + 1],
-                SamplePoints = new List<Vector2>(),
-                ActivePoints = new List<Vector2>()
+                grid = new Vector2?[settings.gridWidth + 1, settings.gridHeight + 1],
+                samplePoints = new List<Vector2>(),
+                activePoints = new List<Vector2>()
             };
             if (useConstraint)
             {
-                bags.ActivePoints.AddRange(constraint.existingPoints);
+                bags.activePoints.AddRange(constraint.existingPoints);
             }
             else
             {
@@ -118,23 +122,23 @@ namespace RobertHoudin.Scatter.Scatterers
 
             do
             {
-                var index = RandomRange(0, bags.ActivePoints.Count);
+                var index = RandomRange(0, bags.activePoints.Count);
 
-                var point = bags.ActivePoints[index];
+                var point = bags.activePoints[index];
 
                 var found = false;
-                Parallel.For(0, settings.IterationPerPoint,
+                Parallel.For(0, settings.iterationPerPoint,
                     i => { found |= GeneratePointAround(point, settings, bags, i, useConstraint); }
                 );
 
 
                 if (found == false)
                 {
-                    bags.ActivePoints.RemoveAt(index);
+                    bags.activePoints.RemoveAt(index);
                 }
-            } while (bags.ActivePoints.Count > 0);
+            } while (bags.activePoints.Count > 0);
 
-            return bags.SamplePoints;
+            return bags.samplePoints;
         }
 
     #region "Algorithm Calculations"
@@ -151,12 +155,12 @@ namespace RobertHoudin.Scatter.Scatterers
         private bool GeneratePointAround(Vector2 point, Settings settings, Bags bags, int curIter,
             bool useConstraint = true)
         {
-            if (bags.SamplePoints.Count >= maxActivePointCount)
+            if (bags.samplePoints.Count >= maxActivePointCount)
             {
                 return false;
             }
 
-            float minDistance = RandomRange(settings.MinimumDistance.x, settings.MinimumDistance.y);
+            float minDistance = RandomRange(settings.minimumDistance.x, settings.minimumDistance.y);
             float maxDistance = 2f * minDistance;
 
             if (useConstraint)
@@ -166,7 +170,7 @@ namespace RobertHoudin.Scatter.Scatterers
 
             var p = GetRandPosInCircle(minDistance, maxDistance) + point;
 
-            if (settings.Dimension.Contains(p) == false)
+            if (settings.dimension.Contains(p) == false)
             {
                 return false;
             }
@@ -180,10 +184,10 @@ namespace RobertHoudin.Scatter.Scatterers
             var minimumSqr = minDistance * minDistance;
             var index = GetGridIndex(p, settings);
 
-            var adjacentCellsRange = Vector2Int.FloorToInt(settings.MinimumDistance / settings.CellSize);
+            var adjacentCellsRange = Vector2Int.FloorToInt(settings.minimumDistance / settings.cellSize);
             // clamping coordinates to cell range
             var fieldMin = Vector2Int.Max(Vector2Int.zero, index - adjacentCellsRange);
-            var fieldMax = Vector2Int.Min(new Vector2Int(settings.GridWidth, settings.GridHeight),
+            var fieldMax = Vector2Int.Min(new Vector2Int(settings.gridWidth, settings.gridHeight),
                 index + adjacentCellsRange);
 
             var drop = false;
@@ -191,7 +195,7 @@ namespace RobertHoudin.Scatter.Scatterers
             {
                 for (var j = fieldMin.y; j <= fieldMax.y && drop == false; j++)
                 {
-                    var q = bags.Grid[i, j];
+                    var q = bags.grid[i, j];
                     if (q.HasValue && (q.Value - p).sqrMagnitude <= minimumSqr)
                     {
                         drop = true;
@@ -202,12 +206,12 @@ namespace RobertHoudin.Scatter.Scatterers
             if (drop) return false;
             var found = true;
 
-            bags.SamplePoints.Add(p);
-            bags.Grid[index.x, index.y] = p;
+            bags.samplePoints.Add(p);
+            bags.grid[index.x, index.y] = p;
 
             if (!useConstraint)
             {
-                bags.ActivePoints.Add(p);
+                bags.activePoints.Add(p);
             }
             else
             {
@@ -220,15 +224,15 @@ namespace RobertHoudin.Scatter.Scatterers
         private void GenerateFirstPoint(Settings set, Bags bags)
         {
             var first = new Vector2(
-                RandomRange(set.BottomLeft.x, set.TopRight.x),
-                RandomRange(set.BottomLeft.y, set.TopRight.y)
+                RandomRange(set.bottomLeft.x, set.topRight.x),
+                RandomRange(set.bottomLeft.y, set.topRight.y)
             );
 
             var index = GetGridIndex(first, set);
 
-            bags.Grid[index.x, index.y] = first;
-            bags.SamplePoints.Add(first);
-            bags.ActivePoints.Add(first);
+            bags.grid[index.x, index.y] = first;
+            bags.samplePoints.Add(first);
+            bags.activePoints.Add(first);
         }
 
     #endregion
@@ -238,8 +242,8 @@ namespace RobertHoudin.Scatter.Scatterers
         private static Vector2Int GetGridIndex(Vector2 point, Settings set)
         {
             return new Vector2Int(
-                Mathf.FloorToInt((point.x - set.BottomLeft.x) / set.CellSize),
-                Mathf.FloorToInt((point.y - set.BottomLeft.y) / set.CellSize)
+                Mathf.FloorToInt((point.x - set.bottomLeft.x) / set.cellSize),
+                Mathf.FloorToInt((point.y - set.bottomLeft.y) / set.cellSize)
             );
         }
 
@@ -251,17 +255,17 @@ namespace RobertHoudin.Scatter.Scatterers
 
             return new Settings()
             {
-                BottomLeft = bl,
-                TopRight = tr,
-                Center = (bl + tr) * 0.5f,
-                Dimension = new Rect(new Vector2(bl.x, bl.y), new Vector2(dimension.x, dimension.y)),
+                bottomLeft = bl,
+                topRight = tr,
+                center = (bl + tr) * 0.5f,
+                dimension = new Rect(new Vector2(bl.x, bl.y), new Vector2(dimension.x, dimension.y)),
 
-                MinimumDistance = min,
-                IterationPerPoint = iteration,
+                minimumDistance = min,
+                iterationPerPoint = iteration,
 
-                CellSize = cell,
-                GridWidth = Mathf.CeilToInt(dimension.x / cell),
-                GridHeight = Mathf.CeilToInt(dimension.y / cell)
+                cellSize = cell,
+                gridWidth = Mathf.CeilToInt(dimension.x / cell),
+                gridHeight = Mathf.CeilToInt(dimension.y / cell)
             };
         }
 

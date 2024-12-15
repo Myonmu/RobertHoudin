@@ -7,12 +7,12 @@ namespace RobertHoudin.NodeLibrary.Rng
 {
     public class RandomRange: RhNode
     {
-        [RhInputPort]public FloatPortDs minPort;
-        [RhInputPort]public FloatPortDs maxPort;
-        [RhOutputPort]public FloatPort result;
+        [RhInputPort]public NumberPortDs minPort;
+        [RhInputPort]public NumberPortDs maxPort;
+        [RhOutputPort]public NumberPortDs result;
         protected override bool OnEvaluate(RhExecutionContext context)
         {
-            result.SetValueNoBoxing(Random.Range(minPort.GetValueNoBoxing(), maxPort.GetValueNoBoxing()));
+            result.SetValueNoBoxing(Random.Range((float)minPort.GetValueNoBoxing(), maxPort.GetValueNoBoxing()));
             return true;
         }
     }

@@ -9,9 +9,9 @@ namespace RobertHoudin.Scatter.ScatterDataConstruction
     {
         protected override void OnBeginEvaluate(RhExecutionContext context)
         {
+            base.OnBeginEvaluate(context);
             collectionOutput.value ??= new();
-            collectionOutput.value.datas ??= new();
-            var data = collectionOutput.value.datas;
+            var data = collectionOutput.value;
             data.Clear();
         }
 
@@ -27,7 +27,7 @@ namespace RobertHoudin.Scatter.ScatterDataConstruction
 
         protected override void Put(ScatterDataCollectionPort outputPort, int i, ScatterData value)
         {
-            outputPort.value.datas[i] = value;
+            outputPort.value.Add(value);
         }
     }
 }
