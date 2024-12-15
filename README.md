@@ -97,6 +97,72 @@ When using `DataSource`, there are 3 different types where the data can come fro
 
 ![image](https://github.com/user-attachments/assets/5a1ef8b4-e07d-49ca-ab56-ecc63599c7af)
 
+### Property Block
+
+`IRhPropertyBlock` is the primary way to pass external data or volatile data to the `RhTree` for evaluation. Typically, you would use a datasource port set to *PropertyBlock* to access values in the property block.
+
+For example, this class defines a simple context for scattering:
+
+```csharp
+    [Serializable]
+    public class SimpleScatterPropertyBlock: IRhPropertyBlock
+    {
+        public Transform rootTransform;
+        public int maxActivePoints;
+        public int k;
+        public Bounds bounds;
+        public Vector2 distance;
+        public SimpleObjectProvider objectProvider;
+    }
+```
+
+You could either expose them in inspector or manually set them with other code.
+
+You could directly access the property block inside `OnEvaluate()` method of a node, since the property block is passed as part of the `RhExecutionContext`, but doing so would create a strong dependency between the node and the property block class, and is best to avoid.
+
+As describe in the previous section, to access a field via datasource port, you simply need to fill the text box with the name of the field, and reflection will take care of the rest:
+
+
+### ForEach Nodes
+
+`ForEachNode` is a very special generic class that not only has input and output ports, but also *item port* and *item result port*. If you are familiar with LINQ, `ForEachNode` is very similar to `Select`:
+
+```csharp
+var inputCollection = new List<Item>();
+var outputCollection = new List<ItemResult>();
+//selector takes an Item, and outputs an ItemResult
+Func<Item, ItemResult> selector;
+outputCollection = inputCollection.Select(selector).ToList();
+```
+
+The generic class takes care of most of the hard working but you need to specify 6 type arguments:
+
+- Input Item type `T`
+- Output Item type `U`
+- Input collection port type (port that takes `List<T>` or other indexable collection)
+- Output collection port type (port that takes `List<U>` or other indexable collection)
+- Item port type (port that takes `T`)
+- Item result port type (port that takes `U`)
+
+You will also need to provide a way to extract an item from the input collection, as well as a way to put a result into the output collection:
+
+```csharp
+//for example, in ForEachNumber
+protected override Number Extract(NumberCollectionPort input, int i)
+{
+     return input.value[i];
+}
+
+protected override void Put(NumberCollectionPort outputPort, int i, Number value)
+{
+    outputPort.value.Add(value);
+}
+```
+
+And that's it. You should be able to see 2 ports on the right of the node that represent item port and item result port. 
+
+It is legal to connect a node that isn't part of the loop with a node that is in the loop, but note that this can produce confusing results at times. The loop itself resets every node that is part of the loop with each iteration, and this can propagate the reset behaviour unexpectedly if you try to mix nodes that are outside the loop. Though I am thinking about implementing scopes and capturing so that it somewhat aligns with common programming schemes.
+
 ## Under the Hood
 
 Here are some implementation details if you wish to modify the framework.
