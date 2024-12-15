@@ -1,4 +1,5 @@
-﻿using RobertHoudin.Framework.Core.Primitives.DataContainers;
+﻿using System;
+using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Utilities;
 using UnityEditor;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace RobertHoudin.Framework.Editor.Data
     [CustomPropertyDrawer(typeof(DataSource<>))]
     public class DataSourceDrawer : PropertyDrawer
     {
+        public static event Action OnDataSourceTypeChanged;
         /// <summary>
         /// Dummy to make nameof work, doesn't do anything else;
         /// </summary>
@@ -34,7 +36,7 @@ namespace RobertHoudin.Framework.Editor.Data
             GUI.Box(position, GUIContent.none);
             var enumVal = property.FindPropertyRelative(nameof(DataSource<_>.sourceType));
             if (enumVal.enumValueIndex < 0) enumVal.enumValueIndex = 0;
-            var type = enumVal.enumValueFlag;
+            var type = (SourceType)enumVal.enumValueFlag;
 
             var maxWidth = position.width;
             var xmin = position.xMin;
@@ -42,7 +44,7 @@ namespace RobertHoudin.Framework.Editor.Data
             GUI.Label(position, property.displayName);
             position.y += position.height * 1.1f;
             position.width *= 0.5f;
-            if (type != (int)SourceType.PropertyBlock)
+            if (type != SourceType.PropertyBlock)
             {
                 EditorGUI.LabelField(position, "(binding ignored)");
             }
@@ -51,10 +53,16 @@ namespace RobertHoudin.Framework.Editor.Data
                 EditorGUI.PropertyField(position, property.FindPropertyRelative(nameof(DataSource<_>.sourceName)), GUIContent.none);
             }
             position.x += position.width;
-            EditorGUI.PropertyField(position, property.FindPropertyRelative(nameof(DataSource<_>.sourceType)), GUIContent.none);
-
+            var newEnumVal = (SourceType)EditorGUI.EnumPopup(position, type);
+            if (newEnumVal != type)
+            {
+                type = newEnumVal;
+                property.FindPropertyRelative(nameof(DataSource<_>.sourceType)).enumValueFlag = (int)newEnumVal;
+                property.serializedObject.ApplyModifiedProperties();
+                OnDataSourceTypeChanged?.Invoke();
+            }
             
-            if (type != (int)SourceType.None)
+            if (type != SourceType.None)
             {
                 return;
             }

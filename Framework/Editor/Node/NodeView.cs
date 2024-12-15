@@ -12,6 +12,7 @@ namespace RobertHoudin.Framework.Editor.Node
 {
     public sealed class NodeView : UnityEditor.Experimental.GraphView.Node
     {
+        internal bool isCulled = false;
         internal static RhTreeSettings settings;
         public readonly RhNode node;
         public Action<NodeView> onNodeSelected;
@@ -19,6 +20,7 @@ namespace RobertHoudin.Framework.Editor.Node
 
         public VisualElement loopStartContainer;
         public VisualElement loopResultContainer;
+        private VisualElement _nodeBorder;
 
         public NodeView(RhNode nodeRef, bool isOutput) :
             base(AssetDatabase.GetAssetPath(RhTreeSettings.GetOrCreateSettings().nodeXml))
@@ -36,6 +38,7 @@ namespace RobertHoudin.Framework.Editor.Node
             loopStartContainer = this.Q<VisualElement>("loopStart");
             loopResultContainer = this.Q<VisualElement>("loopResult");
 
+            _nodeBorder = this.Q<VisualElement>("node-border");
 
             CreateInputPorts();
             CreateOutputPorts();
@@ -201,6 +204,20 @@ namespace RobertHoudin.Framework.Editor.Node
         {
             var outputFlag = this.Q<Button>("OutputFlag");
             outputFlag.RemoveFromClassList("output-flag");
+        }
+        
+        public void UpdateCulledView()
+        {
+            if (isCulled)
+            {
+                _nodeBorder.RemoveFromClassList("normal");
+                _nodeBorder.AddToClassList("culled");
+            }
+            else
+            {
+                _nodeBorder.AddToClassList("normal");
+                _nodeBorder.RemoveFromClassList("culled");
+            }
         }
     }
 }

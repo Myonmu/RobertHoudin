@@ -2,9 +2,9 @@
     <Style src="project://database/Assets/Plugins/RobertHoudin/Framework/Editor/Node/RhNodeViewStyle.uss?fileID=7433441132597879392&amp;guid=8e7406affde3a944caf32945490807e8&amp;type=3#RhNodeViewStyle" />
     <ui:VisualElement name="node-state" />
     <ui:VisualElement name="bg" style="transform-origin: center; display: flex;">
-        <ui:VisualElement name="node-border" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-image: none;">
+        <ui:VisualElement name="node-border" class="normal" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
             <ui:VisualElement name="contents" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-items: center; background-image: none; align-self: flex-end;">
-                <ui:VisualElement name="top">
+                <ui:VisualElement name="top" style="background-color: rgba(0, 0, 0, 0);">
                     <ui:VisualElement name="input" style="padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px; flex-direction: row; justify-content: center;" />
                     <ui:VisualElement name="divider" class="vertical" />
                     <ui:VisualElement name="title" style="padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; height: auto; flex-wrap: wrap; width: 200px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">

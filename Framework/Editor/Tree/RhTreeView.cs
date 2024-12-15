@@ -17,7 +17,7 @@ namespace RobertHoudin.Framework.Editor.Tree
     [UxmlElement]
     public partial class RhTreeView : GraphView
     #else
-    public class RhTreeView : GraphView 
+    public class RhTreeView : GraphView
     #endif
     {
         public Action<NodeView> onNodeSelected;
@@ -40,8 +40,7 @@ namespace RobertHoudin.Framework.Editor.Tree
             styleSheets.Add(styleSheet);
 
             Undo.undoRedoPerformed += OnUndoRedo;
-            viewTransformChanged += _ =>
-            {
+            viewTransformChanged += _ => {
                 if (tree is null) return;
                 tree.transformPosition = viewTransform.position;
                 tree.transformScale = viewTransform.scale; //Lost if recompiled...
@@ -70,11 +69,9 @@ namespace RobertHoudin.Framework.Editor.Tree
             DeleteElements(graphElements);
             graphViewChanged += OnGraphViewChanged;
             tree.nodes.ForEach(CreateNodeView);
-            tree.nodes.ForEach(n =>
-            {
+            tree.nodes.ForEach(n => {
                 //connect output ports
-                n.OutputPortsGeneric.ForEach(p =>
-                {
+                n.OutputPortsGeneric.ForEach(p => {
                     if (p is null) return;
                     var outputP = FindPort(p);
                     foreach (var connectedPort in p.GetConnectedPortGuids())
@@ -88,8 +85,9 @@ namespace RobertHoudin.Framework.Editor.Tree
             });
             if (tree.transformScale == Vector3.zero) tree.transformScale = Vector3.one;
             UpdateViewTransform(tree.transformPosition, tree.transformScale);
+            UpdateCullingStates();
         }
-        
+
         public Port FindPort(RhPort port)
         {
             return GetPortByGuid(port.GUID);
@@ -100,30 +98,69 @@ namespace RobertHoudin.Framework.Editor.Tree
             return GetNodeByGuid(node.GUID);
         }
 
+        public NodeView FindRhNodeView(RhNode node)
+        {
+            return FindNode(node) as NodeView;
+        }
+
+        public void UpdateCullingStates()
+        {
+            // set everything to culled
+            foreach (var node in tree.nodes)
+            {
+                FindRhNodeView(node).isCulled = true;
+            }
+            if (tree.resultNode == null) return;
+            // propagate non-culled state from results node
+            // depth-first-search
+            tree.ResetTree();
+            void UpdateCullingStatesRecursive(RhNode cursor)
+            {
+                if (cursor == null) return;
+                var view = FindRhNodeView(cursor);
+                view.isCulled = false;
+                foreach (var inputPort in cursor.InputPortsGeneric)
+                {
+                    if(!inputPort.IsActive) continue;
+                    foreach (var connectedPort in inputPort.GetConnectedPorts())
+                    {
+                        UpdateCullingStatesRecursive(connectedPort.node);
+                    }
+                }
+            }
+            var cursor = tree.resultNode;
+            UpdateCullingStatesRecursive(cursor);
+            // update visuals
+            foreach (var node in tree.nodes)
+            {
+                FindRhNodeView(node).UpdateCulledView();
+            }
+        }
+
         private GraphViewChange OnGraphViewChanged(GraphViewChange graphviewchange)
         {
-            graphviewchange.elementsToRemove?.ForEach(e =>
-            {
+            graphviewchange.elementsToRemove?.ForEach(e => {
                 switch (e)
                 {
                     case NodeView nodeView:
                         tree.DeleteNode(nodeView.node);
                         break;
                     case Edge edge:
-                    {
-                        if (edge.output.node is NodeView parentView && edge.input.node is NodeView childView)
-                            RhTree.RemoveConnection(
-                                parentView.node,
-                                edge.output.viewDataKey,
-                                childView.node,
-                                edge.input.viewDataKey);
-                        break;
-                    }
+                        {
+                            if (edge.output.node is NodeView parentView && edge.input.node is NodeView childView)
+                            {
+                                RhTree.RemoveConnection(
+                                    parentView.node,
+                                    edge.output.viewDataKey,
+                                    childView.node,
+                                    edge.input.viewDataKey);
+                            }
+                            break;
+                        }
                 }
             });
 
-            graphviewchange.edgesToCreate?.ForEach(edge =>
-            {
+            graphviewchange.edgesToCreate?.ForEach(edge => {
                 if (edge.output.node is NodeView parentView && edge.input.node is NodeView childView)
                     RhTree.AddConnection(
                         parentView.node,
@@ -133,11 +170,12 @@ namespace RobertHoudin.Framework.Editor.Tree
             });
 
             if (graphviewchange.movedElements is not null)
-                nodes.ForEach(n =>
-                {
+                nodes.ForEach(n => {
                     if (n is NodeView nodeView)
                         nodeView.SortChildren();
                 });
+            
+            UpdateCullingStates();
             return graphviewchange;
         }
 

@@ -4,9 +4,9 @@ using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
 using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
 #if UNITY_EDITOR
+using UnityEditor;
 #endif
 
 namespace RobertHoudin.Framework.Core.Primitives
@@ -23,7 +23,14 @@ namespace RobertHoudin.Framework.Core.Primitives
         [HideInInspector] public Vector3 transformPosition;
 
         //TODO: Incremental updates
+
+        /// <summary>
+        /// guid to Node
+        /// </summary>
         private Dictionary<string, RhNode> _nodeCollection = new();
+        /// <summary>
+        /// guid to Port
+        /// </summary>
         private Dictionary<string, RhPort> _portCollection = new();
 
         public void EvaluateTree(RhPropertyBlock propertyBlock)
@@ -149,6 +156,10 @@ namespace RobertHoudin.Framework.Core.Primitives
             return _portCollection.GetValueOrDefault(guid);
         }
 
+        /// <summary>
+        /// For debug only.
+        /// Remove reference to nodes that no longer exist or not actually connected
+        /// </summary>
         public void RemoveDanglingReferences()
         {
             ResetGuidCache();
@@ -157,7 +168,32 @@ namespace RobertHoudin.Framework.Core.Primitives
                 port.GetConnectedPortGuids().RemoveAll(x => string.IsNullOrEmpty(x) || !_portCollection.ContainsKey(x));
             }
         }
-        
+
+        /// <summary>
+        /// Whether a node can be traced to result node
+        /// </summary>
+        /// <returns></returns>
+        public bool IsTraceableFromResultNode(RhNode node)
+        {
+            ResetTree(); //ensure node references are set
+            return IsTraceableFromResultNodeRecursive(node);
+        }
+
+        private bool IsTraceableFromResultNodeRecursive(RhNode node)
+        {
+            if (node == null) return false;
+            if (resultNode == null) return false;
+            if (resultNode == node) return true;
+            foreach (var output in node.OutputPortsGeneric)
+            {
+                foreach (var connectedPort in output.GetConnectedPorts())
+                {
+                    if (IsTraceableFromResultNodeRecursive(connectedPort.node)) return true;
+                }
+            }
+            return false;
+        }
+
         [Button]
         public void Test()
         {

@@ -9,7 +9,7 @@
             </ui:VisualElement>
             <ui:VisualElement>
                 <ui:Label tabindex="-1" text="Data" display-tooltip-when-elided="true" style="background-color: rgb(31, 31, 31); padding-left: 5px; padding-top: 4px; padding-bottom: 4px;" />
-                <uie:Toolbar>
+                <uie:Toolbar enabled="true" style="display: none;">
                     <uie:ToolbarButton tabindex="-1" text="Blackboard" display-tooltip-when-elided="true" name="blackboardButton" />
                     <uie:ToolbarButton tabindex="-1" text="Variable Board" display-tooltip-when-elided="true" name="variableButton" />
                     <uie:ToolbarButton tabindex="-1" text="Agent" display-tooltip-when-elided="true" name="agentButton" />

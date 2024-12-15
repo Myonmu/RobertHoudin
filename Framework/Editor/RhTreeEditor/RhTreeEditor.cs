@@ -1,6 +1,7 @@
 using System;
 using RobertHoudin.Framework.Core.Primitives;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
+using RobertHoudin.Framework.Editor.Data;
 using RobertHoudin.Framework.Editor.Misc;
 using RobertHoudin.Framework.Editor.Node;
 using RobertHoudin.Framework.Editor.Settings;
@@ -32,12 +33,20 @@ namespace RobertHoudin.Framework.Editor.RhTreeEditor
         {
             EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+            DataSourceDrawer.OnDataSourceTypeChanged -= OnDataSourceTypeChanged;
+            DataSourceDrawer.OnDataSourceTypeChanged += OnDataSourceTypeChanged;
         }
 
 
         private void OnDisable()
         {
+            DataSourceDrawer.OnDataSourceTypeChanged -= OnDataSourceTypeChanged;
             EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+        }
+
+        private void OnDataSourceTypeChanged()
+        {
+            treeView?.UpdateCullingStates();
         }
 
         public void CreateGUI()
@@ -130,6 +139,7 @@ namespace RobertHoudin.Framework.Editor.RhTreeEditor
         {
             node.OnBecomeOutputNode();
             var prev = treeView.tree.SetResultNode(node.node);
+            treeView.UpdateCullingStates();
             if (prev == node.node) return;
             if (prev == null) return;
             (treeView.FindNode(prev) as NodeView)?.OnBecomeNonOutputNode();

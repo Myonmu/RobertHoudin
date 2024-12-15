@@ -11,9 +11,10 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
     public abstract class RhDataSourcePort<T> : RhPort<T>, IDataSourcePort
     {
         public DataSource<T> value = new(){sourceType = SourceType.Port};
+
+        public override bool IsActive => value.sourceType == SourceType.Port;
         public void EvalSource(RhExecutionContext ctx, RhNode node)
         {
-            IsActive = value.sourceType == SourceType.Port;
             value.InitializeBindings(ctx, node);
         }
         public override T GetValueNoBoxing()

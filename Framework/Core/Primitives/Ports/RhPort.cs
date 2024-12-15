@@ -21,7 +21,7 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
         /// This usually happens for a datasource port that uses None or PropertyBlock
         /// data types.
         /// </summary>
-        public virtual bool IsActive { get; protected set; } = true;
+        public virtual bool IsActive { get; } = true;
         [HideInInspector]public string name;
         public virtual PortType Type { get; }
         public abstract RhPort[] GetConnectedPorts();
