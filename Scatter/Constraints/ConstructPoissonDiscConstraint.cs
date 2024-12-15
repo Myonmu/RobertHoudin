@@ -1,4 +1,5 @@
-﻿using RobertHoudin.Framework.Core.Primitives.DataContainers;
+﻿using RobertHoudin.Scatter.Scatterers;
+using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using UnityEngine;
 

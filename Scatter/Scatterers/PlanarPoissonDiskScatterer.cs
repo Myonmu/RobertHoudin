@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
+using RobertHoudin.Scatter;
 using TATools.PrefabScatter;
 using TATools.RobertHoudin.Framework.Core.Ports;
 using UnityEngine;
-
-namespace RobertHoudin.Scatter
+namespace RobertHoudin.Scatter.Scatterers
 {
     [Serializable]
     public class PoissonDiskConstraintPort : RhSinglePort<FastPoissonDiskGenerator.PoissonDiskConstraint>

@@ -14,7 +14,12 @@ using UnityEngine.UIElements;
 
 namespace RobertHoudin.Framework.Editor.Tree
 {
-    public class RhTreeView : GraphView
+    #if UNITY_6000_0_OR_NEWER
+    [UxmlElement]
+    public partial class RhTreeView : GraphView
+    #else
+    public class RhTreeView : GraphView 
+    #endif
     {
         public Action<NodeView> onNodeSelected;
         public Action<NodeView> onSetOutputFlag;
@@ -187,9 +192,10 @@ namespace RobertHoudin.Framework.Editor.Tree
                                   endPort.portType == startPort.portType)
                 .ToList();
         }
-
+#if !UNITY_6000_0_OR_NEWER
         public new class UxmlFactory : UxmlFactory<RhTreeView, UxmlTraits>
         {
         }
+#endif
     }
 }
