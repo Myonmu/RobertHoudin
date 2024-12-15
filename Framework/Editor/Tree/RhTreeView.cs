@@ -20,9 +20,9 @@ namespace RobertHoudin.Framework.Editor.Tree
     public class RhTreeView : GraphView
     #endif
     {
-        public Action<NodeView> onNodeSelected;
-        public Action<NodeView> onSetOutputFlag;
-        private NodeSearchWindow searchWindow;
+        public Action<RhNodeView> onNodeSelected;
+        public Action<RhNodeView> onSetOutputFlag;
+        private RhNodeSearchWindow searchWindow;
         private readonly RhTreeSettings settings;
         public RhTree tree;
 
@@ -49,7 +49,7 @@ namespace RobertHoudin.Framework.Editor.Tree
 
         public void AddSearchWindow(RhTreeEditor.RhTreeEditor editor)
         {
-            searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
+            searchWindow = ScriptableObject.CreateInstance<RhNodeSearchWindow>();
             searchWindow.targetView = this;
             searchWindow.targetWindow = editor;
             nodeCreationRequest = ctx =>
@@ -98,11 +98,14 @@ namespace RobertHoudin.Framework.Editor.Tree
             return GetNodeByGuid(node.GUID);
         }
 
-        public NodeView FindRhNodeView(RhNode node)
+        public RhNodeView FindRhNodeView(RhNode node)
         {
-            return FindNode(node) as NodeView;
+            return FindNode(node) as RhNodeView;
         }
 
+        /// <summary>
+        /// Reevaluate if each node should be culled, and update their visuals
+        /// </summary>
         public void UpdateCullingStates()
         {
             // set everything to culled
@@ -146,12 +149,12 @@ namespace RobertHoudin.Framework.Editor.Tree
             graphviewchange.elementsToRemove?.ForEach(e => {
                 switch (e)
                 {
-                    case NodeView nodeView:
+                    case RhNodeView nodeView:
                         tree.DeleteNode(nodeView.node);
                         break;
                     case Edge edge:
                         {
-                            if (edge.output.node is NodeView parentView && edge.input.node is NodeView childView)
+                            if (edge.output.node is RhNodeView parentView && edge.input.node is RhNodeView childView)
                             {
                                 RhTree.RemoveConnection(
                                     parentView.node,
@@ -165,7 +168,7 @@ namespace RobertHoudin.Framework.Editor.Tree
             });
 
             graphviewchange.edgesToCreate?.ForEach(edge => {
-                if (edge.output.node is NodeView parentView && edge.input.node is NodeView childView)
+                if (edge.output.node is RhNodeView parentView && edge.input.node is RhNodeView childView)
                     RhTree.AddConnection(
                         parentView.node,
                         edge.output.viewDataKey,
@@ -175,7 +178,7 @@ namespace RobertHoudin.Framework.Editor.Tree
 
             if (graphviewchange.movedElements is not null)
                 nodes.ForEach(n => {
-                    if (n is NodeView nodeView)
+                    if (n is RhNodeView nodeView)
                         nodeView.SortChildren();
                 });
             
@@ -186,7 +189,7 @@ namespace RobertHoudin.Framework.Editor.Tree
         private void CreateNodeView(RhNode node)
         {
             if (node == null) return;
-            var nodeView = new NodeView(node, tree.resultNode == node)
+            var nodeView = new RhNodeView(node, tree.resultNode == node)
             {
                 onNodeSelected = onNodeSelected,
                 onSetOutputFlag = onSetOutputFlag
@@ -194,34 +197,10 @@ namespace RobertHoudin.Framework.Editor.Tree
             AddElement(nodeView);
         }
 
-        /*[Obsolete]
-        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt) //To be replaced by search window
-        {
-            //base.BuildContextualMenu(evt);
-            var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
-            foreach (var type in types) {
-                evt.menu.AppendAction($"[{type.BaseType.Name}]{type.Name}",_=>CreateNode(type));
-            }
-            types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
-            foreach (var type in types) {
-                evt.menu.AppendAction($"[{type.BaseType.Name}]{type.Name}",_=>CreateNode(type));
-            }
-            types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
-            foreach (var type in types) {
-                evt.menu.AppendAction($"[{type.BaseType.Name}]{type.Name}",_=>CreateNode(type));
-            }
-        }*/
-
         public void CreateNodeAtPosition(Type type, Vector2 position)
         {
             var node = tree.CreateNode(type);
             node.position = position;
-            CreateNodeView(node);
-        }
-
-        public void CreateNode(Type type)
-        {
-            var node = tree.CreateNode(type);
             CreateNodeView(node);
         }
 
@@ -233,6 +212,7 @@ namespace RobertHoudin.Framework.Editor.Tree
                                   endPort.portType == startPort.portType)
                 .ToList();
         }
+        
 #if !UNITY_6000_0_OR_NEWER
         public new class UxmlFactory : UxmlFactory<RhTreeView, UxmlTraits>
         {

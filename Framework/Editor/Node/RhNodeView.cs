@@ -10,19 +10,19 @@ using UnityEngine.UIElements;
 
 namespace RobertHoudin.Framework.Editor.Node
 {
-    public sealed class NodeView : UnityEditor.Experimental.GraphView.Node
+    public sealed class RhNodeView : UnityEditor.Experimental.GraphView.Node
     {
         internal bool isCulled = false;
         internal static RhTreeSettings settings;
         public readonly RhNode node;
-        public Action<NodeView> onNodeSelected;
-        public Action<NodeView> onSetOutputFlag;
+        public Action<RhNodeView> onNodeSelected;
+        public Action<RhNodeView> onSetOutputFlag;
 
         public VisualElement loopStartContainer;
         public VisualElement loopResultContainer;
         private VisualElement _nodeBorder;
 
-        public NodeView(RhNode nodeRef, bool isOutput) :
+        public RhNodeView(RhNode nodeRef, bool isOutput) :
             base(AssetDatabase.GetAssetPath(RhTreeSettings.GetOrCreateSettings().nodeXml))
         {
             var settings = RhTreeSettings.GetOrCreateSettings();
@@ -125,6 +125,11 @@ namespace RobertHoudin.Framework.Editor.Node
                 input.viewDataKey = inputPort.GUID;
                 inputContainer.Add(input);
             }
+        }
+
+        public override Port InstantiatePort(Orientation orientation, Direction direction, Port.Capacity capacity, Type type)
+        {
+            return RhPortView.CreateRhPortView<RhEdgeView>(orientation, direction, capacity, type);
         }
 
         public void CreateOtherPorts()

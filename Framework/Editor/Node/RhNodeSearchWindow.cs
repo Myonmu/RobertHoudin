@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 
 namespace RobertHoudin.Framework.Editor.Node
 {
-    public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
+    public class RhNodeSearchWindow : ScriptableObject, ISearchWindowProvider
     {
         public RhTreeEditor.RhTreeEditor targetWindow;
 

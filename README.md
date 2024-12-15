@@ -63,9 +63,17 @@ Here, `[RhInputPort]` signifies `inputs` is an input port, and `[RhOutputPort]` 
 
 There are other attributes that are specifically used in Loop nodes, but the API is still very unstable.
 
-To implement the `OnEvaluate` method, typically you call `GetValueNoBoxing()` on an input port, and `SetValueNoBoxing()` on an output port. For Multi Ports, however, you will need to call `ForEachConnected()` instead as a Multi Port doesn't store a value itself.
+To implement the `OnEvaluate` method, typically you call `GetValueNoBoxing()` on an input port, and `SetValueNoBoxing()` on an output port. **For Multi Ports, however, you will need to call `ForEachConnected()` instead as a Multi Port doesn't store a value itself**.
 
-Once the implementation is finished, the node should show up in the node search window (RobertHoudin Editor, press space). 
+Once the implementation is finished, the node should show up in the node search window (RobertHoudin Editor, press space).
+
+### Number Types
+
+The framework provides a proxy type `Number` that can be used as both `int` and `float`. This is added to eliminate the need to implement a float and int version of the same node, as well as using a conversion node if you need int or float but only have the other.
+
+You can use `NumberPort`, `NumberPortDs` or `MultiNumberPort` to replace int or float ports in most cases.
+
+The caveat, is that `Number` secretly uses `float` and can result in overflow if you are manipulating a large enough integer. If you find yourself needing to do so, use int or float ports explicitly. 
 
 ### DataSource
 
@@ -79,6 +87,29 @@ When using `DataSource`, there are 3 different types where the data can come fro
 - `PropertyBlock`: the value is retrieved from the property block in `RhExecutionContext`, using cached reflection. The text box before the type selection becomes editable and you should input the field name. (a drop down version might be implemented in the future).
 
 ![image](https://github.com/user-attachments/assets/5a1ef8b4-e07d-49ca-ab56-ecc63599c7af)
+
+## Under the Hood
+
+Here are some implementation details if you wish to modify the framework.
+
+### Node/Port Referencing
+
+The framework uses string GUIDs to reference ports and nodes, using Unity's GUID generator. The GUID is used in several ways:
+
+- Each `RhNode` and `RhPort` keeps a serialized string as GUID (hidden from inspector). If the GUID is empty, we generate a new one.
+- Unity's Graph View system finds an `RhPortView` by using `GetPortByGuid`, and finding `RhNodeView` by `GetNodeByGuid`. These two methods expects setting the `.viewDataKey` field of the node or port. 
+- In `RhTree`, we keep separate dictionaries that map string GUIDs to respective `RhNode` and `RhPort`. 
+- Each `RhPort` serializes the GUIDs of the connected ports.
+
+### Evaluation Process
+
+We always start evaluating an `RhTree` from the result node, and check each of its inputs. If the input has not been evaluated, we do the same for the input node. This is similar to a depth-first search.
+
+`OnBeginEvaluate` will be called before checking the inputs. This is a virtual method but usually no override is needed. Currently, the only thing it does is to setup bindings in DataSource ports.
+
+During a node's evaluation, which is calling the node's `OnEvaluate` method, the node reads from the input ports and sets values of the output ports. After that, the consumer of the output value will perform a *Port Forwarding* process that copies the output value to the connected input port (see `ForwardValue`). Though this is only applicable for single ports, as multi ports cannot have a single value. 
+
+Ports also have `IsActive` state. This doesn't mean whether they contain values or not, but rather if we should propagate the evaluation process through that port. 
 
 
 

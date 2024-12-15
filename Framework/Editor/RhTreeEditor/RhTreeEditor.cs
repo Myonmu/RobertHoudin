@@ -130,19 +130,19 @@ namespace RobertHoudin.Framework.Editor.RhTreeEditor
             }
         }
 
-        private void OnNodeSelectionChanged(NodeView node)
+        private void OnNodeSelectionChanged(RhNodeView node)
         {
             inspectorView.UpdateSelection(node);
         }
 
-        private void OnSetOutputFlag(NodeView node)
+        private void OnSetOutputFlag(RhNodeView node)
         {
             node.OnBecomeOutputNode();
             var prev = treeView.tree.SetResultNode(node.node);
             treeView.UpdateCullingStates();
             if (prev == node.node) return;
             if (prev == null) return;
-            (treeView.FindNode(prev) as NodeView)?.OnBecomeNonOutputNode();
+            (treeView.FindNode(prev) as RhNodeView)?.OnBecomeNonOutputNode();
         }
 
         [OnOpenAsset]

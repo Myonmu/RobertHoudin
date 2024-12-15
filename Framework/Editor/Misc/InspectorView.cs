@@ -17,7 +17,7 @@ namespace RobertHoudin.Framework.Editor.Misc
     {
         private UnityEditor.Editor editor;
 
-        public void UpdateSelection(NodeView nodeView)
+        public void UpdateSelection(RhNodeView nodeView)
         {
             Clear();
             Object.DestroyImmediate(editor);
