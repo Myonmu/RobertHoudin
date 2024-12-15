@@ -5,7 +5,7 @@ using UnityEngine;
 namespace RobertHoudin.Scatter.ScatterDataConstruction
 {
     public class ConstructScatterDataCollection: 
-        ForEachNode<PointCollection2DPort, Vector2Port, ScatterDataPort, ScatterDataCollectionPort, Vector2, ScatterData>
+        ForEachNode<Vector2CollectionPort, Vector2Port, ScatterDataPort, ScatterDataCollectionPort, Vector2, ScatterData>
     {
         protected override void OnBeginEvaluate(RhExecutionContext context)
         {
@@ -15,14 +15,14 @@ namespace RobertHoudin.Scatter.ScatterDataConstruction
             data.Clear();
         }
 
-        protected override int GetInputCollectionSize(PointCollection2DPort port)
+        protected override int GetInputCollectionSize(Vector2CollectionPort port)
         {
-            return port.value.points.Count;
+            return port.value.Count;
         }
 
-        protected override Vector2 Extract(PointCollection2DPort input, int i)
+        protected override Vector2 Extract(Vector2CollectionPort input, int i)
         {
-            return input.value.points[i];
+            return input.value[i];
         }
 
         protected override void Put(ScatterDataCollectionPort outputPort, int i, ScatterData value)

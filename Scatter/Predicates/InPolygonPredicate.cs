@@ -6,14 +6,14 @@ namespace RobertHoudin.Scatter.Predicates
 {
     public class InPolygonPredicate : RhNode
     {
-        [RhInputPort] public PointCollection2DPort input;
-        [RhOutputPort] public Point2DPredicatesPort output;
+        [RhInputPort] public Vector2CollectionPort input;
+        [RhOutputPort] public Vector2PredicatesPort output;
 
         protected override bool OnEvaluate(RhExecutionContext context)
         {
             if (input.value == null) return false;
             output.SetValueNoBoxing((p) => 
-                PolygonIntersection.IsInPolygon(p, input.GetValueNoBoxing().points));
+                PolygonIntersection.IsInPolygon(p, input.GetValueNoBoxing()));
             return true;
         }
     }

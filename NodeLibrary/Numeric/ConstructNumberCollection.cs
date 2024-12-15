@@ -6,16 +6,16 @@ using RobertHoudin.Framework.Core.Primitives.Ports;
 namespace RobertHoudin.NodeLibrary
 {
     [Serializable]
-    public class ConstructIntCollection: RhNode
+    public class ConstructNumberCollection: RhNode
     {
-        [RhInputPort] public MultiIntPort ints = new();
-        [RhOutputPort] public IntCollectionPort output = new();
+        [RhInputPort] public MultiNumberPort ints = new();
+        [RhOutputPort] public NumberCollectionPort output = new();
         protected override bool OnEvaluate(RhExecutionContext context)
         {
-            output.value.list.Clear();
+            output.value.Clear();
             ints.ForEachConnected((i) =>
             {
-                output.value.list.Add(i);
+                output.value.Add(i);
             });
             return true;
         }

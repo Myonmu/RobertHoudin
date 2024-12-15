@@ -9,7 +9,10 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
     [Serializable]
     public abstract class RhPort<T> : RhPort
     {
-         public List<string> connectedPorts = new();
+        #if !RH_DEBUG
+        [HideInInspector]
+        #endif
+        public List<string> connectedPorts = new();
         public override Type AcceptedType => typeof(T);
 
         public override object GetValue()

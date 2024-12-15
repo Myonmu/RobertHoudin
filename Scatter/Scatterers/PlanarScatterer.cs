@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using RobertHoudin.Framework.Core.Ports;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
 using UnityEngine;
 namespace RobertHoudin.Scatter.ScatterDataConstruction
 {
-    public class PointCollection2D
-    {
-        public List<Vector2> points = new();
-    }
-
     public abstract class PlanarScatterer : RhNode
     {
-        public PointCollection2DPort output = new();
+        public Vector2CollectionPort output = new();
         public override List<RhPort> OutputPorts => new() { output };
         
-        public abstract PointCollection2D Scatter(RhExecutionContext context);
+        public abstract List<Vector2> Scatter(RhExecutionContext context);
         protected override bool OnEvaluate(RhExecutionContext context)
         {
             output.SetValueNoBoxing(Scatter(context));
             return true;
         }
     }
-
-    [Serializable] public class PointCollection2DPort : RhSinglePort<PointCollection2D> { }
 }

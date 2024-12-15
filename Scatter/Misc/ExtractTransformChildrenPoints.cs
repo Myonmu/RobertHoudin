@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using RobertHoudin.Framework.Core.Ports;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
@@ -10,7 +11,7 @@ namespace RobertHoudin.Scatter.Misc
     public class ExtractTransformChildrenPoints: RhNode
     {
         public DataSource<Transform> root;
-        [RhOutputPort] public PointCollection2DPort output;
+        [RhOutputPort] public Vector2CollectionPort output;
 
         public static List<Vector2> Extract(Transform transform)
         {
@@ -22,7 +23,7 @@ namespace RobertHoudin.Scatter.Misc
         {
             var transform = root.GetValue(context, this);
             if (transform == null) return false;
-            output.SetValueNoBoxing(new PointCollection2D(){points = Extract(transform)});
+            output.SetValueNoBoxing(Extract(transform));
             return true;
         }
     }

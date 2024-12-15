@@ -4,6 +4,16 @@ using RobertHoudin.Framework.Core.Primitives.Ports;
 
 namespace RobertHoudin.NodeLibrary.Loop
 {
+    /// <summary>
+    /// Run through each item in the input collection, produces output collection.
+    /// Similar to LINQ's Select.
+    /// </summary>
+    /// <typeparam name="InputPort">type of the input collection port</typeparam>
+    /// <typeparam name="ItemPort">port for each item in the input collection</typeparam>
+    /// <typeparam name="ItemResult">port for each item in the output collection</typeparam>
+    /// <typeparam name="OutputPort">type of the output collection port</typeparam>
+    /// <typeparam name="T">input item type</typeparam>
+    /// <typeparam name="U">output item type</typeparam>
     public abstract class ForEachNode<InputPort, ItemPort, ItemResult, OutputPort, T, U> : RhNode
         where InputPort : RhPort
         where ItemResult : RhPort<U>
@@ -68,9 +78,27 @@ namespace RobertHoudin.NodeLibrary.Loop
             status = OnEvaluate(context) ? RhNodeStatus.Success : RhNodeStatus.Failed;
         }
 
+        /// <summary>
+        /// Extract the size of the input collection
+        /// </summary>
+        /// <param name="port"></param>
+        /// <returns></returns>
         protected abstract int GetInputCollectionSize(InputPort port);
 
+        /// <summary>
+        /// Given index i, extract that item from the input collection.
+        /// </summary>
+        /// <param name="input">input port</param>
+        /// <param name="i">item index</param>
+        /// <returns></returns>
         protected abstract T Extract(InputPort input, int i);
+        
+        /// <summary>
+        /// Given index i, place the item in the output collection.
+        /// </summary>
+        /// <param name="outputPort">output port</param>
+        /// <param name="i">item index</param>
+        /// <param name="value">item to put</param>
         protected abstract void Put(OutputPort outputPort, int i, U value);
 
         protected override bool OnEvaluate(RhExecutionContext context)

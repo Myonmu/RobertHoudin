@@ -114,16 +114,20 @@ namespace RobertHoudin.Framework.Editor.Tree
             // propagate non-culled state from results node
             // depth-first-search
             tree.ResetTree();
+            // use hashset to prevent circular dependency
+            var path = new HashSet<RhNode>();
             void UpdateCullingStatesRecursive(RhNode cursor)
             {
                 if (cursor == null) return;
                 var view = FindRhNodeView(cursor);
                 view.isCulled = false;
+                path.Add(cursor);
                 foreach (var inputPort in cursor.InputPortsGeneric)
                 {
                     if(!inputPort.IsActive) continue;
                     foreach (var connectedPort in inputPort.GetConnectedPorts())
                     {
+                        if (path.Contains(connectedPort.node)) return;
                         UpdateCullingStatesRecursive(connectedPort.node);
                     }
                 }

@@ -20,9 +20,9 @@ namespace RobertHoudin.Scatter.Scatterers
         [RhInputPort] public IntPortDs kPort;
         [RhInputPort] public Vector2PortDs distancePort;
         [RhInputPort] public PoissonDiskConstraintPort constraintsPort;
-        [RhInputPort] public Point2DPredicatesPort predicatesPort;
+        [RhInputPort] public Vector2PredicatesPort predicatesPort;
         
-        public override PointCollection2D Scatter(RhExecutionContext context)
+        public override List<Vector2> Scatter(RhExecutionContext context)
         {
             var gen = new FastPoissonDiskGenerator()
             {
@@ -39,7 +39,7 @@ namespace RobertHoudin.Scatter.Scatterers
                 new Vector2(b.max.x, b.max.z), distancePort.GetValueNoBoxing(),
                 kPort.GetValueNoBoxing(), constraintsPort.GetValueNoBoxing()
             );
-            return new PointCollection2D(){points = points};
+            return points;
         }
 
         public void Scatter(ref List<Vector2> resultsCollection)

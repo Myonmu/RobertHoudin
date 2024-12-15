@@ -12,6 +12,12 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
         public void SetValueNoBoxing(T value);
     }
 
+    /// <summary>
+    /// Port that can only accept one input.
+    /// Note that this is best suited for value types (types that can't be assigned null).
+    /// Use <see cref="RhSinglePortObjectType{T}"/> for object types.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [Serializable]
     public abstract class RhSinglePort<T> : RhPort<T>, IRhSinglePort<T>
     {
@@ -32,6 +38,10 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
         }
     }
 
+    /// <summary>
+    /// Single Port but calls default constructor (new())
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class RhSinglePortObjectType<T> : RhPort<T>, IRhSinglePort<T> where T : new()
     {
         public T value = new();
