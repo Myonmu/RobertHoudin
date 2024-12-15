@@ -71,10 +71,13 @@ Once the implementation is finished, the node should show up in the node search 
 
 When using `DataSource`, there are 3 different types where the data can come from:
 - `None`: the value is embedded into the data source. In the editor, an extra field will appear after the type selection.
+
 ![image](https://github.com/user-attachments/assets/8488a636-8636-4b93-a5d1-225303abff07)
 - `Port`: the value comes from evaluating the connected port.
+
 ![image](https://github.com/user-attachments/assets/fde2e67a-5b94-43cd-a9b3-03390ad6eae7)
 - `PropertyBlock`: the value is retrieved from the property block in `RhExecutionContext`, using cached reflection. The text box before the type selection becomes editable and you should input the field name. (a drop down version might be implemented in the future).
+
 ![image](https://github.com/user-attachments/assets/5a1ef8b4-e07d-49ca-ab56-ecc63599c7af)
 
 
