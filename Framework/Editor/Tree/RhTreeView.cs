@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MochiBTS.Editor;
 using RobertHoudin.Framework.Core.Primitives;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
@@ -49,7 +48,7 @@ namespace RobertHoudin.Framework.Editor.Tree
             };
         }
 
-        public void AddSearchWindow(RhTreeEditor editor)
+        public void AddSearchWindow(RhTreeEditor.RhTreeEditor editor)
         {
             searchWindow = ScriptableObject.CreateInstance<NodeSearchWindow>();
             searchWindow.targetView = this;

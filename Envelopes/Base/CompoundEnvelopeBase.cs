@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-
-namespace TATools.RobertHoudin
+namespace RobertHoudin.Envelopes.Base
 {
     [Serializable]
     public abstract class CompoundEnvelopeBase: IEnvelope

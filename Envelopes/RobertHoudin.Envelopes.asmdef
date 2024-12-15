@@ -1,6 +1,7 @@
 ﻿{
   "name": "RobertHoudin.Envelopes",
   "defineConstraints": [
-    "ODIN_EDITOR"
-  ]
+    "ODIN_INSPECTOR"
+  ],
+  "references":[ "GUID:2751ac510abb421da97322e4653fa166" ]
 }

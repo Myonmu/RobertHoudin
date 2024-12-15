@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MochiBTS.Editor;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Editor.Tree;
 using UnityEditor;
@@ -13,7 +12,7 @@ namespace RobertHoudin.Framework.Editor.Node
 {
     public class NodeSearchWindow : ScriptableObject, ISearchWindowProvider
     {
-        public RhTreeEditor targetWindow;
+        public RhTreeEditor.RhTreeEditor targetWindow;
 
         public RhTreeView targetView;
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)

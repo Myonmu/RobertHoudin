@@ -1,8 +1,7 @@
 ﻿using System;
 using RobertHoudin.Framework.Core.Primitives.Ports;
 using UnityEngine;
-
-namespace TATools.RobertHoudin.Framework.Core.Ports
+namespace RobertHoudin.Framework.Core.Ports
 {
     [Serializable] public class IntPortDs : RhDataSourcePort<int> {}
     [Serializable] public class Texture2DPortDs: RhDataSourcePort<Texture2D> { }

@@ -1,7 +1,6 @@
 using System;
 using RobertHoudin.Framework.Core.Primitives;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
-using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Editor.Misc;
 using RobertHoudin.Framework.Editor.Node;
 using RobertHoudin.Framework.Editor.Settings;
@@ -10,7 +9,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UIElements;
-namespace MochiBTS.Editor
+namespace RobertHoudin.Framework.Editor.RhTreeEditor
 {
     public class RhTreeEditor : EditorWindow
     {

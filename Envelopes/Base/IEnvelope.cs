@@ -1,4 +1,4 @@
-﻿namespace TATools.RobertHoudin
+﻿namespace RobertHoudin.Envelopes.Base
 {
     /// <summary>
     /// Envelop is a curve/function f(x): [0,1] -> R

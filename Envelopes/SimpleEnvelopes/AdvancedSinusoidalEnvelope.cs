@@ -1,8 +1,8 @@
 ﻿using System;
+using RobertHoudin.Envelopes.Base;
 using Sirenix.OdinInspector;
 using UnityEngine;
-
-namespace TATools.RobertHoudin
+namespace RobertHoudin.Envelopes.SimpleEnvelopes
 {
     [Serializable]
     public class AdvancedSinusoidalEnvelope: EnvelopeBase

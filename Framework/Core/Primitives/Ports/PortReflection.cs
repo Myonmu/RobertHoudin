@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using RobertHoudin.Framework.Core.Primitives.Ports;
-
-namespace RobertHoudin.Framework.Core.Primitives.Nodes
+using RobertHoudin.Framework.Core.Primitives.Nodes;
+namespace RobertHoudin.Framework.Core.Primitives.Ports
 {
     public static class PortReflection
     {

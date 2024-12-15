@@ -15,6 +15,12 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
     [Serializable]
     public abstract class RhPort
     {
+        /// <summary>
+        /// Whether this port should propagate node evaluation.
+        /// When false, nodes connected with this port will not be evaluated.
+        /// This usually happens for a datasource port that uses None or PropertyBlock
+        /// data types.
+        /// </summary>
         public virtual bool IsActive { get; protected set; } = true;
         [HideInInspector]public string name;
         public virtual PortType Type { get; }

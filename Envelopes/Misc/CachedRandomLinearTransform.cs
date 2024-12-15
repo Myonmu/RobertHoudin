@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
-namespace TATools.RobertHoudin
+namespace RobertHoudin.Envelopes.Misc
 {
     [Serializable]
     public class CachedRandomLinearTransform

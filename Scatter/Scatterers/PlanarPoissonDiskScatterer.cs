@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using RobertHoudin.Framework.Core.Ports;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
 using RobertHoudin.Scatter;
-using TATools.PrefabScatter;
-using TATools.RobertHoudin.Framework.Core.Ports;
+using RobertHoudin.Scatter.ScatterDataConstruction;
 using UnityEngine;
 namespace RobertHoudin.Scatter.Scatterers
 {

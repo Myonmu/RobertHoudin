@@ -1,7 +1,7 @@
-﻿using Sirenix.OdinInspector;
+﻿using RobertHoudin.Envelopes.Base;
+using Sirenix.OdinInspector;
 using UnityEngine;
-
-namespace TATools.RobertHoudin
+namespace RobertHoudin.Envelopes.SimpleEnvelopes
 {
     public class AnimCurveEnvelope: EnvelopeBase
     {

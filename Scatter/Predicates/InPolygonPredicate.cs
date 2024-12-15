@@ -1,7 +1,8 @@
-﻿using RobertHoudin.Framework.Core.Primitives.Nodes;
-using TATools.RobertHoudin.Framework.Core.Ports;
-
-namespace RobertHoudin.Scatter
+﻿using RobertHoudin.Framework.Core.Ports;
+using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Core.Primitives.Ports;
+using RobertHoudin.Scatter.ScatterDataConstruction;
+namespace RobertHoudin.Scatter.Predicates
 {
     public class InPolygonPredicate : RhNode
     {

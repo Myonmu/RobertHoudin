@@ -2,9 +2,10 @@
 using System.Linq;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Core.Primitives.Ports;
+using RobertHoudin.Scatter.ScatterDataConstruction;
 using UnityEngine;
-
-namespace RobertHoudin.Scatter
+namespace RobertHoudin.Scatter.Misc
 {
     public class ExtractTransformChildrenPoints: RhNode
     {

@@ -1,6 +1,6 @@
 ﻿using System;
-
-namespace TATools.RobertHoudin
+using Sirenix.OdinInspector;
+namespace RobertHoudin.Envelopes.Base
 {
     [Serializable]
     public abstract class EnvelopeBase: IEnvelope

@@ -1,9 +1,10 @@
-﻿using RobertHoudin.Scatter.Scatterers;
-using RobertHoudin.Framework.Core.Primitives.DataContainers;
+﻿using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Core.Primitives.Ports;
+using RobertHoudin.Scatter.ScatterDataConstruction;
+using RobertHoudin.Scatter.Scatterers;
 using UnityEngine;
-
-namespace RobertHoudin.Scatter
+namespace RobertHoudin.Scatter.Constraints
 {
     public class ConstructPoissonDiscConstraint: RhNode
     {

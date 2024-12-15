@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
-namespace RobertHoudin.Misc
+namespace RobertHoudin.Envelopes.Misc
 {
     public class CachedRandomT<T>
     {

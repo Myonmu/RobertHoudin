@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
-namespace TATools.RobertHoudin.Misc
+namespace RobertHoudin.Envelopes.Misc
 {
     [Serializable]
     public class SciFloat

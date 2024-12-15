@@ -1,7 +1,7 @@
-﻿using RobertHoudin.Framework.Core.Primitives.Nodes;
-using TATools.RobertHoudin.Framework.Core.Ports;
-
-namespace RobertHoudin.Scatter
+﻿using RobertHoudin.Framework.Core.Ports;
+using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Core.Primitives.Ports;
+namespace RobertHoudin.Scatter.ScatterDataConstruction
 {
     public class ConstructScatterData : RhNode
     {

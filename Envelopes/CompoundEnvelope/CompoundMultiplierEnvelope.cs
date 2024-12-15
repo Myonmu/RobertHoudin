@@ -1,6 +1,6 @@
 ﻿using System;
-
-namespace TATools.RobertHoudin
+using RobertHoudin.Envelopes.Base;
+namespace RobertHoudin.Envelopes.CompoundEnvelope
 {
     [Serializable]
     public class CompoundMultiplierEnvelope: CompoundEnvelopeBase

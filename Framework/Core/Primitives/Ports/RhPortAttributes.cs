@@ -1,6 +1,5 @@
 ﻿using System;
-
-namespace RobertHoudin.Framework.Core.Primitives.Nodes
+namespace RobertHoudin.Framework.Core.Primitives.Ports
 {
     
     [AttributeUsage(AttributeTargets.Field)]

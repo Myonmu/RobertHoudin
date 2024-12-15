@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using RobertHoudin.Envelopes.Base;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = System.Random;
 
-namespace TATools.RobertHoudin
+namespace RobertHoudin.Envelopes.Misc
 {
     /// <summary>
     /// Cached list of random numbers. Useful when you need to generate consistent

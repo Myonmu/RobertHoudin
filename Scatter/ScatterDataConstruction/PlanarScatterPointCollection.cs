@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
 using UnityEngine;
-
-namespace RobertHoudin.Scatter
+namespace RobertHoudin.Scatter.ScatterDataConstruction
 {
     public class PointCollection2D
     {

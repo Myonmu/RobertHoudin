@@ -1,9 +1,8 @@
-﻿using RobertHoudin.Framework.Core.Primitives.Nodes;
+﻿using RobertHoudin.Framework.Core.Ports;
+using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.NodeLibrary.Loop;
-using TATools.RobertHoudin.Framework.Core.Ports;
 using UnityEngine;
-
-namespace RobertHoudin.Scatter
+namespace RobertHoudin.Scatter.ScatterDataConstruction
 {
     public class ConstructScatterDataCollection: 
         ForEachNode<PointCollection2DPort, Vector2Port, ScatterDataPort, ScatterDataCollectionPort, Vector2, ScatterData>

@@ -1,16 +1,15 @@
-﻿using Sirenix.OdinInspector;
+﻿using RobertHoudin.Envelopes.Base;
+using Sirenix.OdinInspector;
 using UnityEngine;
-
-namespace TATools.RobertHoudin
+namespace RobertHoudin.Envelopes.SimpleEnvelopes
 {
     public class RandomRangeEnvelope: EnvelopeBase
     {
-        [Label("输出定值")]
         public bool forceConstant;
-        [HideIf("forceConstant")][Label("随机范围")]
+        [HideIf("forceConstant")]
         public Vector2 randomRange;
 
-        [Label("定值")][ShowIf("forceConstant")]
+        [ShowIf("forceConstant")]
         public float constValue;
         public override float Evaluate(float i)
         {

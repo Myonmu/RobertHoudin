@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using RobertHoudin.Scatter;
+using RobertHoudin.Scatter.ScatterDataConstruction;
 using UnityEngine;
-
-namespace TATools.PrefabScatter
+namespace RobertHoudin.Scatter
 {
     public interface IScatterPipeline
     {

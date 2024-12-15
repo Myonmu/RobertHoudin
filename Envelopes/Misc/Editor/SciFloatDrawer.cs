@@ -1,11 +1,9 @@
-﻿using TATools.Misc;
-using TATools.RobertHoudin.Misc;
+﻿using Plugins.RobertHoudin.Utils;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-
-namespace TATools.RobertHoudin.Editor
+namespace RobertHoudin.Envelopes.Misc.Editor
 {
     [CustomPropertyDrawer(typeof(SciFloat))]
     public class SciFloatDrawer : PropertyDrawer
