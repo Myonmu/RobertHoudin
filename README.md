@@ -120,7 +120,11 @@ You could either expose them in inspector or manually set them with other code.
 
 You could directly access the property block inside `OnEvaluate()` method of a node, since the property block is passed as part of the `RhExecutionContext`, but doing so would create a strong dependency between the node and the property block class, and is best to avoid.
 
-As describe in the previous section, to access a field via datasource port, you simply need to fill the text box with the name of the field, and reflection will take care of the rest:
+As describe in the previous section, to access a field via datasource port, you simply need to fill the text box with the name of the field, and reflection will take care of the rest.
+
+For example, this will bind `rootTransform` and `objectProvider` in the node as in the `SimpleScatterPropertyBlock` class:
+<img width="227" alt="image" src="https://github.com/user-attachments/assets/27ffb32b-2004-452c-ac7e-123e4957194a" />
+
 
 
 ### ForEach Nodes
