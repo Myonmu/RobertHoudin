@@ -62,10 +62,10 @@ namespace RobertHoudin.Framework.Editor.Node
                 switch (ds.SourceType)
                 {
                     case SourceType.None:
-                        portColor = _naturalColor;
+                        portColor = Color.black;
                         return;
                     case SourceType.PropertyBlock:
-                        portColor = string.IsNullOrEmpty(ds.SourceName) ? Color.red : _naturalColor;
+                        portColor = string.IsNullOrEmpty(ds.SourceName) ? Color.red : Color.black;
                         return;
                     case SourceType.Port:
                         break;
