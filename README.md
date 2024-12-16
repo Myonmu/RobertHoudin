@@ -93,9 +93,15 @@ When using `DataSource`, there are 3 different types where the data can come fro
 - `Port`: the value comes from evaluating the connected port.
 
 ![image](https://github.com/user-attachments/assets/fde2e67a-5b94-43cd-a9b3-03390ad6eae7)
-- `PropertyBlock`: the value is retrieved from the property block in `RhExecutionContext`, using cached reflection. The text box before the type selection becomes editable and you should input the field name. (a drop down version might be implemented in the future).
+- `PropertyBlock`: the value is retrieved from the property block in `RhExecutionContext`, using cached reflection. 
 
-![image](https://github.com/user-attachments/assets/5a1ef8b4-e07d-49ca-ab56-ecc63599c7af)
+<img width="214" alt="image" src="https://github.com/user-attachments/assets/83f6d21a-d958-4eed-b1ce-d004ce4d5914" />
+
+Assigning a value to `PropertyBlockType` in `RhTree` asset will provide a dropdown of eligible fields when editing datasources.
+
+![image](https://github.com/user-attachments/assets/0f732dc4-cc30-4d83-b584-144dab2b1854)
+
+
 
 ### Property Block
 
@@ -123,9 +129,22 @@ You could directly access the property block inside `OnEvaluate()` method of a n
 As describe in the previous section, to access a field via datasource port, you simply need to fill the text box with the name of the field, and reflection will take care of the rest.
 
 For example, this will bind `rootTransform` and `objectProvider` in the node as in the `SimpleScatterPropertyBlock` class:
+
 <img width="227" alt="image" src="https://github.com/user-attachments/assets/27ffb32b-2004-452c-ac7e-123e4957194a" />
 
+### Validation
 
+There are a few validation mechanisms that catch graph errors early on.
+
+- **Node Culling** : When a node cannot be traced to the result node, it becomes dimmed, meaning the node will not be executed.
+
+![image](https://github.com/user-attachments/assets/8e64315e-a345-4ff8-b4ce-f1249b7e7c74)
+
+- **Missing Connection** : If an input port or a data source input port set to `Port` is not connected, the port becomes magenta:
+
+![image](https://github.com/user-attachments/assets/cc77ad8e-c58c-4938-a11b-f20a813db15a)
+
+- **Missing Reflection Binding** : If a data source port is set to `PropertyBlock` while its binding is null, the port becomes red. Though it can only happen if you do not specify the property block type in the `RhTree` asset.
 
 ### ForEach Nodes
 
