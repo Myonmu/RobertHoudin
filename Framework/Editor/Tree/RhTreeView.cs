@@ -4,12 +4,14 @@ using System.Linq;
 using RobertHoudin.Framework.Core.Primitives;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
+using RobertHoudin.Framework.Core.Primitives.Utilities;
 using RobertHoudin.Framework.Editor.Node;
 using RobertHoudin.Framework.Editor.Settings;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Direction = UnityEditor.Experimental.GraphView.Direction;
 
 namespace RobertHoudin.Framework.Editor.Tree
 {
@@ -127,7 +129,7 @@ namespace RobertHoudin.Framework.Editor.Tree
                 path.Add(cursor);
                 foreach (var inputPort in cursor.InputPortsGeneric)
                 {
-                    if(!inputPort.IsActive) continue;
+                    if (!inputPort.IsActive) continue;
                     foreach (var connectedPort in inputPort.GetConnectedPorts())
                     {
                         if (path.Contains(connectedPort.node)) return;
@@ -142,7 +144,7 @@ namespace RobertHoudin.Framework.Editor.Tree
             {
                 FindRhNodeView(node).UpdateCulledView();
             }
-            
+
             ValidatePorts();
         }
 
@@ -195,7 +197,7 @@ namespace RobertHoudin.Framework.Editor.Tree
                     if (n is RhNodeView nodeView)
                         nodeView.SortChildren();
                 });
-            
+
             UpdateCullingStates();
             return graphviewchange;
         }
@@ -221,14 +223,19 @@ namespace RobertHoudin.Framework.Editor.Tree
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
             return ports.ToList()
-                .Where(endPort => endPort.direction != startPort.direction &&
-                                  endPort.node != startPort.node &&
-                                  endPort.portType == startPort.portType)
+                .Where(endPort =>
+                    endPort.direction != startPort.direction &&
+                    endPort.node != startPort.node &&
+                    ((endPort.direction is Direction.Input && startPort.portType.IsConvertibleTo(endPort.portType))
+                     ||
+                     (startPort.direction is Direction.Input && endPort.portType.IsConvertibleTo(startPort.portType)
+                     )
+                    ))
                 .ToList();
         }
-        
 
-        
+
+
 #if !UNITY_6000_0_OR_NEWER
         public new class UxmlFactory : UxmlFactory<RhTreeView, UxmlTraits>
         {

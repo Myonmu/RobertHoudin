@@ -71,6 +71,9 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
                     break;
                 case RhMultiPort<T> multiPort:
                     return;
+                case IRhSinglePort ambiguousSinglePort:
+                    ambiguousSinglePort.SetValue(GetValue());
+                    break;
             }
         }
 

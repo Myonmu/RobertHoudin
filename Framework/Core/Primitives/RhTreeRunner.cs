@@ -21,7 +21,6 @@ namespace RobertHoudin.Framework.Core.Primitives
         {
             ResetTree();
             tree.EvaluateTree(propertyBlock);
-            Debug.Log(tree.resultNode.OutputPorts[0].GetValue());
         }
     }
 }

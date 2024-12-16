@@ -23,4 +23,6 @@ namespace RobertHoudin.Framework.Core.Ports
     
     [Serializable] public class BoolPort: RhSinglePort<bool> { }
     [Serializable] public class StringPort: RhSinglePort<string> { }
+    
+    [Serializable] public class BoxedObjectPort: RhSinglePort<object> { }
 }

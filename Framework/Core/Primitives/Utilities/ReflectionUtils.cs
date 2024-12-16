@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
+using Sirenix.Utilities;
 
 namespace RobertHoudin.Framework.Core.Primitives.Utilities
 {
@@ -236,6 +238,22 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
             return containerType.GetFields(
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
                 .Where(x => type.IsAssignableFrom(x.FieldType)).ToList();
+        }
+        
+        public static bool IsConvertibleTo(this Type from, Type to)
+        {
+            bool IsConvertibleToViaCastOrTypeConversion(Type from, Type to)
+            {
+                if (from.IsEnum)
+                    return Enum.GetUnderlyingType(from).IsConvertibleTo(to);
+                if (to.IsEnum)
+                    return Enum.GetUnderlyingType(to).IsConvertibleTo(from);
+                if (!from.IsPrimitive || !to.IsPrimitive)
+                    return from.GetCastMethod(to) != null;
+                var tc = TypeDescriptor.GetConverter(from);
+                return tc.CanConvertTo(to);
+            }
+            return to.IsAssignableFrom(from) || IsConvertibleToViaCastOrTypeConversion(from, to);
         }
     }
 }

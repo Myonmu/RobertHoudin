@@ -4,6 +4,8 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
 {
     public interface IRhSinglePort
     {
+        public object GetValue();
+        public void SetValue(object value);
     }
 
     public interface IRhSinglePort<T> : IRhSinglePort
