@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
-using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -14,6 +14,15 @@ namespace RobertHoudin.Framework.Core.Primitives
     [CreateAssetMenu(fileName = "RhTree", menuName = "RobertHoudin/RH Tree")]
     public class RhTree : ScriptableObject
     {
+        /// <summary>
+        /// Used to provide context for data sources.
+        /// But we only use the type info, not its values,
+        /// so SerializeReference is slightly overkill.
+        /// null is allowed as that indicates we fall back to draw
+        /// a text box for binding instead.
+        /// </summary>
+        [SerializeReference]
+        public IRhPropertyBlock propertyBlockType;
         public RhNode resultNode;
 
         [HideInInspector] public List<RhNode> nodes = new();
@@ -35,6 +44,10 @@ namespace RobertHoudin.Framework.Core.Primitives
 
         public void EvaluateTree(IRhPropertyBlock propertyBlock)
         {
+            if (propertyBlockType != null && propertyBlock.GetType() != propertyBlockType.GetType())
+            {
+                throw new Exception($"Provided property block does not match the type {propertyBlockType.GetType().Name} expected by the RhTree.");
+            }
             resultNode.EvaluateNode(new RhExecutionContext()
             {
                 propertyBlock = propertyBlock
@@ -79,62 +92,7 @@ namespace RobertHoudin.Framework.Core.Primitives
             resultNode = node;
             return prevResultNode;
         }
-
-#if UNITY_EDITOR
-        public RhNode CreateNode(Type type)
-        {
-            var node = CreateInstance(type) as RhNode;
-            node.name = type.Name;
-
-            Undo.RecordObject(this, "RH Tree (CreateNode)");
-            nodes.Add(node);
-
-            if (!Application.isPlaying)
-                AssetDatabase.AddObjectToAsset(node, this);
-            Undo.RegisterCreatedObjectUndo(node, "RH Tree (CreateNode)");
-            AssetDatabase.SaveAssets();
-            return node;
-        }
-
-        public void DeleteNode(RhNode node)
-        {
-            if (node is null) return;
-            ResetGuidCache();
-            Undo.RecordObject(this, "RH Tree (DeleteNode)");
-            nodes.Remove(node);
-            node.DisconnectAll(this);
-            //AssetDatabase.RemoveObjectFromAsset(node);
-            Undo.DestroyObjectImmediate(node);
-            AssetDatabase.SaveAssets();
-        }
-
-        public static void AddConnection(RhNode from, string fromPortGuid, RhNode to, string toPortGuid)
-        {
-            if (from is null || to is null) return;
-            var fromPort = from.GetOutputPortByGUID(fromPortGuid);
-            var toPort = to.GetInputPortByGUID(toPortGuid);
-            if (fromPort is null || toPort is null) return;
-
-            Undo.RecordObject(from, "RH Tree (Connect)");
-            fromPort.Connect(toPort);
-            toPort.Connect(fromPort);
-            EditorUtility.SetDirty(from);
-        }
-
-        public static void RemoveConnection(RhNode from, string fromPortGuid, RhNode to, string toPortGuid)
-        {
-            if (from is null || to is null) return;
-            var fromPort = from.GetOutputPortByGUID(fromPortGuid);
-            var toPort = to.GetInputPortByGUID(toPortGuid);
-            if (fromPort is null || toPort is null) return;
-
-            Undo.RecordObject(from, "RH Tree (Disconnect)");
-            fromPort.Disconnect(toPort);
-            toPort.Disconnect(fromPort);
-            EditorUtility.SetDirty(from);
-        }
-
-#endif
+        
 
         /// <summary>
         /// Finds a node by guid from guid cache (guid cache must have been initialized)
@@ -177,21 +135,21 @@ namespace RobertHoudin.Framework.Core.Primitives
         {
             ResetTree(); //ensure node references are set
             return IsTraceableFromResultNodeRecursive(node);
-        }
-
-        private bool IsTraceableFromResultNodeRecursive(RhNode node)
-        {
-            if (node == null) return false;
-            if (resultNode == null) return false;
-            if (resultNode == node) return true;
-            foreach (var output in node.OutputPortsGeneric)
+            
+            bool IsTraceableFromResultNodeRecursive(RhNode cursor)
             {
-                foreach (var connectedPort in output.GetConnectedPorts())
+                if (cursor == null) return false;
+                if (resultNode == null) return false;
+                if (resultNode == cursor) return true;
+                foreach (var output in cursor.OutputPortsGeneric)
                 {
-                    if (IsTraceableFromResultNodeRecursive(connectedPort.node)) return true;
+                    foreach (var connectedPort in output.GetConnectedPorts())
+                    {
+                        if (IsTraceableFromResultNodeRecursive(connectedPort.node)) return true;
+                    }
                 }
+                return false;
             }
-            return false;
         }
     }
 }

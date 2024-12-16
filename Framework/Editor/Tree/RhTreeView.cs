@@ -150,13 +150,13 @@ namespace RobertHoudin.Framework.Editor.Tree
                 switch (e)
                 {
                     case RhNodeView nodeView:
-                        tree.DeleteNode(nodeView.node);
+                        DeleteNode(nodeView.node);
                         break;
                     case Edge edge:
                         {
                             if (edge.output.node is RhNodeView parentView && edge.input.node is RhNodeView childView)
                             {
-                                RhTree.RemoveConnection(
+                                RhTreeEditing.RemoveConnection(
                                     parentView.node,
                                     edge.output.viewDataKey,
                                     childView.node,
@@ -169,7 +169,7 @@ namespace RobertHoudin.Framework.Editor.Tree
 
             graphviewchange.edgesToCreate?.ForEach(edge => {
                 if (edge.output.node is RhNodeView parentView && edge.input.node is RhNodeView childView)
-                    RhTree.AddConnection(
+                    RhTreeEditing.AddConnection(
                         parentView.node,
                         edge.output.viewDataKey,
                         childView.node,
@@ -199,7 +199,7 @@ namespace RobertHoudin.Framework.Editor.Tree
 
         public void CreateNodeAtPosition(Type type, Vector2 position)
         {
-            var node = tree.CreateNode(type);
+            var node = CreateNode(type);
             node.position = position;
             CreateNodeView(node);
         }
@@ -213,10 +213,37 @@ namespace RobertHoudin.Framework.Editor.Tree
                 .ToList();
         }
         
+
+        
 #if !UNITY_6000_0_OR_NEWER
         public new class UxmlFactory : UxmlFactory<RhTreeView, UxmlTraits>
         {
         }
 #endif
+        public RhNode CreateNode(Type type)
+        {
+            var node = ScriptableObject.CreateInstance(type) as RhNode;
+            node.name = type.Name;
+
+            Undo.RecordObject(tree, "RH Tree (CreateNode)");
+            tree.nodes.Add(node);
+
+            if (!Application.isPlaying)
+                AssetDatabase.AddObjectToAsset(node, tree);
+            Undo.RegisterCreatedObjectUndo(node, "RH Tree (CreateNode)");
+            AssetDatabase.SaveAssets();
+            return node;
+        }
+        public void DeleteNode(RhNode node)
+        {
+            if (node is null) return;
+            tree.ResetGuidCache();
+            Undo.RecordObject(tree, "RH Tree (DeleteNode)");
+            tree.nodes.Remove(node);
+            node.DisconnectAll(tree);
+            //AssetDatabase.RemoveObjectFromAsset(node);
+            Undo.DestroyObjectImmediate(node);
+            AssetDatabase.SaveAssets();
+        }
     }
 }

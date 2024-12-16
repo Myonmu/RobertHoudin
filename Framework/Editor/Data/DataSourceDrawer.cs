@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Utilities;
 using UnityEditor;
@@ -29,7 +30,43 @@ namespace RobertHoudin.Framework.Editor.Data
         }
         */
 
-
+        private void DrawBindingSelector(ref Rect position, SerializedProperty property)
+        {
+            var window = EditorWindow.focusedWindow as RhTreeEditor.RhTreeEditor;
+            if (window?.Tree?.propertyBlockType is null)
+            {
+                EditorGUI.PropertyField(position, property.FindPropertyRelative(nameof(DataSource<_>.sourceName)), GUIContent.none);
+            }
+            else
+            {
+                var blockType = window.Tree.propertyBlockType.GetType();
+                var sourceName = property.FindPropertyRelative(nameof(DataSource<_>.sourceName));
+                // extract the expected type
+                var dsType = property.boxedValue.GetType();
+                while (!dsType.IsGenericType)
+                {
+                    dsType = dsType.BaseType ?? throw new Exception($"Failed to get reflection data from data source type: " +
+                                                                    $"no generic type in {property.boxedValue.GetType()}'s hierarchy.");
+                }
+                var typeArg = dsType.GetGenericArguments()[0];
+                var fields = ReflectionUtils.GetFieldsAssignableTo(typeArg, blockType).Select(x=>x.Name).ToArray();
+                var i = 0;
+                // determine current index
+                for (i = 0; i < fields.Length; i++)
+                {
+                    if (fields[i] == sourceName.stringValue)
+                    {
+                        break;
+                    }
+                }
+                var newIndex = EditorGUI.Popup(position, i, fields);
+                if (newIndex != i)
+                {
+                    sourceName.stringValue = fields[newIndex];
+                    property.serializedObject.ApplyModifiedProperties();
+                }
+            }
+        }
         public override void OnGUI(Rect position, SerializedProperty property,
             GUIContent label)
         {
@@ -50,7 +87,7 @@ namespace RobertHoudin.Framework.Editor.Data
             }
             else
             {
-                EditorGUI.PropertyField(position, property.FindPropertyRelative(nameof(DataSource<_>.sourceName)), GUIContent.none);
+                DrawBindingSelector(ref position, property);
             }
             position.x += position.width;
             var newEnumVal = (SourceType)EditorGUI.EnumPopup(position, type);
@@ -61,7 +98,7 @@ namespace RobertHoudin.Framework.Editor.Data
                 property.serializedObject.ApplyModifiedProperties();
                 OnDataSourceTypeChanged?.Invoke();
             }
-            
+
             if (type != SourceType.None)
             {
                 return;

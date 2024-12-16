@@ -28,6 +28,8 @@ namespace RobertHoudin.Framework.Editor.RhTreeEditor
         //private SerializedObject treeObject;
         private RhTreeView treeView;
         private VariableBoard variableBoard;
+        
+        public RhTree Tree => treeView?.tree;
 
         private void OnEnable()
         {
@@ -146,7 +148,7 @@ namespace RobertHoudin.Framework.Editor.RhTreeEditor
         }
 
         [OnOpenAsset]
-        public static bool OnOpenAsset(int instanceId, int line)
+        public static bool OnOpenAsset(int instanceId)
         {
             if (Selection.activeObject is not RhTree tree) return false;
             OpenWindow();

@@ -10,7 +10,7 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
     /// <summary>
     /// Dark magic. Not friend of IL2CPP (Source generator required if it is the case)
     /// </summary>
-    internal static class ReflectionUtils
+    public static class ReflectionUtils
     {
         public static Func<T> CreateGetter<T>(object selectedComponent, FieldInfo field)
         {
@@ -229,6 +229,13 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
             var f = container.GetType().GetFields()
                 .First(x => x.FieldType.GetInterfaces().Contains(typeof(T)));
             return (T)f.GetValue(container);
+        }
+
+        public static List<FieldInfo> GetFieldsAssignableTo(Type type, Type containerType)
+        {
+            return containerType.GetFields(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                .Where(x => type.IsAssignableFrom(x.FieldType)).ToList();
         }
     }
 }
