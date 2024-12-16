@@ -33,14 +33,18 @@ namespace RobertHoudin.Framework.Editor.Data
         private void DrawBindingSelector(ref Rect position, SerializedProperty property)
         {
             var window = EditorWindow.focusedWindow as RhTreeEditor.RhTreeEditor;
-            if (window?.Tree?.propertyBlockType is null)
+             var sourceName = property.FindPropertyRelative(nameof(DataSource<_>.sourceName));
+            if (window?.Tree is null)
+            {
+                EditorGUI.LabelField(position, sourceName.stringValue);
+            }
+            else if (window?.Tree?.propertyBlockType is null)
             {
                 EditorGUI.PropertyField(position, property.FindPropertyRelative(nameof(DataSource<_>.sourceName)), GUIContent.none);
             }
             else
             {
                 var blockType = window.Tree.propertyBlockType.GetType();
-                var sourceName = property.FindPropertyRelative(nameof(DataSource<_>.sourceName));
                 // extract the expected type
                 var dsType = property.boxedValue.GetType();
                 while (!dsType.IsGenericType)
