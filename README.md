@@ -2,15 +2,33 @@
 
 ![GIF 2024-12-15 22-56-45](https://github.com/user-attachments/assets/7f1170de-8f5b-4781-b99d-8d83c865109d)
 
-A Houdini-like node evaluation framework with (hopefully) common tech art functions.
+A Houdini-like node evaluation framework with (hopefully) common tech art functions. 
 
-The project is *useable* but still needs quality of life improvements to be suitable to integrate in large scale production.
+The project is *useable* but still needs quality of life improvements.
 
 At the moment, the code base contains a minor amount of behaviour tree concepts, because it is derived from an earlier behaviour tree plugin MochiBTS
 
 ### Why "Robert Houdin"?
 
-If your name is actually Robert Houdin then it is a coincidence. The project is named after the famous French magician, and the reason being, well, Harry *Houdini* is also a famous and remarkable figure in the history of prestidigitation. Plus, *Houdin* is so similar to *Houdini* so I couldn't help it.
+The project is named after the famous French magician, and the reason being, well, Harry *Houdini* is also a famous and remarkable figure in the history of prestidigitation. Plus, *Houdin* is so similar to *Houdini* so I couldn't help it.
+
+### Why bother doing/using this at all?
+
+- Houdini has a 4-digit price tag. 
+- You can't do everything with HDA, since HDA is not the complete Houdini. 
+- Houdini is CPU-bound.
+- Visual Scripting isn't really tooling friendly.
+- Working in the industry, you would sometimes find yourself needing to do similar things again and again.
+
+In comparison:
+
+- This project is free.
+- You can do anything as long as you can program an appropriate node. (You can write a fluid sim if you have the time budget!)
+- You can run compute shaders with this project, and feel the power of GPU.
+- Your artist don't need to go back and forth between Unity and DCC applications, and they always prefer so.
+- With a good node design, you could achieve the level of decoupling just as behaviour trees, write once, connect the dots later.
+
+Of course, you would be using houdini because it has those nice convenient features, not soley because it is procedural. This project does not aim to *replace* Houdini, but rather a fast *Houdini-like* editing experience all inside the Unity itself, for smaller, less complex, but highly Unity-bound features.
 
 ## Current API
 ![image](https://github.com/user-attachments/assets/3843c96b-4818-4b0e-886e-7053546df9f9)
