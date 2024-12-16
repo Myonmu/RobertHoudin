@@ -111,7 +111,9 @@ namespace RobertHoudin.Framework.Editor.Data
             position.width = maxWidth;
             position.y += EditorGUIUtility.singleLineHeight;
             position.x = xmin;
-            EditorGUI.PropertyField(position, property.FindPropertyRelative(nameof(DataSource<_>.value)), new GUIContent("Value"));
+            var val = property.FindPropertyRelative(nameof(DataSource<_>.value));
+            if (val != null)
+                EditorGUI.PropertyField(position, val, new GUIContent("Value"));
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -120,8 +122,12 @@ namespace RobertHoudin.Framework.Editor.Data
             if (enumVal.enumValueIndex < 0) return EditorGUIUtility.singleLineHeight;
             var type = enumVal.enumNames[enumVal.enumValueIndex];
             if (type == "None")
-                return EditorGUI.GetPropertyHeight(property.FindPropertyRelative(nameof(DataSource<_>.value))) +
-                       EditorGUIUtility.singleLineHeight * 2.5f;
+            {
+                var val = property.FindPropertyRelative(nameof(DataSource<_>.value));
+                if(val != null)  
+                    return EditorGUI.GetPropertyHeight(val) + EditorGUIUtility.singleLineHeight * 2.5f;
+            }
+                
             return EditorGUIUtility.singleLineHeight * 2;
         }
     }

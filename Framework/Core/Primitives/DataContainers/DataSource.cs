@@ -5,6 +5,11 @@ using RobertHoudin.Framework.Core.Primitives.Utilities;
 
 namespace RobertHoudin.Framework.Core.Primitives.DataContainers
 {
+    public abstract class DataSource
+    {
+        public SourceType sourceType = SourceType.Port;
+        public string sourceName;
+    }
     /* Note on source type:
      * Port and None are the same here, but they differ on how they are evaluated.
      * 
@@ -18,11 +23,8 @@ namespace RobertHoudin.Framework.Core.Primitives.DataContainers
      */
     
     [Serializable]
-    public class DataSource<T>
+    public class DataSource<T>: DataSource
     {
-        public SourceType sourceType = SourceType.Port;
-        public string sourceName;
-
         /// <summary>
         /// Value of the data source. Must Bind the data source before accessing this field
         /// </summary>

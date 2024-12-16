@@ -6,13 +6,16 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
 {
     public interface IDataSourcePort
     {
+        public SourceType SourceType { get; }
+        public string SourceName { get; }
         void EvalSource(RhExecutionContext ctx, RhNode node);
     }
     public abstract class RhDataSourcePort<T> : RhPort<T>, IDataSourcePort
     {
         public DataSource<T> value = new(){sourceType = SourceType.Port};
-
         public override bool IsActive => value.sourceType == SourceType.Port;
+        public SourceType SourceType => value.sourceType;
+        public string SourceName => value.sourceName;
         public void EvalSource(RhExecutionContext ctx, RhNode node)
         {
             value.InitializeBindings(ctx, node);

@@ -142,6 +142,20 @@ namespace RobertHoudin.Framework.Editor.Tree
             {
                 FindRhNodeView(node).UpdateCulledView();
             }
+            
+            ValidatePorts();
+        }
+
+        public void ValidatePorts()
+        {
+            foreach (var node in tree.nodes)
+            {
+                foreach (var port in node.InputPortsGeneric)
+                {
+                    var view = FindPort(port) as RhPortView;
+                    view?.Validate(port);
+                }
+            }
         }
 
         private GraphViewChange OnGraphViewChanged(GraphViewChange graphviewchange)
