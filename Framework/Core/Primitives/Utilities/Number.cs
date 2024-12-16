@@ -13,6 +13,19 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
         {
             return (int)number.value;
         }
+        
+        public static implicit operator Number(bool value)
+        {
+            return new Number()
+            {
+                value = value ? 1 : 0
+            };
+        }
+        
+        public static implicit operator bool(Number number)
+        {
+            return number.value > 0;
+        }
 
         public static implicit operator Number(int value)
         {

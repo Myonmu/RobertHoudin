@@ -20,4 +20,6 @@ namespace RobertHoudin.Framework.Core.Ports
     [Serializable] public class BoundsPortDs: RhDataSourcePort<Bounds> { }
     
     [Serializable] public class TransformPortDs: RhDataSourcePort<Transform> { }
+    
+    [Serializable] public class LayerMaskPortDs: RhDataSourcePort<LayerMask> { }
 }

@@ -20,4 +20,7 @@ namespace RobertHoudin.Framework.Core.Ports
     
     [Serializable] public class GameObjectPort : RhSinglePort<GameObject> {}
     [Serializable] public class TransformPort : RhSinglePort<Transform> {}
+    
+    [Serializable] public class BoolPort: RhSinglePort<bool> { }
+    [Serializable] public class StringPort: RhSinglePort<string> { }
 }

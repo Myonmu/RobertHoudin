@@ -3,15 +3,13 @@ using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
 namespace RobertHoudin.NodeLibrary
 {
-    public class Sum2Node: RhNode
+    public class NumberToBool: RhNode
     {
-        [RhInputPort] public IntPortDs a;
-        [RhInputPort] public IntPortDs b;
-        [RhOutputPort] public IntPort c;
-
+        [RhInputPort] public NumberPort number;
+        [RhOutputPort] public BoolPort output;
         protected override bool OnEvaluate(RhExecutionContext context)
         {
-            c.SetValueNoBoxing(a.GetValueNoBoxing() + b.GetValueNoBoxing());
+            output.SetValueNoBoxing(number.GetValueNoBoxing());
             return true;
         }
     }
