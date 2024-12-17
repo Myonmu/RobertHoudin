@@ -233,6 +233,11 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
             return (T)f.GetValue(container);
         }
 
+        public static List<FieldInfo> GetFieldsWithAttribute<T>(object container) where T : Attribute
+        {
+            return container.GetType().GetFields().Where(x => x.GetAttribute<T>() != null).ToList();
+        }
+
         public static List<FieldInfo> GetFieldsAssignableTo(Type type, Type containerType)
         {
             return containerType.GetFields(

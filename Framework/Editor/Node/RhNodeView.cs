@@ -1,6 +1,8 @@
 ﻿using System;
+using RobertHoudin.Framework.Core.Primitives.DataContainers;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
+using RobertHoudin.Framework.Core.Primitives.Utilities;
 using RobertHoudin.Framework.Editor.Settings;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -17,6 +19,7 @@ namespace RobertHoudin.Framework.Editor.Node
         public readonly RhNode node;
         public Action<RhNodeView> onNodeSelected;
         public Action<RhNodeView> onSetOutputFlag;
+        public VisualElement nodeDataRoot;
 
         public VisualElement loopStartContainer;
         public VisualElement loopResultContainer;
@@ -70,14 +73,25 @@ namespace RobertHoudin.Framework.Editor.Node
                 outputFlag.AddToClassList("output-flag");
             }
 
+            nodeDataRoot = this.Q<VisualElement>("nodeData");
+            var nodeDatas = ReflectionUtils.GetFieldsWithAttribute<RhNodeDataAttribute>(nodeRef);
+            var propUI = new IMGUIContainer(() => {
+                foreach (var data in nodeDatas)
+                {
+                    var prop = serializedObject.FindProperty(data.Name);
+                    EditorGUILayout.PropertyField(prop);
+                }
+                serializedObject.ApplyModifiedProperties();
+            });
+            nodeDataRoot.Add(propUI);
+
+
             var icon = this.Q<VisualElement>("nodeIcon");
             if (settings == null) settings = RhTreeSettings.GetOrCreateSettings();
             var iconImage = settings != null ? settings.GetIcon(nodeRef) : null;
             if (iconImage == null)
                 return;
             icon.style.backgroundImage = new StyleBackground(iconImage);
-
-
             //Debug.Log(iconImage.name);
         }
 
@@ -145,7 +159,7 @@ namespace RobertHoudin.Framework.Editor.Node
                 port.viewDataKey = p.GUID;
                 loopStartContainer.Add(port);
             }
-            
+
             foreach (var p in node.GetPortsWithAttribute<RhLoopResultPortAttribute>())
             {
                 Port port = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single,
@@ -210,7 +224,7 @@ namespace RobertHoudin.Framework.Editor.Node
             var outputFlag = this.Q<Button>("OutputFlag");
             outputFlag.RemoveFromClassList("output-flag");
         }
-        
+
         public void UpdateCulledView()
         {
             if (isCulled)
