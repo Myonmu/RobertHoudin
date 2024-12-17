@@ -20,6 +20,7 @@ namespace RobertHoudin.Framework.Core.Primitives
         public void Execute()
         {
             ResetTree();
+            propertyBlock.OnBeginEvaluate();
             tree.EvaluateTree(propertyBlock);
         }
     }

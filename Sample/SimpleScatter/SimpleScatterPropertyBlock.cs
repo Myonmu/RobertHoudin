@@ -11,8 +11,13 @@ namespace RobertHoudin.Sample.SimpleScatter
         public Transform rootTransform;
         public int maxActivePoints;
         public int k;
-        public Bounds bounds;
+        [HideInInspector] public Bounds bounds;
         public Vector2 distance;
         public WeightedObjectProvider objectProvider;
+        public void OnBeginEvaluate()
+        {
+            var boxCollider = rootTransform.gameObject.GetComponent<BoxCollider>();
+            bounds = boxCollider.bounds;
+        }
     }
 }

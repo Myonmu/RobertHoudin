@@ -15,7 +15,7 @@ MonoBehaviour:
   tree: {fileID: 11400000}
   status: 0
   _guid: 755408182ee2d4a49b5a2b17dce37e2d
-  position: {x: 882.66675, y: -83.99997}
+  position: {x: 992, y: 187.33339}
   description: 
   info: 
   subInfo: 
@@ -29,7 +29,7 @@ MonoBehaviour:
       sourceType: 2
       sourceName: 
       value:
-        value: 0
+        value: 1.638942
   yPort:
     name: yPort
     node: {fileID: -2826844252263728438}
@@ -40,7 +40,7 @@ MonoBehaviour:
       sourceType: 2
       sourceName: 
       value:
-        value: 0
+        value: 1.638942
   zPort:
     name: zPort
     node: {fileID: -2826844252263728438}
@@ -51,15 +51,15 @@ MonoBehaviour:
       sourceType: 2
       sourceName: 
       value:
-        value: 0
+        value: 1.638942
   output:
     name: output
     node: {fileID: -2826844252263728438}
     _guid: ca654abf469a0af488c5c4dbefe2da23
     connectedPorts:
     - 277cd206f1cfafd4bac150a646b207d3
-    value: {x: 0, y: 0, z: 0}
---- !u!114 &-1161647645865480974
+    value: {x: 1.638942, y: 1.638942, z: 1.638942}
+--- !u!114 &-432397307140058392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,33 +68,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 629fd1e47e2940b8a14bbf47198f641d, type: 3}
-  m_Name: EulerToQuaternion
+  m_Script: {fileID: 11500000, guid: fdc98a94d7c14db4acfa6448fae4ff1a, type: 3}
+  m_Name: NegateNode
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000}
   status: 0
-  _guid: 3592a4f06c9af2942870dfdd7391fed1
-  position: {x: 664, y: -87.73335}
+  _guid: 7b80f5f117da8094e998d6ed2ecd3ec8
+  position: {x: 505.3001, y: 195.33331}
   description: 
   info: 
   subInfo: 
-  input:
-    name: input
-    node: {fileID: -1161647645865480974}
-    _guid: 5b81482cdb11130469dcc5f0d05561a4
+  boolInput:
+    name: boolInput
+    node: {fileID: -432397307140058392}
+    _guid: 6c34c8c84c1eb34448d7ba4b1fadcaf5
     connectedPorts:
-    - 74bda911b16418c479591bbee5bc695f
+    - 6688a10236fc34e49ac2b868d01faeb2
     value:
       sourceType: 2
       sourceName: 
-      value: {x: 0, y: 0, z: 0}
-  output:
-    name: output
-    node: {fileID: -1161647645865480974}
-    _guid: 345bd791d4bd27340b7275ffd8e62833
+      value: 1
+  negateOutput:
+    name: negateOutput
+    node: {fileID: -432397307140058392}
+    _guid: 4d2051f3a853ec94598f46720d03d646
     connectedPorts:
-    - 6b9f6f7fc4c41fb44b266cf16a5167ff
-    value: {x: 0, y: 0, z: 0, w: 0}
+    - 9bbd8c09839ba7d4a87ad7f97f255909
+    value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,17 +114,18 @@ MonoBehaviour:
   - {fileID: 4114360016089293293}
   - {fileID: 2239068637122157868}
   - {fileID: 6201229393880670842}
-  - {fileID: 368007067826933347}
   - {fileID: 7001339468748760890}
   - {fileID: 8491839525595953070}
-  - {fileID: -1161647645865480974}
-  - {fileID: 4301148862089880101}
   - {fileID: -2826844252263728438}
   - {fileID: 947902608634880320}
   - {fileID: 3370444659066598131}
   - {fileID: 1382084001214152914}
-  transformScale: {x: 1, y: 1, z: 1}
-  transformPosition: {x: -788, y: 266.66666, z: 0}
+  - {fileID: 6684853792403656578}
+  - {fileID: 7774206331719197576}
+  - {fileID: -432397307140058392}
+  - {fileID: 3971955175644625429}
+  transformScale: {x: 0.7561437, y: 0.7561437, z: 1}
+  transformPosition: {x: 89.333336, y: 304, z: 0}
   references:
     version: 2
     RefIds:
@@ -139,64 +140,6 @@ MonoBehaviour:
           m_Extent: {x: 0, y: 0, z: 0}
         distance: {x: 0, y: 0}
         objectProvider: {fileID: 0}
---- !u!114 &368007067826933347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1521ec42a2614f878f065daf02e9a330, type: 3}
-  m_Name: ConstructVector3
-  m_EditorClassIdentifier: 
-  tree: {fileID: 11400000}
-  status: 0
-  _guid: 33500794ef2246e45a6541542a34cc77
-  position: {x: 440.66666, y: -88}
-  description: 
-  info: 
-  subInfo: 
-  xPort:
-    name: xPort
-    node: {fileID: 368007067826933347}
-    _guid: 64f197c1c936c904781b3e6f0cfcb436
-    connectedPorts:
-    - fdcacd13c6e7de2449ba203ed92d5fd1
-    value:
-      sourceType: 2
-      sourceName: 
-      value:
-        value: 0
-  yPort:
-    name: yPort
-    node: {fileID: 368007067826933347}
-    _guid: fb45902a3b4ed6247b449986a6851ef5
-    connectedPorts: []
-    value:
-      sourceType: 0
-      sourceName: 
-      value:
-        value: 0
-  zPort:
-    name: zPort
-    node: {fileID: 368007067826933347}
-    _guid: eb816ad86c87aed49aa8ac3ce89f3723
-    connectedPorts:
-    - 8a024f91cc7f5b7448f6f125526c7d04
-    value:
-      sourceType: 2
-      sourceName: 
-      value:
-        value: 0
-  output:
-    name: output
-    node: {fileID: 368007067826933347}
-    _guid: 7124061ff03744244ae6bc22ae179c08
-    connectedPorts:
-    - 6368b01038828154baa5a61b1def416e
-    value: {x: 0, y: 0, z: 0}
 --- !u!114 &947902608634880320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +155,7 @@ MonoBehaviour:
   tree: {fileID: 11400000}
   status: 0
   _guid: e85fb63c9d6deeb40a182cd720d2803c
-  position: {x: 882.6667, y: -276.66675}
+  position: {x: 992, y: -82.66667}
   description: 
   info: 
   subInfo: 
@@ -248,7 +191,7 @@ MonoBehaviour:
       sourceType: 2
       sourceName: 
       value:
-        value: 0
+        value: 1.638942
 --- !u!114 &1382084001214152914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +207,7 @@ MonoBehaviour:
   tree: {fileID: 11400000}
   status: 0
   _guid: b0cff4dd8913e2c43b0b5b48fbef8578
-  position: {x: 1119.3333, y: -88}
+  position: {x: 1227.9365, y: 183.33337}
   description: 
   info: 
   subInfo: 
@@ -282,7 +225,7 @@ MonoBehaviour:
     _guid: e78e70e62394e0743bed7ddb4578a9bb
     connectedPorts:
     - e9e0688d746940e45badc7ac575a8afd
-    value: 0
+    value: 2
 --- !u!114 &2239068637122157868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,14 +251,88 @@ MonoBehaviour:
     _guid: f2806d6f57f94ad4f993092fecd9b4da
     connectedPorts:
     - cd6a048e9fd656c48b12ab9de62698e9
-    value: []
+    value:
+    - {x: 72.807755, y: 94.46598}
+    - {x: 83.80901, y: 89.90247}
+    - {x: 52.174637, y: 94.27744}
+    - {x: 68.79744, y: 93.08726}
+    - {x: 46.804813, y: 67.83168}
+    - {x: 40.109833, y: 94.11108}
+    - {x: 50.937756, y: 77.03552}
+    - {x: 41.306633, y: 76.42629}
+    - {x: 71.40434, y: 74.29037}
+    - {x: 52.419216, y: 56.330757}
+    - {x: 54.17656, y: 72.75801}
+    - {x: 51.059242, y: 63.027863}
+    - {x: 61.654312, y: 53.501556}
+    - {x: 57.284157, y: 53.045334}
+    - {x: 63.670296, y: 74.839355}
+    - {x: 69.12433, y: 54.837708}
+    - {x: 75.86851, y: 63.835686}
+    - {x: 63.949577, y: 94.57782}
+    - {x: 76.302444, y: 71.037636}
+    - {x: 80.38727, y: 49.340645}
+    - {x: 40.352997, y: 66.15662}
+    - {x: 62.01608, y: 64.75374}
+    - {x: 66.77276, y: 67.053986}
+    - {x: 57.696316, y: 82.10887}
+    - {x: 64.03693, y: 78.26091}
+    - {x: 45.030487, y: 91.52529}
+    - {x: 87.65241, y: 91.760124}
+    - {x: 75.18801, y: 79.54683}
+    - {x: 65.73166, y: 83.977165}
+    - {x: 40.57807, y: 51.650455}
+    - {x: 56.863304, y: 63.62263}
+    - {x: 75.4905, y: 48.67911}
+    - {x: 83.51459, y: 48.545498}
+    - {x: 62.102413, y: 59.517586}
+    - {x: 44.027195, y: 49.31052}
+    - {x: 45.313602, y: 62.614212}
+    - {x: 79.650276, y: 90.758354}
+    - {x: 79.062675, y: 75.08025}
+    - {x: 65.64207, y: 71.69956}
+    - {x: 69.31436, y: 71.55103}
+    - {x: 84.7349, y: 66.00504}
+    - {x: 61.17169, y: 47.093845}
+    - {x: 55.3883, y: 46.24157}
+    - {x: 58.74926, y: 70.43887}
+    - {x: 68.551895, y: 79.01352}
+    - {x: 50.718033, y: 84.24476}
+    - {x: 83.14797, y: 71.993614}
+    - {x: 82.17471, y: 82.90015}
+    - {x: 70.39899, y: 45.714046}
+    - {x: 70.862434, y: 83.52733}
+    - {x: 53.770916, y: 80.40683}
+    - {x: 39.05293, y: 87.816605}
+    - {x: 64.78376, y: 52.89033}
+    - {x: 43.314972, y: 85.62741}
+    - {x: 49.018555, y: 47.07596}
+    - {x: 78.24563, y: 58.244453}
+    - {x: 49.000458, y: 80.37099}
+    - {x: 87.65932, y: 82.41146}
+    - {x: 84.04556, y: 79.58323}
+    - {x: 53.663017, y: 59.346626}
+    - {x: 46.776863, y: 57.66252}
+    - {x: 58.57768, y: 89.93934}
+    - {x: 60.996723, y: 87.34185}
+    - {x: 88.100044, y: 72.55292}
+    - {x: 45.796974, y: 75.39984}
+    - {x: 78.73938, y: 85.136185}
+    - {x: 75.049446, y: 60.226078}
+    - {x: 74.12735, y: 87.763565}
+    - {x: 54.70757, y: 90.06937}
+    - {x: 81.656586, y: 58.413574}
+    - {x: 79.42878, y: 65.393234}
+    - {x: 43.30595, y: 45.741695}
+    - {x: 87.6341, y: 87.314415}
+    - {x: 64.48142, y: 88.52223}
   itemPort:
     name: itemPort
     node: {fileID: 2239068637122157868}
     _guid: 811684bb3da7ca4419a30f4cba62147d
     connectedPorts:
     - 44309c8deb0f0fc469a162b5ddc5efa9
-    value: {x: 0, y: 0}
+    value: {x: 64.48142, y: 88.52223}
   itemResult:
     name: itemResult
     node: {fileID: 2239068637122157868}
@@ -370,6 +387,53 @@ MonoBehaviour:
     value:
       sourceType: 1
       sourceName: objectProvider
+--- !u!114 &3971955175644625429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcdc10eb8d634e1f8d91ab5db8b9b0e5, type: 3}
+  m_Name: QuaternionRotateAround
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 0
+  _guid: 7fff6968955d62f46a2be0d0106b14e6
+  position: {x: 757.33325, y: 191.33331}
+  description: 
+  info: 
+  subInfo: 
+  axis:
+    name: axis
+    node: {fileID: 3971955175644625429}
+    _guid: eef1cc568f11ba449b5eff1f743f09b3
+    connectedPorts:
+    - 10619bef2675ce04e950f83836f33b07
+    value:
+      sourceType: 2
+      sourceName: 
+      value: {x: 0, y: 1, z: 0}
+  angle:
+    name: angle
+    node: {fileID: 3971955175644625429}
+    _guid: 753024bb7292c524aa76e26f6ad4792e
+    connectedPorts:
+    - 6e38eed1fb87a224594c2ddecd3f9623
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 238.7869
+  rot:
+    name: rot
+    node: {fileID: 3971955175644625429}
+    _guid: 3930c9707bb4028408b46f484d2a7b4e
+    connectedPorts:
+    - 6b9f6f7fc4c41fb44b266cf16a5167ff
+    value: {x: 0, y: 0.8712699, z: 0, w: -0.49080423}
 --- !u!114 &4114360016089293293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +459,81 @@ MonoBehaviour:
     _guid: cd6a048e9fd656c48b12ab9de62698e9
     connectedPorts:
     - f2806d6f57f94ad4f993092fecd9b4da
-    value: []
+    value:
+    - {x: 72.807755, y: 94.46598}
+    - {x: 83.80901, y: 89.90247}
+    - {x: 52.174637, y: 94.27744}
+    - {x: 68.79744, y: 93.08726}
+    - {x: 46.804813, y: 67.83168}
+    - {x: 40.109833, y: 94.11108}
+    - {x: 50.937756, y: 77.03552}
+    - {x: 41.306633, y: 76.42629}
+    - {x: 71.40434, y: 74.29037}
+    - {x: 52.419216, y: 56.330757}
+    - {x: 54.17656, y: 72.75801}
+    - {x: 51.059242, y: 63.027863}
+    - {x: 61.654312, y: 53.501556}
+    - {x: 57.284157, y: 53.045334}
+    - {x: 63.670296, y: 74.839355}
+    - {x: 69.12433, y: 54.837708}
+    - {x: 75.86851, y: 63.835686}
+    - {x: 63.949577, y: 94.57782}
+    - {x: 76.302444, y: 71.037636}
+    - {x: 80.38727, y: 49.340645}
+    - {x: 40.352997, y: 66.15662}
+    - {x: 62.01608, y: 64.75374}
+    - {x: 66.77276, y: 67.053986}
+    - {x: 57.696316, y: 82.10887}
+    - {x: 64.03693, y: 78.26091}
+    - {x: 45.030487, y: 91.52529}
+    - {x: 87.65241, y: 91.760124}
+    - {x: 75.18801, y: 79.54683}
+    - {x: 65.73166, y: 83.977165}
+    - {x: 40.57807, y: 51.650455}
+    - {x: 56.863304, y: 63.62263}
+    - {x: 75.4905, y: 48.67911}
+    - {x: 83.51459, y: 48.545498}
+    - {x: 62.102413, y: 59.517586}
+    - {x: 44.027195, y: 49.31052}
+    - {x: 45.313602, y: 62.614212}
+    - {x: 79.650276, y: 90.758354}
+    - {x: 79.062675, y: 75.08025}
+    - {x: 65.64207, y: 71.69956}
+    - {x: 69.31436, y: 71.55103}
+    - {x: 84.7349, y: 66.00504}
+    - {x: 61.17169, y: 47.093845}
+    - {x: 55.3883, y: 46.24157}
+    - {x: 58.74926, y: 70.43887}
+    - {x: 68.551895, y: 79.01352}
+    - {x: 50.718033, y: 84.24476}
+    - {x: 83.14797, y: 71.993614}
+    - {x: 82.17471, y: 82.90015}
+    - {x: 70.39899, y: 45.714046}
+    - {x: 70.862434, y: 83.52733}
+    - {x: 53.770916, y: 80.40683}
+    - {x: 39.05293, y: 87.816605}
+    - {x: 64.78376, y: 52.89033}
+    - {x: 43.314972, y: 85.62741}
+    - {x: 49.018555, y: 47.07596}
+    - {x: 78.24563, y: 58.244453}
+    - {x: 49.000458, y: 80.37099}
+    - {x: 87.65932, y: 82.41146}
+    - {x: 84.04556, y: 79.58323}
+    - {x: 53.663017, y: 59.346626}
+    - {x: 46.776863, y: 57.66252}
+    - {x: 58.57768, y: 89.93934}
+    - {x: 60.996723, y: 87.34185}
+    - {x: 88.100044, y: 72.55292}
+    - {x: 45.796974, y: 75.39984}
+    - {x: 78.73938, y: 85.136185}
+    - {x: 75.049446, y: 60.226078}
+    - {x: 74.12735, y: 87.763565}
+    - {x: 54.70757, y: 90.06937}
+    - {x: 81.656586, y: 58.413574}
+    - {x: 79.42878, y: 65.393234}
+    - {x: 43.30595, y: 45.741695}
+    - {x: 87.6341, y: 87.314415}
+    - {x: 64.48142, y: 88.52223}
   maxActivePointsPort:
     name: maxActivePointsPort
     node: {fileID: 4114360016089293293}
@@ -404,7 +542,7 @@ MonoBehaviour:
     value:
       sourceType: 1
       sourceName: maxActivePoints
-      value: 0
+      value: 100
   boundsPort:
     name: boundsPort
     node: {fileID: 4114360016089293293}
@@ -414,8 +552,8 @@ MonoBehaviour:
       sourceType: 1
       sourceName: bounds
       value:
-        m_Center: {x: 0, y: 0, z: 0}
-        m_Extent: {x: 0, y: 0, z: 0}
+        m_Center: {x: 63.6, y: 8.6, z: 70.1}
+        m_Extent: {x: 25, y: 0.5, z: 25}
   kPort:
     name: kPort
     node: {fileID: 4114360016089293293}
@@ -424,7 +562,7 @@ MonoBehaviour:
     value:
       sourceType: 1
       sourceName: k
-      value: 0
+      value: 10
   distancePort:
     name: distancePort
     node: {fileID: 4114360016089293293}
@@ -433,7 +571,7 @@ MonoBehaviour:
     value:
       sourceType: 1
       sourceName: distance
-      value: {x: 0, y: 0}
+      value: {x: 3, y: 20}
   constraintsPort:
     name: constraintsPort
     node: {fileID: 4114360016089293293}
@@ -446,63 +584,6 @@ MonoBehaviour:
     node: {fileID: 4114360016089293293}
     _guid: 638cde05072447f42827bc4657ef0110
     connectedPorts: []
---- !u!114 &4301148862089880101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1521ec42a2614f878f065daf02e9a330, type: 3}
-  m_Name: ConstructVector3
-  m_EditorClassIdentifier: 
-  tree: {fileID: 11400000}
-  status: 0
-  _guid: 3b835ca1f2b37ba4d94379d7ce9ef2b9
-  position: {x: 664.00006, y: -280.66672}
-  description: 
-  info: 
-  subInfo: 
-  xPort:
-    name: xPort
-    node: {fileID: 4301148862089880101}
-    _guid: d35a9c49a8d6e0949b6a0042f826b55d
-    connectedPorts: []
-    value:
-      sourceType: 0
-      sourceName: 
-      value:
-        value: 0
-  yPort:
-    name: yPort
-    node: {fileID: 4301148862089880101}
-    _guid: b1fc6536185fd2a4ab1e8734a5689309
-    connectedPorts:
-    - 6e38eed1fb87a224594c2ddecd3f9623
-    value:
-      sourceType: 2
-      sourceName: 
-      value:
-        value: 0
-  zPort:
-    name: zPort
-    node: {fileID: 4301148862089880101}
-    _guid: dbada912734e2da479cabfef0c175d54
-    connectedPorts: []
-    value:
-      sourceType: 0
-      sourceName: 
-      value:
-        value: 0
-  output:
-    name: output
-    node: {fileID: 4301148862089880101}
-    _guid: 74bda911b16418c479591bbee5bc695f
-    connectedPorts:
-    - 5b81482cdb11130469dcc5f0d05561a4
-    value: {x: 0, y: 0, z: 0}
 --- !u!114 &6201229393880670842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,30 +599,40 @@ MonoBehaviour:
   tree: {fileID: 11400000}
   status: 0
   _guid: fa00df6a0fbf2364b89ffccca64ca0e2
-  position: {x: 754.6666, y: 262.66666}
+  position: {x: 773.3334, y: 493.47247}
   description: 
   info: 
   subInfo: 
+  isDiscarded:
+    name: isDiscarded
+    node: {fileID: 6201229393880670842}
+    _guid: 9bbd8c09839ba7d4a87ad7f97f255909
+    connectedPorts:
+    - 4d2051f3a853ec94598f46720d03d646
+    value:
+      sourceType: 2
+      sourceName: 
+      value: 0
   pos:
     name: pos
     node: {fileID: 6201229393880670842}
     _guid: 6368b01038828154baa5a61b1def416e
     connectedPorts:
-    - 7124061ff03744244ae6bc22ae179c08
+    - 90d8cbf65fecbf445a27112af57987b5
     value:
       sourceType: 2
       sourceName: 
-      value: {x: 0, y: 0, z: 0}
+      value: {x: 64.48142, y: 0, z: 88.52223}
   rot:
     name: rot
     node: {fileID: 6201229393880670842}
     _guid: 6b9f6f7fc4c41fb44b266cf16a5167ff
     connectedPorts:
-    - 345bd791d4bd27340b7275ffd8e62833
+    - 3930c9707bb4028408b46f484d2a7b4e
     value:
       sourceType: 2
       sourceName: 
-      value: {x: 0, y: 0, z: 0, w: 0}
+      value: {x: 0, y: 0.8712699, z: 0, w: -0.49080423}
   scale:
     name: scale
     node: {fileID: 6201229393880670842}
@@ -551,14 +642,15 @@ MonoBehaviour:
     value:
       sourceType: 2
       sourceName: 
-      value: {x: 0, y: 0, z: 0}
+      value: {x: 1.638942, y: 1.638942, z: 1.638942}
   normal:
     name: normal
     node: {fileID: 6201229393880670842}
     _guid: 0e5ca35c66a388845b1210d6dd4d2691
-    connectedPorts: []
+    connectedPorts:
+    - 10619bef2675ce04e950f83836f33b07
     value:
-      sourceType: 0
+      sourceType: 2
       sourceName: 
       value: {x: 0, y: 1, z: 0}
   objectId:
@@ -570,13 +662,106 @@ MonoBehaviour:
     value:
       sourceType: 2
       sourceName: 
-      value: 0
+      value: 2
   data:
     name: data
     node: {fileID: 6201229393880670842}
     _guid: cc618d20bd6f28a4cb9dfc5f71b66514
     connectedPorts:
     - eff80ec0ffe597c4aab076a9a4d22e45
+--- !u!114 &6684853792403656578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3bc8cab2e3466faf88e6bb62d20eac, type: 3}
+  m_Name: RaycastNode
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 0
+  _guid: c07417d3b43e987419d6977f494d16a1
+  position: {x: 538.6666, y: -90.99998}
+  description: 
+  info: 
+  subInfo: 
+  start:
+    name: start
+    node: {fileID: 6684853792403656578}
+    _guid: a08e4cfa9dfb68b48bcc78f569f96cef
+    connectedPorts:
+    - 2e20f342e4571f44999f2e08d3a02eaf
+    value:
+      sourceType: 2
+      sourceName: 
+      value: {x: 64.48142, y: 100, z: 88.52223}
+  direction:
+    name: direction
+    node: {fileID: 6684853792403656578}
+    _guid: 6235d71cf131b02449e65831e63d66fe
+    connectedPorts: []
+    value:
+      sourceType: 0
+      sourceName: 
+      value: {x: 0, y: -1, z: 0}
+  maxDistance:
+    name: maxDistance
+    node: {fileID: 6684853792403656578}
+    _guid: 5110af16df5b1f14a8798c03b8275ce2
+    connectedPorts: []
+    value:
+      sourceType: 0
+      sourceName: 
+      value: 1000
+  layerMask:
+    name: layerMask
+    node: {fileID: 6684853792403656578}
+    _guid: 9312dd6dd8e866845bc0843f5d3f6245
+    connectedPorts: []
+    value:
+      sourceType: 0
+      sourceName: 
+      value:
+        serializedVersion: 2
+        m_Bits: 1
+  isHit:
+    name: isHit
+    node: {fileID: 6684853792403656578}
+    _guid: 6688a10236fc34e49ac2b868d01faeb2
+    connectedPorts:
+    - 6c34c8c84c1eb34448d7ba4b1fadcaf5
+    value: 1
+  hitPosition:
+    name: hitPosition
+    node: {fileID: 6684853792403656578}
+    _guid: 90d8cbf65fecbf445a27112af57987b5
+    connectedPorts:
+    - 6368b01038828154baa5a61b1def416e
+    value: {x: 64.48142, y: 0, z: 88.52223}
+  hitDistance:
+    name: hitDistance
+    node: {fileID: 6684853792403656578}
+    _guid: 8150ac826b44f314d99f96a1fee1a0a3
+    connectedPorts: []
+    value:
+      value: 100
+  hitNormal:
+    name: hitNormal
+    node: {fileID: 6684853792403656578}
+    _guid: 10619bef2675ce04e950f83836f33b07
+    connectedPorts:
+    - 0e5ca35c66a388845b1210d6dd4d2691
+    - eef1cc568f11ba449b5eff1f743f09b3
+    value: {x: 0, y: 1, z: 0}
+  hitTransform:
+    name: hitTransform
+    node: {fileID: 6684853792403656578}
+    _guid: 3740429bcd47d1a45b3b867784685c0e
+    connectedPorts: []
+    value: {fileID: 0}
 --- !u!114 &7001339468748760890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,7 +777,7 @@ MonoBehaviour:
   tree: {fileID: 11400000}
   status: 0
   _guid: 1d1a8116ff6a4394d9ec8d58b0336d2d
-  position: {x: 445.33334, y: -308.16672}
+  position: {x: 538.66656, y: -445.6623}
   description: 
   info: 
   subInfo: 
@@ -605,23 +790,81 @@ MonoBehaviour:
     value:
       sourceType: 2
       sourceName: 
-      value: {x: 0, y: 0}
+      value: {x: 64.48142, y: 88.52223}
   x:
     name: x
     node: {fileID: 7001339468748760890}
     _guid: fdcacd13c6e7de2449ba203ed92d5fd1
     connectedPorts:
-    - 64f197c1c936c904781b3e6f0cfcb436
+    - 679c68a84b9a3884b8ea1efd553583f1
     value:
-      value: 0
+      value: 64.48142
   y:
     name: y
     node: {fileID: 7001339468748760890}
     _guid: 8a024f91cc7f5b7448f6f125526c7d04
     connectedPorts:
-    - eb816ad86c87aed49aa8ac3ce89f3723
+    - 2d81d2989aac8714c91d8e3be7cbf82d
     value:
-      value: 0
+      value: 88.52223
+--- !u!114 &7774206331719197576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1521ec42a2614f878f065daf02e9a330, type: 3}
+  m_Name: ConstructVector3
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 0
+  _guid: f00c372b55a19af449999fc3473fed8b
+  position: {x: 538.6666, y: -266.42465}
+  description: 
+  info: 
+  subInfo: 
+  xPort:
+    name: xPort
+    node: {fileID: 7774206331719197576}
+    _guid: 679c68a84b9a3884b8ea1efd553583f1
+    connectedPorts:
+    - fdcacd13c6e7de2449ba203ed92d5fd1
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 64.48142
+  yPort:
+    name: yPort
+    node: {fileID: 7774206331719197576}
+    _guid: c4d41fd6639b7764ba524d7ae64b8648
+    connectedPorts: []
+    value:
+      sourceType: 0
+      sourceName: 
+      value:
+        value: 100
+  zPort:
+    name: zPort
+    node: {fileID: 7774206331719197576}
+    _guid: 2d81d2989aac8714c91d8e3be7cbf82d
+    connectedPorts:
+    - 8a024f91cc7f5b7448f6f125526c7d04
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 88.52223
+  output:
+    name: output
+    node: {fileID: 7774206331719197576}
+    _guid: 2e20f342e4571f44999f2e08d3a02eaf
+    connectedPorts:
+    - a08e4cfa9dfb68b48bcc78f569f96cef
+    value: {x: 64.48142, y: 100, z: 88.52223}
 --- !u!114 &8491839525595953070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,7 +880,7 @@ MonoBehaviour:
   tree: {fileID: 11400000}
   status: 0
   _guid: 151b0a49c11875445af3b466f10fa211
-  position: {x: 658.32336, y: -470.32837}
+  position: {x: 765.3335, y: -82.66668}
   description: 
   info: 
   subInfo: 
@@ -666,9 +909,9 @@ MonoBehaviour:
     node: {fileID: 8491839525595953070}
     _guid: 6e38eed1fb87a224594c2ddecd3f9623
     connectedPorts:
-    - b1fc6536185fd2a4ab1e8734a5689309
+    - 753024bb7292c524aa76e26f6ad4792e
     value:
       sourceType: 2
       sourceName: 
       value:
-        value: 0
+        value: 238.7869

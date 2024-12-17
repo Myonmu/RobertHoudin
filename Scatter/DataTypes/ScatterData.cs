@@ -9,6 +9,7 @@ namespace RobertHoudin.Scatter.ScatterDataConstruction
     /// </summary>
     public struct ScatterData
     {
+        public bool isDiscarded;
         public Vector3 pos;
         public Quaternion rotation;
         public Vector3 scale;

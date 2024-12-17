@@ -17,6 +17,7 @@ namespace RobertHoudin.Framework.Core.Ports
     [Serializable] public class QuaternionPortDs: RhDataSourcePort<Quaternion> { }
     [Serializable] public class Vector3IntPortDs: RhDataSourcePort<Vector3Int> { }
     [Serializable] public class Vector2IntPortDs: RhDataSourcePort<Vector2Int> { }
+    [Serializable] public class BoolPortDs: RhDataSourcePort<bool> { }
     [Serializable] public class BoundsPortDs: RhDataSourcePort<Bounds> { }
     
     [Serializable] public class TransformPortDs: RhDataSourcePort<Transform> { }

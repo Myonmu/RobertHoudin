@@ -17,6 +17,7 @@ namespace RobertHoudin.Scatter.ObjectPlacers
         {
             foreach (var data in scatterDataCollection.GetValueNoBoxing())
             {
+                if(data.isDiscarded) continue;
                 var instance = PrefabUtility.InstantiatePrefab(
                     objectProvider.GetValueNoBoxing().GetObjectByIndex(data.objectId), 
                     rootTransform.GetValueNoBoxing()) as GameObject;

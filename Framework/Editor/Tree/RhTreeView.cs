@@ -132,7 +132,7 @@ namespace RobertHoudin.Framework.Editor.Tree
                     if (!inputPort.IsActive) continue;
                     foreach (var connectedPort in inputPort.GetConnectedPorts())
                     {
-                        if (path.Contains(connectedPort.node)) return;
+                        if (path.Contains(connectedPort.node)) continue;
                         UpdateCullingStatesRecursive(connectedPort.node);
                     }
                 }

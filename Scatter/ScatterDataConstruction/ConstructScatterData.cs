@@ -5,6 +5,7 @@ namespace RobertHoudin.Scatter.ScatterDataConstruction
 {
     public class ConstructScatterData : RhNode
     {
+        [RhInputPort] public BoolPortDs isDiscarded;
         [RhInputPort] public Vector3PortDs pos;
         [RhInputPort] public QuaternionPortDs rot;
         [RhInputPort] public Vector3PortDs scale;
@@ -16,6 +17,7 @@ namespace RobertHoudin.Scatter.ScatterDataConstruction
         {
             data.SetValueNoBoxing(new ScatterData()
             {
+                isDiscarded = isDiscarded.GetValueNoBoxing(),
                 pos = pos.GetValueNoBoxing(),
                 rotation = rot.GetValueNoBoxing(),
                 scale = scale.GetValueNoBoxing(),
