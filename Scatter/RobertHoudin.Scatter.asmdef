@@ -3,6 +3,7 @@
   "references": [
     "RobertHoudin.Runtime.Primitives",
     "RobertHoudin.Ports",
-    "RobertHoudin.NodeLibrary"
+    "RobertHoudin.NodeLibrary",
+    "RobertHoudin.Misc"
   ]
 }

@@ -81,5 +81,10 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
         {
             return connectedPorts;
         }
+        
+        public static implicit operator T(RhPort<T> port)
+        {
+            return port.GetValueNoBoxing();
+        }
     }
 }

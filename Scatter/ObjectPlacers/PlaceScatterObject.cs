@@ -23,6 +23,7 @@ namespace RobertHoudin.Scatter.ObjectPlacers
                 instance.transform.position = data.pos;
                 instance.transform.rotation = data.rotation;
                 instance.transform.localScale = data.scale;
+                Undo.RegisterCreatedObjectUndo(instance, "Scatter");
             }
             return true;
         }

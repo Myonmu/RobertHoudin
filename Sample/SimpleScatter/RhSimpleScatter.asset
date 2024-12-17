@@ -1,222 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8344167939395654597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00136eb962db4049861790e82570a4a3, type: 3}
-  m_Name: GetObjectProviderProperties
-  m_EditorClassIdentifier: 
-  tree: {fileID: 11400000}
-  status: 0
-  _guid: a78341c7526eaef4ab824c9c0d2c0a76
-  position: {x: 1135.3333, y: -355.33337}
-  description: 
-  info: 
-  subInfo: 
-  objectProvider:
-    name: objectProvider
-    node: {fileID: -8344167939395654597}
-    _guid: c3932f81bee7b614f8c7102b69fb6dfa
-    connectedPorts: []
-    value:
-      sourceType: 1
-      sourceName: objectProvider
-  indexMin:
-    name: indexMin
-    node: {fileID: -8344167939395654597}
-    _guid: 3dbc10a941d2ce647bc14de7add13579
-    connectedPorts:
-    - 37fb48c45e28b36479b2f9459d41efa5
-    value:
-      value: 0
-  indexMax:
-    name: indexMax
-    node: {fileID: -8344167939395654597}
-    _guid: 70602537a3534554e8b61175abede757
-    connectedPorts:
-    - ccfd3f4592acba848a577f94cde38d46
-    value:
-      value: 0
---- !u!114 &-6418347362950904911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0e59e3bd97b4af4a3a304f7b649ad5f, type: 3}
-  m_Name: NumberToInt
-  m_EditorClassIdentifier: 
-  tree: {fileID: 11400000}
-  status: 0
-  _guid: 34860efa2b3e12a4c8b578ac5b252b8e
-  position: {x: 1127.5066, y: 4.6667023}
-  description: 
-  info: 
-  subInfo: 
-  number:
-    name: number
-    node: {fileID: -6418347362950904911}
-    _guid: e03a9dd1c8b5772489c3c6f0b600b04b
-    connectedPorts:
-    - b41b5d828a6df0a408dd3a651b41bcab
-    value:
-      value: 0
-  output:
-    name: output
-    node: {fileID: -6418347362950904911}
-    _guid: 2cbde3016956dc84ab40d7714680c295
-    connectedPorts:
-    - e9e0688d746940e45badc7ac575a8afd
-    value: 0
---- !u!114 &-4954132940893439989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da3bc8cab2e3466faf88e6bb62d20eac, type: 3}
-  m_Name: RaycastNode
-  m_EditorClassIdentifier: 
-  tree: {fileID: 11400000}
-  status: 0
-  _guid: 461830d226c71c845b72f1698a92ec45
-  position: {x: 431.05328, y: -515.6767}
-  description: 
-  info: 
-  subInfo: 
-  start:
-    name: start
-    node: {fileID: -4954132940893439989}
-    _guid: 914fb40a7782e8347a3cad063a3a3fd1
-    connectedPorts: []
-    value:
-      sourceType: 2
-      sourceName: 
-      value: {x: 0, y: 0, z: 0}
-  direction:
-    name: direction
-    node: {fileID: -4954132940893439989}
-    _guid: 4d6cea537a199854a9dc1f3d455506ed
-    connectedPorts: []
-    value:
-      sourceType: 2
-      sourceName: 
-      value: {x: 0, y: 0, z: 0}
-  maxDistance:
-    name: maxDistance
-    node: {fileID: -4954132940893439989}
-    _guid: 9b2cfcb55d38b504a90784bbd825e710
-    connectedPorts: []
-    value:
-      sourceType: 2
-      sourceName: 
-      value: 0
-  layerMask:
-    name: layerMask
-    node: {fileID: -4954132940893439989}
-    _guid: 96fa8ad89c715e442953bbfac56a2167
-    connectedPorts: []
-    value:
-      sourceType: 0
-      sourceName: 
-      value:
-        serializedVersion: 2
-        m_Bits: 0
-  isHit:
-    name: isHit
-    node: {fileID: -4954132940893439989}
-    _guid: 4d4ea71e23fb062439030f66da2162f0
-    connectedPorts: []
-    value: 0
-  hitPosition:
-    name: hitPosition
-    node: {fileID: -4954132940893439989}
-    _guid: bb80e46817ae96a43b9e5a4c173707ea
-    connectedPorts: []
-    value: {x: 0, y: 0, z: 0}
-  hitDistance:
-    name: hitDistance
-    node: {fileID: -4954132940893439989}
-    _guid: 19a26ffa95991d34990f348c08a3a262
-    connectedPorts: []
-    value:
-      value: 0
-  hitNormal:
-    name: hitNormal
-    node: {fileID: -4954132940893439989}
-    _guid: eac5f4af9ee59b044982470ac37f36b6
-    connectedPorts: []
-    value: {x: 0, y: 0, z: 0}
-  hitTransform:
-    name: hitTransform
-    node: {fileID: -4954132940893439989}
-    _guid: 9a1ea71fc80949848a18cdd196fbce61
-    connectedPorts: []
-    value: {fileID: 0}
---- !u!114 &-3959729229862054421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e155d2608fe84e3e98088460ae1abb53, type: 3}
-  m_Name: RandomRange
-  m_EditorClassIdentifier: 
-  tree: {fileID: 11400000}
-  status: 0
-  _guid: 32939b2a8e321964f89415c0fbe96cea
-  position: {x: 1130.8616, y: -178.00003}
-  description: 
-  info: 
-  subInfo: 
-  minPort:
-    name: minPort
-    node: {fileID: -3959729229862054421}
-    _guid: 37fb48c45e28b36479b2f9459d41efa5
-    connectedPorts:
-    - 3dbc10a941d2ce647bc14de7add13579
-    value:
-      sourceType: 2
-      sourceName: 
-      value:
-        value: 0
-  maxPort:
-    name: maxPort
-    node: {fileID: -3959729229862054421}
-    _guid: ccfd3f4592acba848a577f94cde38d46
-    connectedPorts:
-    - 70602537a3534554e8b61175abede757
-    value:
-      sourceType: 2
-      sourceName: 
-      value:
-        value: 0
-  result:
-    name: result
-    node: {fileID: -3959729229862054421}
-    _guid: b41b5d828a6df0a408dd3a651b41bcab
-    connectedPorts:
-    - e03a9dd1c8b5772489c3c6f0b600b04b
-    value:
-      sourceType: 2
-      sourceName: 
-      value:
-        value: 0
 --- !u!114 &-2826844252263728438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,12 +122,9 @@ MonoBehaviour:
   - {fileID: -2826844252263728438}
   - {fileID: 947902608634880320}
   - {fileID: 3370444659066598131}
-  - {fileID: -8344167939395654597}
-  - {fileID: -3959729229862054421}
-  - {fileID: -6418347362950904911}
-  - {fileID: -4954132940893439989}
-  transformScale: {x: 0.8695652, y: 0.8695652, z: 1}
-  transformPosition: {x: -5.3333335, y: 441.33334, z: 0}
+  - {fileID: 1382084001214152914}
+  transformScale: {x: 1, y: 1, z: 1}
+  transformPosition: {x: -788, y: 266.66666, z: 0}
   references:
     version: 2
     RefIds:
@@ -469,6 +249,40 @@ MonoBehaviour:
       sourceName: 
       value:
         value: 0
+--- !u!114 &1382084001214152914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab72b2db30e34c0fa822465aaf4eb7ed, type: 3}
+  m_Name: GetRandomObjectIndex
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 0
+  _guid: b0cff4dd8913e2c43b0b5b48fbef8578
+  position: {x: 1119.3333, y: -88}
+  description: 
+  info: 
+  subInfo: 
+  objectProvider:
+    name: objectProvider
+    node: {fileID: 1382084001214152914}
+    _guid: 1457183851ae07641ab6513d205bdb99
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: objectProvider
+  randomIndex:
+    name: randomIndex
+    node: {fileID: 1382084001214152914}
+    _guid: e78e70e62394e0743bed7ddb4578a9bb
+    connectedPorts:
+    - e9e0688d746940e45badc7ac575a8afd
+    value: 0
 --- !u!114 &2239068637122157868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,7 +566,7 @@ MonoBehaviour:
     node: {fileID: 6201229393880670842}
     _guid: e9e0688d746940e45badc7ac575a8afd
     connectedPorts:
-    - 2cbde3016956dc84ab40d7714680c295
+    - e78e70e62394e0743bed7ddb4578a9bb
     value:
       sourceType: 2
       sourceName: 

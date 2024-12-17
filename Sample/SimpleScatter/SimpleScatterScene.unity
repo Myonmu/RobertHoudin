@@ -457,12 +457,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: 243aa00b765503b4ca015141f1a80a74, type: 2}
   propertyBlock:
-    rid: -2
+    rid: 1931237592025530646
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 1931237592025530646
+      type: {class: SimpleScatterPropertyBlock, ns: RobertHoudin.Sample.SimpleScatter, asm: Assembly-CSharp-firstpass}
+      data:
+        rootTransform: {fileID: 1685806829}
+        maxActivePoints: 50
+        k: 10
+        bounds:
+          m_Center: {x: 0, y: 0, z: 0}
+          m_Extent: {x: 50, y: 50, z: 50}
+        distance: {x: 0.5, y: 5}
+        objectProvider: {fileID: 11400000, guid: 0135031cc13c8f14281b67b5e05213f5, type: 2}
 --- !u!4 &1685806829
 Transform:
   m_ObjectHideFlags: 0

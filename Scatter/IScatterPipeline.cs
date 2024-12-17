@@ -68,6 +68,7 @@ namespace RobertHoudin.Scatter
     public interface IObjectProvider
     {
         public GameObject GetObjectByIndex(int objectId);
+        public int GetRandomObjectIndex();
         int MinIndex { get; }
         int MaxIndex { get; }
     }
