@@ -1,6 +1,7 @@
 # RobertHoudin
 
-![GIF 2024-12-15 22-56-45](https://github.com/user-attachments/assets/7f1170de-8f5b-4781-b99d-8d83c865109d)
+![GIF 2024-12-17 21-52-31](https://github.com/user-attachments/assets/8edcc1d3-fe53-4cae-8fc9-5c30980d548a)
+
 
 A Houdini-like node evaluation framework with (hopefully) common tech art functions. 
 
