@@ -94,6 +94,28 @@ To implement the `OnEvaluate` method, typically you call `GetValueNoBoxing()` on
 
 Once the implementation is finished, the node should show up in the node search window (RobertHoudin Editor, press space).
 
+#### In-Node Properties (experimental)
+
+For non-port fields that you wish to display in a node directly, add `[RhNodeData]` attribute to that field:
+
+```csharp
+public class PrintNode: RhNode
+{
+    [RhNodeData] public string someString;
+    [RhNodeData] public Bounds bounds;
+    [RhInputPort] public StringPort str;
+    //...
+}
+```
+
+![image](https://github.com/user-attachments/assets/ca9f5230-a3fe-40e0-8b42-06b8ac8807dc)
+
+Note that this is only used to control whether the field should appear in the node, without the attribute, the field is always visible in the node's inspector.
+
+Caveats:
+- Does not support Odin or anything that isn't IMGUI
+- Has layout issues as seen in the previous image.
+
 ### Number Types
 
 The framework provides a proxy type `Number` that can be used as both `int` and `float`. This is added to eliminate the need to implement a float and int version of the same node, as well as using a conversion node if you need int or float but only have the other.
