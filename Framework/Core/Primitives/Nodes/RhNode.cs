@@ -136,6 +136,11 @@ namespace RobertHoudin.Framework.Core.Primitives.Nodes
             return (T)InputPorts[index].GetValue();
         }
 
+        public T GetOutputValueAtPort<T>(int index)
+        {
+            return (T)OutputPorts[index].GetValue();
+        }
+
         public void SetOutputValueAtPort(int index, object value)
         {
             OutputPorts[index].SetValue(value);

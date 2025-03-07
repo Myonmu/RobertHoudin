@@ -23,5 +23,10 @@ namespace RobertHoudin.Framework.Core.Primitives
             propertyBlock.OnBeginEvaluate();
             tree.EvaluateTree(propertyBlock);
         }
+
+        public T GetResultValueAtPort<T>(int portIndex)
+        {
+            return tree.resultNode.GetOutputValueAtPort<T>(portIndex);
+        }
     }
 }
