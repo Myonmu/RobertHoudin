@@ -54,6 +54,12 @@ namespace RobertHoudin.Framework.Core.Primitives
             });
         }
 
+        [ContextMenu("Evaluate")]
+        public void EvaluateTree()
+        {
+            EvaluateTree(null);
+        }
+
         /// <summary>
         /// Reconstructs guid cache. 
         /// </summary>

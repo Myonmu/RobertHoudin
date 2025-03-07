@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 namespace RobertHoudin.Utils.RuntimeCompatible
 {
+    public enum ClampSearchMode
+    {
+        None,
+        StrictLowerBound,
+        StrictUpperBound
+    }
     /// <summary>
     /// Contains methods for searching values clamping a given value in a list.
     /// List must be SORTED.
@@ -17,7 +23,7 @@ namespace RobertHoudin.Utils.RuntimeCompatible
         /// <param name="after">index of element with value just above the eval point</param>
         /// <typeparam name="T">list element type</typeparam>
         /// <exception cref="Exception">list is empty</exception>
-        public static void FindClampingIndices<T>(List<T> list, T evalPoint, out int before, out int after)
+        public static void FindClampingIndices<T>(List<T> list, T evalPoint, out int before, out int after, ClampSearchMode mode = ClampSearchMode.None)
             where T : IComparable<T>
         {
             if (list.Count == 0) throw new Exception("List is empty");
@@ -26,12 +32,15 @@ namespace RobertHoudin.Utils.RuntimeCompatible
             before = 0;
             while (after - before > 1)
             {
-                if (list[i / 2].CompareTo(evalPoint) < 0)
+                var compareResult = list[i].CompareTo(evalPoint);
+                if (mode is ClampSearchMode.StrictLowerBound && compareResult < 0 ||
+                    mode is not ClampSearchMode.StrictLowerBound && compareResult <= 0)
                 {
                     before = i;
                     i = (i + list.Count - 1) / 2;
                 }
-                else
+                else if(mode is ClampSearchMode.StrictUpperBound && compareResult > 0 ||
+                        mode is not ClampSearchMode.StrictUpperBound && compareResult >= 0)
                 {
                     after = i;
                     i /= 2;
@@ -51,7 +60,7 @@ namespace RobertHoudin.Utils.RuntimeCompatible
         /// <typeparam name="U">value type</typeparam>
         /// <exception cref="Exception"></exception>
         public static void FindClampingIndices<T, U>(List<T> list, Func<T, U> fieldSelector,
-            U evalPoint, out int before, out int after) where U : IComparable<U>
+            U evalPoint, out int before, out int after, ClampSearchMode mode = ClampSearchMode.None) where U : IComparable<U>
         {
             if (list.Count == 0) throw new Exception("List is empty");
             var i = list.Count - 1;
@@ -59,12 +68,15 @@ namespace RobertHoudin.Utils.RuntimeCompatible
             before = 0;
             while (after - before > 1)
             {
-                if (fieldSelector(list[i / 2]).CompareTo(evalPoint) < 0)
+                var compareResult = fieldSelector(list[i]).CompareTo(evalPoint);
+                if (mode is ClampSearchMode.StrictLowerBound && compareResult < 0 ||
+                    mode is not ClampSearchMode.StrictLowerBound && compareResult <= 0)
                 {
                     before = i;
                     i = (i + list.Count - 1) / 2;
                 }
-                else
+                else if(mode is ClampSearchMode.StrictUpperBound && compareResult > 0 ||
+                        mode is not ClampSearchMode.StrictUpperBound && compareResult >= 0)
                 {
                     after = i;
                     i /= 2;

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
-using Sirenix.Utilities;
 
 namespace RobertHoudin.Framework.Core.Primitives.Utilities
 {
@@ -19,7 +18,8 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
             try
             {
                 var expr = Expression.Field(field.IsStatic ? null : Expression.Constant(selectedComponent), field);
-                return Expression.Lambda<Func<T>>(expr).Compile();
+                var convertedExpr = Expression.Convert(expr, typeof(T));
+                return Expression.Lambda<Func<T>>(convertedExpr).Compile();
             }
             catch (Exception e)
             {
@@ -49,7 +49,7 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
             {
                 var expr = Expression.Property(Expression.Constant(selectedComponent), property);
                 expr = Expression.Property(expr, second);
-                return Expression.Lambda<Func<T>>(expr).Compile();
+                return Expression.Lambda<Func<T>>(Expression.Convert(expr, typeof(T))).Compile();
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
             {
                 var expr = Expression.Field(field.IsStatic ? null : Expression.Constant(selectedComponent), field);
                 expr = Expression.Property(expr, second);
-                return Expression.Lambda<Func<T>>(expr).Compile();
+                return Expression.Lambda<Func<T>>(Expression.Convert(expr, typeof(T))).Compile();
             }
             catch (Exception e)
             {
@@ -110,7 +110,7 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
             {
                 var expr = Expression.Field(Expression.Constant(instance), first);
                 expr = Expression.Field(expr, second);
-                return Expression.Lambda<Func<T>>(expr).Compile();
+                return Expression.Lambda<Func<T>>(Expression.Convert(expr, typeof(T))).Compile();
             }
             catch
             {
@@ -140,7 +140,7 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
             {
                 var expr = Expression.Property(Expression.Constant(instance), first);
                 expr = Expression.Field(expr, second);
-                return Expression.Lambda<Func<T>>(expr).Compile();
+                return Expression.Lambda<Func<T>>(Expression.Convert(expr, typeof(T))).Compile();
             }
             catch
             {
@@ -235,18 +235,69 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
 
         public static List<FieldInfo> GetFieldsWithAttribute<T>(object container) where T : Attribute
         {
-            return container.GetType().GetFields().Where(x => x.GetAttribute<T>() != null).ToList();
+            return container.GetType().GetFields().Where(x => x.GetCustomAttribute<T>() != null).ToList();
         }
 
         public static List<FieldInfo> GetFieldsAssignableTo(Type type, Type containerType)
         {
             return containerType.GetFields(
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                .Where(x => type.IsAssignableFrom(x.FieldType)).ToList();
+                .Where(x => type.IsConvertibleTo(x.FieldType)).ToList();
+        }
+        public static IEnumerable<T> GetAllMembers<T>(this Type type, BindingFlags flags = BindingFlags.Default) where T : MemberInfo
+        {
+            if (type == (Type) null)
+                throw new ArgumentNullException(nameof (type));
+            if (type == typeof(object))
+                yield break;
+            var currentType = type;
+            MemberInfo[] memberInfoArray;
+            int index;
+            if ((flags & BindingFlags.DeclaredOnly) == BindingFlags.DeclaredOnly)
+            {
+                memberInfoArray = currentType.GetMembers(flags);
+                for (index = 0; index < memberInfoArray.Length; ++index)
+                {
+                    var allMember = memberInfoArray[index] as T;
+                    if (allMember != null)
+                        yield return allMember;
+                }
+            }
+            else
+            {
+                flags |= BindingFlags.DeclaredOnly;
+                do
+                {
+                    memberInfoArray = currentType.GetMembers(flags);
+                    for (index = 0; index < memberInfoArray.Length; ++index)
+                    {
+                        var allMember = memberInfoArray[index] as T;
+                        if (allMember != null)
+                            yield return allMember;
+                    }
+                    currentType = currentType.BaseType;
+                }
+                while (currentType != null);
+            }
+        }
+        public static MethodInfo GetCastMethod(this Type from, Type to, bool requireImplicitCast = false)
+        {
+            foreach (var allMember in from.GetAllMembers<MethodInfo>(BindingFlags.Static | BindingFlags.Public))
+            {
+                if ((allMember.Name == "op_Implicit" || !requireImplicitCast && allMember.Name == "op_Explicit") && allMember.GetParameters()[0].ParameterType.IsAssignableFrom(from) && to.IsAssignableFrom(allMember.ReturnType))
+                    return allMember;
+            }
+            foreach (var allMember in to.GetAllMembers<MethodInfo>(BindingFlags.Static | BindingFlags.Public))
+            {
+                if ((allMember.Name == "op_Implicit" || !requireImplicitCast && allMember.Name == "op_Explicit") && allMember.GetParameters()[0].ParameterType.IsAssignableFrom(from) && to.IsAssignableFrom(allMember.ReturnType))
+                    return allMember;
+            }
+            return (MethodInfo) null;
         }
         
         public static bool IsConvertibleTo(this Type from, Type to)
         {
+            return to.IsAssignableFrom(from) || IsConvertibleToViaCastOrTypeConversion(from, to);
             bool IsConvertibleToViaCastOrTypeConversion(Type from, Type to)
             {
                 if (from.IsEnum)
@@ -258,7 +309,6 @@ namespace RobertHoudin.Framework.Core.Primitives.Utilities
                 var tc = TypeDescriptor.GetConverter(from);
                 return tc.CanConvertTo(to);
             }
-            return to.IsAssignableFrom(from) || IsConvertibleToViaCastOrTypeConversion(from, to);
         }
     }
 }

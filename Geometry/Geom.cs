@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 namespace RobertHoudin.Geometry
 {
@@ -43,6 +44,18 @@ namespace RobertHoudin.Geometry
                 result.center -= gameObject.transform.position;
             }
             return result;
+        }
+
+        public static Bounds CalculatePointCollectionBounds(List<Vector3> points)
+        {
+            var min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+            var max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            foreach (var point in points)
+            {
+                min = Vector3.Min(point, min);
+                max = Vector3.Max(point, max);
+            }
+            return new Bounds((min + max) / 2, (max - min));
         }
     }
 }
