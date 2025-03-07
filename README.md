@@ -9,7 +9,7 @@ The project is *useable* but still needs quality of life improvements.
 
 At the moment, the code base contains a minor amount of behaviour tree concepts, because it is derived from an earlier behaviour tree plugin MochiBTS
 
-A more extensive documentation can be found ![here](https://myonmu.github.io/RobertHoudin-Docs/).
+A more extensive documentation can be found [here](https://myonmu.github.io/RobertHoudin-Docs/).
 
 ### Why "Robert Houdin"?
 
