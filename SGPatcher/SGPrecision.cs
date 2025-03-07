@@ -1,4 +1,4 @@
-﻿namespace Plugins.RobertHoudin.SGPatcher
+﻿namespace RobertHoudin.SGPatcher
 {
     public enum SGPrecision
     {

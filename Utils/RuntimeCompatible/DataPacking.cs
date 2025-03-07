@@ -4,11 +4,11 @@ namespace RobertHoudin.Utils.RuntimeCompatible
 {
     public static class DataPacking
     {
-        private static byte[] _mergeBuffer = new byte[2];
+        private static byte[] _mergeBuffer = new byte[4];
         public static float PackToFloat(in ushort high, in ushort low)
         {
-            _mergeBuffer[0] = (byte)(high);
-            _mergeBuffer[1] = (byte)(low);
+            BitConverter.GetBytes(high).CopyTo(_mergeBuffer,0);
+            BitConverter.GetBytes(low).CopyTo(_mergeBuffer,2);
             return BitConverter.ToSingle(_mergeBuffer);
         }
         public static float PackToFloat(in half high, in half low)

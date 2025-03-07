@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Plugins.RobertHoudin.SGPatcher
+namespace RobertHoudin.SGPatcher
 {
     [Serializable]
     public class SGPropertyPatchEntry

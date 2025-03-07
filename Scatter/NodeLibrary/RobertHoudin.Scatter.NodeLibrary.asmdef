@@ -1,0 +1,10 @@
+﻿{
+  "name": "RobertHoudin.Scatter.NodeLibrary",
+  "references":[ 
+    "RobertHoudin.Framework.Primitives"
+  , "RobertHoudin.Framework.Ports",
+    "RobertHoudin.NodeLibrary",
+    "RobertHoudin.Misc",
+    "RobertHoudin.Scatter.Runtime"
+  ]
+}

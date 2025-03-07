@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-namespace Plugins.RobertHoudin.SGPatcher
+namespace RobertHoudin.SGPatcher
 {
     public static class SGPropertyTypeMapping
     {

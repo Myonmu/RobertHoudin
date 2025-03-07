@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Object = UnityEngine.Object;
-namespace Plugins.RobertHoudin.SGPatcher
+namespace RobertHoudin.SGPatcher
 {
     [UnityEngine.CreateAssetMenu(fileName = "SGPropertyPatchPreset",
         menuName = "RobertHoudin/SG Property Patch Preset", order = 0)]

@@ -1,0 +1,4 @@
+﻿{
+  "name": "RobertHoudin.Framework.Variables",
+  "references":[ "RobertHoudin.Framework.Primitives" ]
+}

@@ -1,6 +1,5 @@
 ﻿using System;
-using UnityEditor;
-namespace Plugins.RobertHoudin.SGPatcher
+namespace RobertHoudin.SGPatcher
 {
     [Serializable]
     public class SGGUIDJsonBlock
