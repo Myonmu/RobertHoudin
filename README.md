@@ -9,6 +9,8 @@ The project is *useable* but still needs quality of life improvements.
 
 At the moment, the code base contains a minor amount of behaviour tree concepts, because it is derived from an earlier behaviour tree plugin MochiBTS
 
+A more extensive documentation can be found [here](https://myonmu.github.io/RobertHoudin-Docs/).
+
 ### Why "Robert Houdin"?
 
 The project is named after the famous French magician, and the reason being, well, Harry *Houdini* is also a famous and remarkable figure in the history of prestidigitation. Plus, *Houdin* is so similar to *Houdini* so I couldn't help it.
@@ -32,6 +34,7 @@ In comparison:
 Of course, you would be using houdini because it has those nice convenient features, not soley because it is procedural. This project does not aim to *replace* Houdini, but rather a fast *Houdini-like* editing experience all inside the Unity itself, for smaller, less complex, but highly Unity-bound features.
 
 ## Current API
+
 ![image](https://github.com/user-attachments/assets/3843c96b-4818-4b0e-886e-7053546df9f9)
 
 ### Create an RhTree asset
