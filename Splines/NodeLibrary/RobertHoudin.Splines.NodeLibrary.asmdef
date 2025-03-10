@@ -1,0 +1,7 @@
+﻿{
+  "name": "RobertHoudin.Splines.NodeLibrary",
+  "references":[ "RobertHoudin.Splines.Runtime",
+    "RobertHoudin.Framework.Ports",
+    "RobertHoudin.Framework.Primitives"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "RobertHoudin.UnitySplines.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Splines",
+        "Unity.Mathematics",
+        "RobertHoudin.Splines.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.splines",
+            "expression": "",
+            "define": "HAS_UNITY_SPLINES_PACKAGE"
+        }
+    ],
+    "noEngineReferences": false
+}

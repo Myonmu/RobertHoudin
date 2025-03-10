@@ -67,7 +67,12 @@ namespace RobertHoudin.Scatter.Runtime
     public interface IObjectProvider
     {
         public GameObject GetObjectByIndex(int objectId);
-        public int GetRandomObjectIndex();
+        /// <summary>
+        /// Get a random object index.
+        /// </summary>
+        /// <param name="i">optional seed. the exact interpretation of this number depends on the provider</param>
+        /// <returns></returns>
+        public int GetRandomObjectIndex(int i); 
         int MinIndex { get; }
         int MaxIndex { get; }
     }

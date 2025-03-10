@@ -1,0 +1,7 @@
+﻿{
+  "name": "RobertHoudin.Splines.Editor",
+  "references": [
+    "RobertHoudin.Splines.Runtime",
+    "RobertHoudin.Utils.EditorOnly"
+  ]
+}

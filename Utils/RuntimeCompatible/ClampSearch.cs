@@ -36,13 +36,13 @@ namespace RobertHoudin.Utils.RuntimeCompatible
                 if (mode is ClampSearchMode.StrictLowerBound && compareResult < 0 ||
                     mode is not ClampSearchMode.StrictLowerBound && compareResult <= 0)
                 {
-                    before = i;
+                    before = Math.Max(i, before + 1);
                     i = (i + list.Count - 1) / 2;
                 }
                 else if(mode is ClampSearchMode.StrictUpperBound && compareResult > 0 ||
                         mode is not ClampSearchMode.StrictUpperBound && compareResult >= 0)
                 {
-                    after = i;
+                    after = Math.Min(i, after - 1);
                     i /= 2;
                 }
             }
@@ -72,13 +72,13 @@ namespace RobertHoudin.Utils.RuntimeCompatible
                 if (mode is ClampSearchMode.StrictLowerBound && compareResult < 0 ||
                     mode is not ClampSearchMode.StrictLowerBound && compareResult <= 0)
                 {
-                    before = i;
+                    before = Math.Max(i, before + 1);
                     i = (i + list.Count - 1) / 2;
                 }
                 else if(mode is ClampSearchMode.StrictUpperBound && compareResult > 0 ||
                         mode is not ClampSearchMode.StrictUpperBound && compareResult >= 0)
                 {
-                    after = i;
+                    after = Math.Min(i, after - 1);
                     i /= 2;
                 }
             }

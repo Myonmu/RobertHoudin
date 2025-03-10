@@ -12,7 +12,7 @@ namespace RobertHoudin.Scatter.NodeLibrary.ObjectProviders
             if(objectId < 0 || objectId >= prefabs.Count) return null;
             return prefabs[objectId];
         }
-        public int GetRandomObjectIndex()
+        public int GetRandomObjectIndex(int i = 0)
         {
             return Random.Range(0, prefabs.Count);
         }

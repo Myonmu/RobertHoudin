@@ -9,7 +9,7 @@ namespace RobertHoudin.Scatter.NodeLibrary.ObjectProviders
         [RhOutputPort] public IntPort randomIndex;
         protected override bool OnEvaluate(RhExecutionContext context)
         {
-            randomIndex.SetValueNoBoxing(objectProvider.GetValueNoBoxing().GetRandomObjectIndex());
+            randomIndex.SetValueNoBoxing(objectProvider.GetValueNoBoxing().GetRandomObjectIndex(0));
             return true;
         }
     }

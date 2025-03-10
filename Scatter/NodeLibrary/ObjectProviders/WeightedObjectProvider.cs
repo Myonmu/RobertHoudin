@@ -41,7 +41,7 @@ namespace RobertHoudin.Scatter.NodeLibrary.ObjectProviders
             return prefabs[objectId].prefab;
         }
         
-        public int GetRandomObjectIndex()
+        public int GetRandomObjectIndex(int i = 0)
         {
             UpdateWeights();
             return _random.GetRandom();

@@ -1,0 +1,10 @@
+﻿{
+  "name": "RobertHoudin.Splines.Runtime",
+  "references":[ 
+    "RobertHoudin.MeshGeneration",
+    "RobertHoudin.Geometry",
+    "RobertHoudin.Interpolation",
+    "RobertHoudin.Utils.RuntimeCompatible",
+    "RobertHoudin.Framework.Primitives"
+  ]
+}

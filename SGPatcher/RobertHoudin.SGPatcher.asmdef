@@ -1,7 +1,10 @@
 {
     "name": "RobertHoudin.SGPatcher",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "RobertHoudin.InspectorExt.Odin",
+        "RobertHoudin.InspectorExt.Tri"
+    ],
     "includePlatforms": [
         "Editor"
     ],

@@ -3,8 +3,7 @@ using RobertHoudin.Framework.Core.Ports;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Utilities;
 using RobertHoudin.NodeLibrary.Loop;
-
-namespace RobertHoudin.NodeLibrary
+namespace RobertHoudin.NodeLibrary.Numeric
 {
     [Serializable]
     public class ForeachNumber : ForEachNode<NumberCollectionPort, 

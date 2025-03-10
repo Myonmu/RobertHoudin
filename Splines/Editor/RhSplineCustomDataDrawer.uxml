@@ -1,0 +1,17 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:VisualElement style="flex-grow: 1; background-size: 100% 4px; height: 4px; min-height: 4px;" />
+    <engine:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+        <engine:TextField label="Data Key" placeholder-text="enter data key (obligatory)" data-source-path="dataKey" style="background-color: rgba(233, 179, 78, 0.22); width: 80%; min-width: 70%;" />
+        <engine:DropdownField name="WellKnownKeys" choices="width,roll,eccentricity" style="background-size: 100% 100%; width: 20%;" />
+    </engine:VisualElement>
+    <engine:VisualElement style="flex-grow: 1; background-size: 100% 6px; height: 4px; min-height: 4px;" />
+    <engine:VisualElement name="CandidateContainer" style="flex-grow: 1; border-bottom-color: rgba(255, 255, 255, 0.54); border-top-color: rgba(255, 255, 255, 0.5); border-top-width: 2px; border-bottom-width: 2px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-right-width: 2px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-left-color: rgba(255, 255, 255, 0.5); border-right-color: rgba(255, 255, 255, 0.54); border-left-width: 2px;">
+        <engine:IntegerField label="Control Point Id" value="0" name="ControlPointId" />
+        <editor:PropertyField name="CandidateData" />
+        <engine:Button text="Add Data" />
+    </engine:VisualElement>
+    <engine:Foldout text="All Points and Data" style="background-color: rgba(89, 99, 149, 0.08);">
+        <engine:MultiColumnListView name="AllData" />
+    </engine:Foldout>
+    <engine:VisualElement style="flex-grow: 1; background-size: 100% 4px; height: 4px; min-height: 4px;" />
+</engine:UXML>

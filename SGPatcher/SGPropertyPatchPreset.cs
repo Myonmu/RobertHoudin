@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using RobertHoudin.InspectorExt;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -58,13 +59,29 @@ namespace RobertHoudin.SGPatcher
                 sb.AppendLine(JsonUtility.ToJson(obj, true));
             }
             var result = sb.ToString();
+            var unmodified = sb.ToString();
             // append object references
             const string childObjectListTemplate = "\"m_ChildObjectList\": [{0}]";
             const string childObjectListPattern = @"""m_ChildObjectList"": \[\s*(.*?)\s*\]";
             const string propertyListTemplate = "\"m_Properties\": [{0}]";
             const string propertyListPattern = @"""m_Properties"": \[\s*(.*?)\s*\]";
 
-            result = Regex.Replace(result, childObjectListPattern, match => {
+            result = Regex.Replace(result, childObjectListPattern, match =>
+            {
+                //seek back, attempt to verif if the category group is anonymous
+                var start = match.Index - 1;
+                var seekCursor = start;
+                var seekLimit = start - 30;
+                while (unmodified[seekCursor] != '\"' && seekCursor > seekLimit)
+                {
+                    seekCursor--;
+                }
+
+                if (seekCursor <= seekLimit || unmodified[seekCursor - 1] != '\"') 
+                {
+                    return match.Value;
+                }
+                
                 var sb2 = StringBuilder(match);
                 return string.Format(childObjectListTemplate, sb2);
             }, RegexOptions.Singleline);
@@ -82,7 +99,7 @@ namespace RobertHoudin.SGPatcher
                 var isFirstAppend = true;
                 foreach (var reference in objectList)
                 {
-                    if (!isFirstAppend || data.EndsWith("}\n"))
+                    if (!isFirstAppend || data.EndsWith("}"))
                     {
                         sb2.Append(",\n");
                     }

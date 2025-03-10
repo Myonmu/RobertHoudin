@@ -57,5 +57,17 @@ namespace RobertHoudin.Geometry
             }
             return new Bounds((min + max) / 2, (max - min));
         }
+
+        public static Bounds CalculatePointCollectionBounds(params Vector3[] points)
+        {
+            var min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+            var max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            foreach (var point in points)
+            {
+                min = Vector3.Min(point, min);
+                max = Vector3.Max(point, max);
+            }
+            return new Bounds((min + max) / 2, (max - min));
+        }
     }
 }

@@ -1,0 +1,7 @@
+﻿{
+  "name": "RobertHoudin.UnitySplines.Editor",
+  "references":[ 
+    "RobertHoudin.Splines.Editor",
+    "Unity.Splines.Editor"
+  ]
+}

@@ -2,8 +2,7 @@
 using RobertHoudin.Framework.Core.Ports;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
-
-namespace RobertHoudin.NodeLibrary
+namespace RobertHoudin.NodeLibrary.Numeric
 {
     [Serializable]
     public class ConstructNumberCollection: RhNode
