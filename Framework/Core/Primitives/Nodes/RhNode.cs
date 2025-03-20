@@ -45,7 +45,7 @@ namespace RobertHoudin.Framework.Core.Primitives.Nodes
         /// </summary>
         public virtual List<RhPort> OutputPortsGeneric => OutputPorts;
 
-        public RhNodeStatus status;
+        [HideInInspector] public RhNodeStatus status;
         public RhNodeFlag flags;
         [SerializeField] [HideInInspector] private string _guid;
         [HideInInspector] public Vector2 position;
