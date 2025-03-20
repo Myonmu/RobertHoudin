@@ -91,7 +91,7 @@ namespace RobertHoudin.Splines.Runtime
             while (resamplePoints.MoveNext())
             {
                 var pos = resamplePoints.Current;
-                result.PushPoint(new()
+                result.PushPoint(new DiscreteControlPoint()
                 {
                     Position = (spline as ISplineWithPosition)?.EvaluatePosition(pos) ?? Vector3.zero,
                     Tangent = (spline as ISplineWithTangent)?.EvaluateTangent(pos) ?? Vector3.zero,
@@ -101,6 +101,15 @@ namespace RobertHoudin.Splines.Runtime
             return result;
         }
 
+        /// <summary>
+        /// Measure the length of a spline by resampling
+        /// </summary>
+        /// <param name="spline">spline to measure</param>
+        /// <param name="start">segment start</param>
+        /// <param name="end">segment end</param>
+        /// <param name="accuracy">resample count</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static float MeasureLength(ISpline spline, float start, float end, float accuracy = 64)
         {
             if (spline is not ISplineWithPosition splineWithPos) throw new ArgumentException("spline doesn't implement ISplineWithPosition");

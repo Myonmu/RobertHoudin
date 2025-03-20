@@ -37,6 +37,7 @@ namespace RobertHoudin.UnitySpline.Runtime
         {
             return new UnitySplineControlPointEnumerator(spline.Knots);
         }
+        public int ControlPointCount => spline.Count;
     }
 }
 #endif

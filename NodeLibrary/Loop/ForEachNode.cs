@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RobertHoudin.Framework.Core.Ports;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
 
@@ -23,10 +24,12 @@ namespace RobertHoudin.NodeLibrary.Loop
         protected bool isInLoop = false;
         [RhInputPort] public InputPort collectionInput;
         [RhLoopItemPort] public ItemPort itemPort;
+        [RhLoopItemPort] public NumberPort indexPort;
         [RhLoopResultPort] public ItemResult itemResult;
         [RhOutputPort] public OutputPort collectionOutput;
         private List<RhPort> _outputPortsGenericCache;
         private List<RhPort> _inputPortsGenericCache;
+        private HashSet<RhNode> _nodesInLoop = new();
 
         public override List<RhPort> OutputPortsGeneric
         {
@@ -35,6 +38,7 @@ namespace RobertHoudin.NodeLibrary.Loop
                 {
                     _outputPortsGenericCache = this.GetPortsWithAttribute<RhOutputPortAttribute>();
                     _outputPortsGenericCache.Add(itemPort);
+                    _outputPortsGenericCache.Add(indexPort);
                 }
                 return _outputPortsGenericCache;
             }
@@ -59,6 +63,7 @@ namespace RobertHoudin.NodeLibrary.Loop
             }
 
             status = RhNodeStatus.WaitingForDependency;
+            _nodesInLoop.Clear();
             OnBeginEvaluate(context);
             for (var i = 0; i < collectionInput.GetConnectedPortCount(); i++)
             {
@@ -101,22 +106,30 @@ namespace RobertHoudin.NodeLibrary.Loop
 
         protected void ResetNodeStatusInLoop()
         {
-            void ResetRecursive(RhNode node)
+            if (_nodesInLoop.Count == 0)
             {
-                if (node is null) return;
-                if (node == this) return;
-                node.status = RhNodeStatus.Idle;
-                foreach (var inputPort in node.InputPortsGeneric)
+                void AddRecursive(RhNode node)
                 {
-                    foreach (var connectedPort in inputPort.GetConnectedPorts())
+                    if (node is null) return;
+                    if (node == this) return;
+                    if (!node.flags.HasFlag(RhNodeFlag.PreventLoopResetPropagate))
+                        _nodesInLoop.Add(node);
+                    foreach (var inputPort in node.InputPortsGeneric)
                     {
-                        ResetRecursive(connectedPort.node);
+                        foreach (var connectedPort in inputPort.GetConnectedPorts())
+                        {
+                            AddRecursive(connectedPort.node);
+                        }
                     }
                 }
+                foreach (var port in itemResult.GetConnectedPorts())
+                {
+                    AddRecursive(port.node);
+                }
             }
-            foreach (var port in itemResult.GetConnectedPorts())
+            foreach (var node in _nodesInLoop)
             {
-                ResetRecursive(port.node);
+                node.status = RhNodeStatus.Idle;
             }
         }
 
@@ -125,6 +138,7 @@ namespace RobertHoudin.NodeLibrary.Loop
             // todo: stub
             for (int i = 0; i < GetInputCollectionSize(collectionInput); i++)
             {
+                indexPort.SetValueNoBoxing(i);
                 ResetNodeStatusInLoop();
                 itemPort.SetValueNoBoxing(Extract(collectionInput, i));
                 foreach (var connectedPort in itemResult.GetConnectedPorts())
@@ -140,6 +154,7 @@ namespace RobertHoudin.NodeLibrary.Loop
         public override RhPort GetOutputPortByGUID(string guid)
         {
             if (itemPort.GUID == guid) return itemPort;
+            if (indexPort.GUID == guid) return indexPort;
             return base.GetOutputPortByGUID(guid);
         }
 

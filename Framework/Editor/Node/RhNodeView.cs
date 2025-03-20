@@ -176,7 +176,7 @@ namespace RobertHoudin.Framework.Editor.Node
         public override void SetPosition(Rect newPos)
         {
             base.SetPosition(newPos);
-            Undo.RecordObject(node, "Behaviour Tree (Set Position)");
+            Undo.RecordObject(node, "RhTree (Set Position)");
             node.position.x = newPos.xMin;
             node.position.y = newPos.yMin;
             EditorUtility.SetDirty(node);

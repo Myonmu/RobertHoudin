@@ -1,6 +1,7 @@
 ﻿{
   "name": "RobertHoudin.Scatter.Runtime",
   "references": [
-    "RobertHoudin.Misc"
+    "RobertHoudin.Misc",
+    "RobertHoudin.Framework.Primitives"
   ]
 }

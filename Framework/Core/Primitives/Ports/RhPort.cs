@@ -15,22 +15,27 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
     [Serializable]
     public abstract class RhPort
     {
+        
+        public virtual bool IsActive => !IsImplicitlyDisabled && !forceDisabled;
         /// <summary>
         /// Whether this port should propagate node evaluation.
         /// When false, nodes connected with this port will not be evaluated.
         /// This usually happens for a datasource port that uses None or PropertyBlock
         /// data types.
         /// </summary>
-        public virtual bool IsActive { get; } = true;
-        [HideInInspector]public string name;
+        public virtual bool IsImplicitlyDisabled { get; } = false;
+        /// <summary>
+        /// When true, the port is force disabled. Happens when this value is toggled in the inspector.
+        /// </summary>
+        public bool forceDisabled;
+        [HideInInspector] public string name;
         public virtual PortType Type { get; }
         public abstract RhPort[] GetConnectedPorts();
         [HideInInspector] public RhNode node;
-        [SerializeField][HideInInspector] private string _guid;
+        [SerializeField] [HideInInspector] private string _guid;
         public string GUID
         {
-            get
-            {
+            get {
                 #if UNITY_EDITOR
                 if (string.IsNullOrEmpty(_guid))
                 {
@@ -52,7 +57,7 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
         public abstract void ForwardValue(RhPort target);
 
         public abstract RhPort GetPortAtIndex(int index);
-        
+
         public abstract int GetConnectedPortCount();
         public abstract List<string> GetConnectedPortGuids();
     }

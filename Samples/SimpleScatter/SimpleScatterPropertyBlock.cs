@@ -1,7 +1,6 @@
 ﻿using System;
 using RobertHoudin.Framework.Core.Primitives.DataContainers;
-using RobertHoudin.Scatter;
-using RobertHoudin.Scatter.ObjectProviders;
+using RobertHoudin.Scatter.NodeLibrary.ObjectProviders;
 using UnityEngine;
 namespace RobertHoudin.Sample.SimpleScatter
 {

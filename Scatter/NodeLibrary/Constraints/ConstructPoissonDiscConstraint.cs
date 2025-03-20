@@ -9,7 +9,7 @@ namespace RobertHoudin.Scatter.NodeLibrary.Constraints
 {
     public class ConstructPoissonDiscConstraint: RhNode
     {
-        [RhInputPort] public Vector2CollectionPort pointsPort;
+        [RhInputPort] public NumberBufferPort pointsPort;
         //[RhInputPort] public Vector2Port distancePort;
         [RhOutputPort] public PoissonDiskConstraintPort output;
 

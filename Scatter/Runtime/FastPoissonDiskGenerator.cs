@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using RobertHoudin.Framework.Core.Primitives.Utilities;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = System.Random;
@@ -20,7 +21,7 @@ namespace RobertHoudin.Scatter.Runtime
         [Serializable]
         public class PoissonDiskConstraint
         {
-            [FormerlySerializedAs("points")] public List<Vector2> existingPoints;
+            [FormerlySerializedAs("points")] public NumberBuffer existingPoints = new(2);
             public bool IsValid()
             {
                 return existingPoints != null && existingPoints.Count > 0;
@@ -42,20 +43,21 @@ namespace RobertHoudin.Scatter.Runtime
             public int gridHeight;
         }
 
-        private class Bags
+        private class BagsT<T>
         {
             public Vector2?[,] grid;
 
             /// <summary>
             /// Result points
             /// </summary>
-            public List<Vector2> samplePoints;
+            public T samplePoints;
 
             /// <summary>
             /// Points that can be used to generate new points in the next iteration
             /// </summary>
-            public List<Vector2> activePoints;
+            public T activePoints;
         }
+        private class Bags: BagsT<NumberBuffer>{}
 
     #endregion
 
@@ -69,7 +71,7 @@ namespace RobertHoudin.Scatter.Runtime
             return gen.Next(left, right);
         }
 
-        public List<Vector2> Sample(Bounds bounds, Vector2 minDist, int iterPerPoint, PoissonDiskConstraint constraint)
+        public NumberBuffer Sample(Bounds bounds, Vector2 minDist, int iterPerPoint, PoissonDiskConstraint constraint)
         {
             return Sample(new Vector2(bounds.min.x, bounds.min.z),
                 new Vector2(bounds.max.x, bounds.max.z),
@@ -84,7 +86,7 @@ namespace RobertHoudin.Scatter.Runtime
         /// <param name="iterPerPoint"></param>
         /// <param name="constraint"></param>
         /// <returns></returns>
-        public List<Vector2> Sample(float range, float minDist, int iterPerPoint, PoissonDiskConstraint constraint)
+        public NumberBuffer Sample(float range, float minDist, int iterPerPoint, PoissonDiskConstraint constraint)
         {
             return Sample(
                 new Vector2(-range, -range),
@@ -93,7 +95,7 @@ namespace RobertHoudin.Scatter.Runtime
                 iterPerPoint, constraint);
         }
 
-        public List<Vector2> Sample(Vector2 bottomLeft, Vector2 topRight, Vector2 minimumDistance,
+        public NumberBuffer Sample(Vector2 bottomLeft, Vector2 topRight, Vector2 minimumDistance,
             int iterationPerPoint, PoissonDiskConstraint constraint)
         {
             var useConstraint = constraint is not null && constraint.IsValid();
@@ -108,8 +110,8 @@ namespace RobertHoudin.Scatter.Runtime
             var bags = new Bags()
             {
                 grid = new Vector2?[settings.gridWidth + 1, settings.gridHeight + 1],
-                samplePoints = new List<Vector2>(),
-                activePoints = new List<Vector2>()
+                samplePoints = new(2),
+                activePoints = new(2)
             };
             if (useConstraint)
             {

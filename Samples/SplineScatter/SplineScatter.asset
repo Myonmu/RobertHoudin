@@ -1,0 +1,1339 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7181843283212855380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9820d7af93f647ca82a303e587c5e78a, type: 3}
+  m_Name: ExtractVectorFromBuffer
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: 388279052add7d34297a0ebb708ed86d
+  position: {x: 805.33325, y: -866}
+  description: 
+  info: 
+  subInfo: 
+  buffer:
+    forceDisabled: 0
+    name: buffer
+    node: {fileID: -7181843283212855380}
+    _guid: a9b8cb82cc2275f47a69a3c7d53fe64e
+    connectedPorts:
+    - 3143bfaca99b551489b0e38f30f93f36
+  index:
+    forceDisabled: 0
+    name: index
+    node: {fileID: -7181843283212855380}
+    _guid: 52ab8ec1cf5b2c9418ec7e3af8ee99e7
+    connectedPorts:
+    - 0d54dc2e7b77ca14bbad1c446b5023de
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 59
+  vector:
+    forceDisabled: 0
+    name: vector
+    node: {fileID: -7181843283212855380}
+    _guid: 1927fd88a3dc1dd4f8c5c141250d8dec
+    connectedPorts:
+    - 988f7efb6b5557e478493db8371e3df2
+    value:
+      components:
+      - value: -2.9036407
+      - value: 0
+      - value: 3.9326324
+--- !u!114 &-7095156934334611018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf10bf237dd4849abe8061afbf67cc7, type: 3}
+  m_Name: QuaternionLookAt
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: eab6c6716df9d5946a99f629efdf3717
+  position: {x: 662.6667, y: -366.00003}
+  description: 
+  info: 
+  subInfo: 
+  forward:
+    forceDisabled: 0
+    name: forward
+    node: {fileID: -7095156934334611018}
+    _guid: cd300b9ac5b4a854884816ce0a96f666
+    connectedPorts:
+    - df3f8381988ece141aaeffced316a399
+    value:
+      sourceType: 2
+      sourceName: 
+      value: {x: -2.9036407, y: 0, z: 3.9326324}
+  up:
+    forceDisabled: 0
+    name: up
+    node: {fileID: -7095156934334611018}
+    _guid: e2d3652b76842f0428162c558cafb8bf
+    connectedPorts:
+    - 60f3b93361daf2a4e888042dba048e9a
+    value:
+      sourceType: 2
+      sourceName: 
+      value: {x: -0.5091924, y: 0.57931244, z: 0.63649046}
+  quat:
+    forceDisabled: 0
+    name: quat
+    node: {fileID: -7095156934334611018}
+    _guid: 72cf69f29af83ad42b21413b523b19f6
+    connectedPorts:
+    - b8c8f080a6abb4044aefc6ba5bce868f
+    value: {x: -0.008509998, y: -0.31255177, z: 0.025852788, w: 0.94951075}
+--- !u!114 &-7069027092465855840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7990bc14a420483f962acdecaabc0cbd, type: 3}
+  m_Name: VectorToUnityVector
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: deafc90e63fdb66468dc241b30067ed4
+  position: {x: 754.6666, y: -615.3333}
+  description: 
+  info: 
+  subInfo: 
+  subscript: xyzw
+  vector:
+    forceDisabled: 0
+    name: vector
+    node: {fileID: -7069027092465855840}
+    _guid: 988f7efb6b5557e478493db8371e3df2
+    connectedPorts:
+    - 1927fd88a3dc1dd4f8c5c141250d8dec
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        components:
+        - value: -2.9036407
+        - value: 0
+        - value: 3.9326324
+  vector1:
+    forceDisabled: 1
+    name: vector1
+    node: {fileID: -7069027092465855840}
+    _guid: 7f53884f80ea0bf409b359ac0e745e70
+    connectedPorts: []
+    value:
+      value: 0
+  vector2:
+    forceDisabled: 1
+    name: vector2
+    node: {fileID: -7069027092465855840}
+    _guid: 0658995968d754e4dae33635f6744df1
+    connectedPorts: []
+    value: {x: 0, y: 0}
+  vector3:
+    forceDisabled: 0
+    name: vector3
+    node: {fileID: -7069027092465855840}
+    _guid: df3f8381988ece141aaeffced316a399
+    connectedPorts:
+    - cd300b9ac5b4a854884816ce0a96f666
+    value: {x: -2.9036407, y: 0, z: 3.9326324}
+  vector4:
+    forceDisabled: 1
+    name: vector4
+    node: {fileID: -7069027092465855840}
+    _guid: a6d5c5eff0b416b41801050f7aa73d78
+    connectedPorts: []
+    value: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &-6767663714367564991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac0d5bfe2284d5190bac230bc1943b4, type: 3}
+  m_Name: SplineResample
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 0
+  flags: 0
+  _guid: 4b34a6aba8e290f4fa4b22eb9b900ee7
+  position: {x: -302.67334, y: -1286.3214}
+  description: 
+  info: 
+  subInfo: 
+  useLocalSpace: 0
+  spline:
+    forceDisabled: 0
+    name: spline
+    node: {fileID: -6767663714367564991}
+    _guid: c4b2c70f1fb41db49ac63bc162141361
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: spline
+  resampler:
+    forceDisabled: 0
+    name: resampler
+    node: {fileID: -6767663714367564991}
+    _guid: fb1de5d9a5040384fa17a0e11c8897ac
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: resampler
+  start:
+    forceDisabled: 0
+    name: start
+    node: {fileID: -6767663714367564991}
+    _guid: eb82b2b56943c5e4e9269724c7379bdc
+    connectedPorts: []
+    value:
+      sourceType: 0
+      sourceName: 
+      value:
+        value: 0
+  end:
+    forceDisabled: 0
+    name: end
+    node: {fileID: -6767663714367564991}
+    _guid: 57401689b53ef2c4e919ec37446ef7b0
+    connectedPorts: []
+    value:
+      sourceType: 0
+      sourceName: 
+      value:
+        value: 1
+  discreteSpline:
+    forceDisabled: 0
+    name: discreteSpline
+    node: {fileID: -6767663714367564991}
+    _guid: 6324d08e625c16c4e875aff9508e5bba
+    connectedPorts:
+    - 64419ec893cd42a41b3f68dd5431ed7f
+--- !u!114 &-6188750702665311551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67872d58536740deb5e2241aa4d7ff05, type: 3}
+  m_Name: ConstructScatterDataCollection
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: 6885ddb70407854448694992278d29a7
+  position: {x: -335.7797, y: 246.04507}
+  description: 
+  info: 
+  subInfo: 
+  collectionInput:
+    forceDisabled: 0
+    name: collectionInput
+    node: {fileID: -6188750702665311551}
+    _guid: b4943ee13bac5db43bfbbb4e68a512f2
+    connectedPorts:
+    - 73513d2f8782e5d4cad8e7e20fb6f511
+  itemPort:
+    forceDisabled: 0
+    name: itemPort
+    node: {fileID: -6188750702665311551}
+    _guid: d12c6b89fbbe0574fb24dfd80f090414
+    connectedPorts:
+    - a7af83024ade52d49979c70e28655884
+    value:
+      components:
+      - value: 67.03282
+      - value: 47.400005
+      - value: 76.27965
+  indexPort:
+    forceDisabled: 0
+    name: indexPort
+    node: {fileID: -6188750702665311551}
+    _guid: 0d54dc2e7b77ca14bbad1c446b5023de
+    connectedPorts:
+    - 52ab8ec1cf5b2c9418ec7e3af8ee99e7
+    value:
+      value: 59
+  itemResult:
+    forceDisabled: 0
+    name: itemResult
+    node: {fileID: -6188750702665311551}
+    _guid: 6c5810063d2d0a3488e2d2d58ce89181
+    connectedPorts:
+    - db781f9393dca4145a3254bef3167e25
+  collectionOutput:
+    forceDisabled: 0
+    name: collectionOutput
+    node: {fileID: -6188750702665311551}
+    _guid: 864cec7e0c427c8408f0d84c3ee37835
+    connectedPorts:
+    - 0649a7f5a347a4d43a1faacf053e6a50
+--- !u!114 &-5679729507565983804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ede630f3c964271832bf43d27ef1ab2, type: 3}
+  m_Name: PlaceScatterObject
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: f8b907b1db8e0fa4aaa0d944b4197a7d
+  position: {x: -311.4242, y: 474.20486}
+  description: 
+  info: 
+  subInfo: 
+  scatterDataCollection:
+    forceDisabled: 0
+    name: scatterDataCollection
+    node: {fileID: -5679729507565983804}
+    _guid: 0649a7f5a347a4d43a1faacf053e6a50
+    connectedPorts:
+    - 864cec7e0c427c8408f0d84c3ee37835
+  rootTransform:
+    forceDisabled: 0
+    name: rootTransform
+    node: {fileID: -5679729507565983804}
+    _guid: 62887a9df88b643469cdbacd327ff6b7
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: spawnRoot
+      value: {fileID: 0}
+  objectProvider:
+    forceDisabled: 0
+    name: objectProvider
+    node: {fileID: -5679729507565983804}
+    _guid: 0a65d2a77bb0e4140a1b570d864dba5e
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: _objectProvider
+--- !u!114 &-4833311334437286108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcdc10eb8d634e1f8d91ab5db8b9b0e5, type: 3}
+  m_Name: QuaternionRotateAround
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: dff52a50e57c1cb448d9c4979ea17a14
+  position: {x: 489.3333, y: -180.6667}
+  description: 
+  info: 
+  subInfo: 
+  axis:
+    forceDisabled: 0
+    name: axis
+    node: {fileID: -4833311334437286108}
+    _guid: 3899525b4f140d04e8accffb2b9461ef
+    connectedPorts:
+    - 60f3b93361daf2a4e888042dba048e9a
+    value:
+      sourceType: 2
+      sourceName: 
+      value: {x: -0.5091924, y: 0.57931244, z: 0.63649046}
+  angle:
+    forceDisabled: 0
+    name: angle
+    node: {fileID: -4833311334437286108}
+    _guid: 2981c22892b4dbf48b7699edcd19b1fd
+    connectedPorts:
+    - 3f88d6991ec4f44459e2a41dd8bacdbe
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 0
+  rot:
+    forceDisabled: 0
+    name: rot
+    node: {fileID: -4833311334437286108}
+    _guid: f41a8395b07d2184eb73c373b29ee854
+    connectedPorts:
+    - 4b89567fd397bb44abfa750752f35716
+    value: {x: -0, y: 0, z: 0, w: 1}
+--- !u!114 &-4691164947436408491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 617066b8b11f44bcaaf250bbe391bde0, type: 3}
+  m_Name: DecomposeVector
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: 2a641d3dec91aa74ba0d5eed4aea4f06
+  position: {x: 218.66663, y: -611.33325}
+  description: 
+  info: 
+  subInfo: 
+  swizzle: xyzw
+  vector:
+    forceDisabled: 0
+    name: vector
+    node: {fileID: -4691164947436408491}
+    _guid: a7af83024ade52d49979c70e28655884
+    connectedPorts:
+    - d12c6b89fbbe0574fb24dfd80f090414
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        components:
+        - value: 67.03282
+        - value: 47.400005
+        - value: 76.27965
+  x:
+    forceDisabled: 0
+    name: x
+    node: {fileID: -4691164947436408491}
+    _guid: 3fb63b3e981a98b4aadd1a529895735f
+    connectedPorts:
+    - 77269fb0b56c79241a471e333b117d8b
+    value:
+      value: 67.03282
+  y:
+    forceDisabled: 0
+    name: y
+    node: {fileID: -4691164947436408491}
+    _guid: 27bf5fcab12bdde449de6c57f207d47f
+    connectedPorts: []
+    value:
+      value: 47.400005
+  z:
+    forceDisabled: 0
+    name: z
+    node: {fileID: -4691164947436408491}
+    _guid: e6d7b395f71599a4cb57eb0bcf10880c
+    connectedPorts:
+    - 9fcddeef5c3e12b44bfdc405a87f2bba
+    value:
+      value: 76.27965
+  w:
+    forceDisabled: 0
+    name: w
+    node: {fileID: -4691164947436408491}
+    _guid: 40caec4442fa5d64a85551ba6276b388
+    connectedPorts: []
+    value:
+      value: 76.27965
+--- !u!114 &-2603393179571439702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab72b2db30e34c0fa822465aaf4eb7ed, type: 3}
+  m_Name: GetRandomObjectIndex
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: cade9908d63c8624eb32fbc735ff9ea4
+  position: {x: 1265.3333, y: -78.66667}
+  description: 
+  info: 
+  subInfo: 
+  objectProvider:
+    forceDisabled: 0
+    name: objectProvider
+    node: {fileID: -2603393179571439702}
+    _guid: a1fe9dd75d3c22b47868be60dea1cd15
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: _objectProvider
+  randomIndex:
+    forceDisabled: 0
+    name: randomIndex
+    node: {fileID: -2603393179571439702}
+    _guid: fd9f83faa6ce54f4f9b3d6ea61039ae2
+    connectedPorts:
+    - 65f97f5f485c679428a9dc0d37faea37
+    value: 1
+--- !u!114 &-2112554705411897158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac519646286459182140bcb430c7c9e, type: 3}
+  m_Name: QuaternionMultiply
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: f107720d5ee9e034ca1e79687e1ef7e3
+  position: {x: 644.00006, y: 39.333374}
+  description: 
+  info: 
+  subInfo: 
+  lhs:
+    forceDisabled: 0
+    name: lhs
+    node: {fileID: -2112554705411897158}
+    _guid: 4b89567fd397bb44abfa750752f35716
+    connectedPorts:
+    - f41a8395b07d2184eb73c373b29ee854
+    value: {x: -0, y: 0, z: 0, w: 1}
+  rhs:
+    forceDisabled: 0
+    name: rhs
+    node: {fileID: -2112554705411897158}
+    _guid: 059f10008befe9c458b5080e284f8fb8
+    connectedPorts:
+    - e8b6f7c0b2db9fc4d97f79a70ca3bf63
+    value: {x: -0.008509998, y: -0.31255177, z: 0.025852788, w: 0.94951075}
+  output:
+    forceDisabled: 0
+    name: output
+    node: {fileID: -2112554705411897158}
+    _guid: d205ec0fd63528f44885ef6de98d9e2d
+    connectedPorts:
+    - 3bc4d936254685c41bf7645ab9ab7c7c
+    value: {x: -0.008509998, y: -0.31255177, z: 0.025852788, w: 0.94951075}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2283422b0c164b288082f122620d6140, type: 3}
+  m_Name: SplineScatter
+  m_EditorClassIdentifier: 
+  propertyBlockType:
+    rid: 8502566753284915271
+  resultNode: {fileID: -5679729507565983804}
+  nodes:
+  - {fileID: 7836043412632195598}
+  - {fileID: -4833311334437286108}
+  - {fileID: 7706625872873918324}
+  - {fileID: 4740992969035914053}
+  - {fileID: 7677307564086282803}
+  - {fileID: 3171291251726930179}
+  - {fileID: 1760082647895059340}
+  - {fileID: 2635638269842411023}
+  - {fileID: 6489584627375606869}
+  - {fileID: 5567803153316517849}
+  - {fileID: -6767663714367564991}
+  - {fileID: -6188750702665311551}
+  - {fileID: -4691164947436408491}
+  - {fileID: 4458600557359610779}
+  - {fileID: -2603393179571439702}
+  - {fileID: -5679729507565983804}
+  - {fileID: -2112554705411897158}
+  - {fileID: 5344728023973732528}
+  - {fileID: 5420293101548670934}
+  - {fileID: -7095156934334611018}
+  - {fileID: -7181843283212855380}
+  - {fileID: -7069027092465855840}
+  transformScale: {x: 0.8695652, y: 0.8695652, z: 1}
+  transformPosition: {x: 339.33334, y: 999.3333, z: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8502566753284915271
+      type: {class: SplineScatterPropertyBlock, ns: RobertHoudin.Samples.SplineScatter, asm: Assembly-CSharp-firstpass}
+      data:
+        spline:
+          rid: -2
+        resampler:
+          rid: -2
+        randomYRot: 0
+        randomYRotMin: 0
+        randomYRotMax: 0
+        constYRot: 0
+        lookAtSplineDir: 0
+        randomScale: 0
+        randomScaleMin: 0
+        randomScaleMax: 0
+        constScale: 0
+        objectProvider: {fileID: 0}
+        spawnRoot: {fileID: 0}
+--- !u!114 &1760082647895059340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1521ec42a2614f878f065daf02e9a330, type: 3}
+  m_Name: ConstructVector3
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: 094b801b4a690fe44b90d210db056a3c
+  position: {x: 1027.9999, y: -82.66667}
+  description: 
+  info: 
+  subInfo: 
+  xPort:
+    forceDisabled: 0
+    name: xPort
+    node: {fileID: 1760082647895059340}
+    _guid: 455a3f3d26b085241bdbaab035958882
+    connectedPorts:
+    - 58ec49723fa63d84abb257a8126741f8
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 1.2792268
+  yPort:
+    forceDisabled: 0
+    name: yPort
+    node: {fileID: 1760082647895059340}
+    _guid: ed8db06724589754597db661da502628
+    connectedPorts:
+    - 58ec49723fa63d84abb257a8126741f8
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 1.2792268
+  zPort:
+    forceDisabled: 0
+    name: zPort
+    node: {fileID: 1760082647895059340}
+    _guid: 5a92d69bd127d3a4d8de4099b114f8a9
+    connectedPorts:
+    - 58ec49723fa63d84abb257a8126741f8
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 1.2792268
+  output:
+    forceDisabled: 0
+    name: output
+    node: {fileID: 1760082647895059340}
+    _guid: 8044a7ade5358f9439ee8d3fa6c3bab9
+    connectedPorts:
+    - b41b9692a4ce00047aab15ba599e33fb
+    value: {x: 1.2792268, y: 1.2792268, z: 1.2792268}
+--- !u!114 &2635638269842411023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da3bc8cab2e3466faf88e6bb62d20eac, type: 3}
+  m_Name: RaycastNode
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: 87c4eb7fe4f3c774abcf21e2e1d47355
+  position: {x: 226.66663, y: -234.66669}
+  description: 
+  info: 
+  subInfo: 
+  start:
+    forceDisabled: 0
+    name: start
+    node: {fileID: 2635638269842411023}
+    _guid: 1086b6d9fa535ad4ca2f15d577e20a90
+    connectedPorts:
+    - bbffa1737cde46a46bda53fe91f23bcb
+    value:
+      sourceType: 2
+      sourceName: 
+      value: {x: 67.03282, y: 100, z: 76.27965}
+  direction:
+    forceDisabled: 0
+    name: direction
+    node: {fileID: 2635638269842411023}
+    _guid: 773691745e7a76b43b66ca4488844db4
+    connectedPorts: []
+    value:
+      sourceType: 0
+      sourceName: 
+      value: {x: 0, y: -1, z: 0}
+  maxDistance:
+    forceDisabled: 0
+    name: maxDistance
+    node: {fileID: 2635638269842411023}
+    _guid: d7cad0e85ff80f646a2ee13102cf8166
+    connectedPorts: []
+    value:
+      sourceType: 0
+      sourceName: 
+      value: 1000
+  layerMask:
+    forceDisabled: 0
+    name: layerMask
+    node: {fileID: 2635638269842411023}
+    _guid: 0826cc4023937bc49a9b442244744035
+    connectedPorts: []
+    value:
+      sourceType: 0
+      sourceName: 
+      value:
+        serializedVersion: 2
+        m_Bits: 1
+  isHit:
+    forceDisabled: 0
+    name: isHit
+    node: {fileID: 2635638269842411023}
+    _guid: 4f9656437f540c14181ae321777a12ad
+    connectedPorts:
+    - 52c50793cf983e34b8e367279ba83ad6
+    value: 1
+  hitPosition:
+    forceDisabled: 0
+    name: hitPosition
+    node: {fileID: 2635638269842411023}
+    _guid: 6a1067f9b7f2a5a4a909bb7da48c28be
+    connectedPorts:
+    - 0c542570c15391b448cda0eea024851a
+    value: {x: 67.03282, y: 11.917168, z: 76.27965}
+  hitDistance:
+    forceDisabled: 0
+    name: hitDistance
+    node: {fileID: 2635638269842411023}
+    _guid: af5bda3eec24a4a489091cce52052b9d
+    connectedPorts: []
+    value:
+      value: 88.08283
+  hitNormal:
+    forceDisabled: 0
+    name: hitNormal
+    node: {fileID: 2635638269842411023}
+    _guid: 60f3b93361daf2a4e888042dba048e9a
+    connectedPorts:
+    - 7d901b1440bd50c48b2fd74816bc062e
+    - 3899525b4f140d04e8accffb2b9461ef
+    - e2d3652b76842f0428162c558cafb8bf
+    value: {x: -0.5091924, y: 0.57931244, z: 0.63649046}
+  hitTransform:
+    forceDisabled: 0
+    name: hitTransform
+    node: {fileID: 2635638269842411023}
+    _guid: 7feeeacfcdabf624a9d8622b61e42c9b
+    connectedPorts: []
+    value: {fileID: 0}
+--- !u!114 &3171291251726930179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e155d2608fe84e3e98088460ae1abb53, type: 3}
+  m_Name: RandomRange
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: c814c5136f63e584aac42c4f1ee4d630
+  position: {x: 1091.0667, y: -548.6667}
+  description: 
+  info: 
+  subInfo: 
+  minPort:
+    forceDisabled: 0
+    name: minPort
+    node: {fileID: 3171291251726930179}
+    _guid: 6ba0951a3cde0084484aa9aae7960e6b
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: randomScaleMin
+      value:
+        value: 1
+  maxPort:
+    forceDisabled: 0
+    name: maxPort
+    node: {fileID: 3171291251726930179}
+    _guid: d6b6326a90c791242ae969e902d2e6a2
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: randomScaleMax
+      value:
+        value: 5
+  result:
+    forceDisabled: 0
+    name: result
+    node: {fileID: 3171291251726930179}
+    _guid: 178a8790e73c4be459b3f16663e09fac
+    connectedPorts:
+    - faa8147a1cc4add428cbfca33e1a3f97
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 1.2792268
+--- !u!114 &4458600557359610779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1521ec42a2614f878f065daf02e9a330, type: 3}
+  m_Name: ConstructVector3
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: cf8601a2dcd0295418931b407baf3420
+  position: {x: 210.66663, y: -416.00003}
+  description: 
+  info: 
+  subInfo: 
+  xPort:
+    forceDisabled: 0
+    name: xPort
+    node: {fileID: 4458600557359610779}
+    _guid: 77269fb0b56c79241a471e333b117d8b
+    connectedPorts:
+    - 3fb63b3e981a98b4aadd1a529895735f
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 67.03282
+  yPort:
+    forceDisabled: 0
+    name: yPort
+    node: {fileID: 4458600557359610779}
+    _guid: 09fe971e11c3a7d448b09d6f1061cdf0
+    connectedPorts: []
+    value:
+      sourceType: 0
+      sourceName: 
+      value:
+        value: 100
+  zPort:
+    forceDisabled: 0
+    name: zPort
+    node: {fileID: 4458600557359610779}
+    _guid: 9fcddeef5c3e12b44bfdc405a87f2bba
+    connectedPorts:
+    - e6d7b395f71599a4cb57eb0bcf10880c
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 76.27965
+  output:
+    forceDisabled: 0
+    name: output
+    node: {fileID: 4458600557359610779}
+    _guid: bbffa1737cde46a46bda53fe91f23bcb
+    connectedPorts:
+    - 1086b6d9fa535ad4ca2f15d577e20a90
+    value: {x: 67.03282, y: 100, z: 76.27965}
+--- !u!114 &4740992969035914053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67689f8371b4050a6c24f2c1bc13519, type: 3}
+  m_Name: BranchNumber
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: 2d04bf7239af8164e9a77b6dca527118
+  position: {x: 484.6667, y: -617.3334}
+  description: 
+  info: 
+  subInfo: 
+  condition:
+    forceDisabled: 0
+    name: condition
+    node: {fileID: 4740992969035914053}
+    _guid: 92ec58af6c4de7c49b1c93ad164915a2
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: randomYRot
+      value: 0
+  a:
+    forceDisabled: 0
+    name: a
+    node: {fileID: 4740992969035914053}
+    _guid: e65ebc74a38090f4f87a5c2dfa9d1393
+    connectedPorts:
+    - 3e0b2006d5d9d6f43aca6d0c71a970a7
+    value:
+      sourceType: 2
+      sourceName: constYRot
+      value:
+        value: 95.90892
+  b:
+    forceDisabled: 0
+    name: b
+    node: {fileID: 4740992969035914053}
+    _guid: f170894806006d4448a66ceee3b2bf3c
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: constYRot
+      value:
+        value: 0
+  output:
+    forceDisabled: 0
+    name: output
+    node: {fileID: 4740992969035914053}
+    _guid: 3f88d6991ec4f44459e2a41dd8bacdbe
+    connectedPorts:
+    - 2981c22892b4dbf48b7699edcd19b1fd
+    value:
+      value: 0
+--- !u!114 &5344728023973732528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01e71e2803845039be1664f0650b385, type: 3}
+  m_Name: BranchQuaternion
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: 6891a32e6bb296c43a750a4da7011b43
+  position: {x: 703.3334, y: -188.66669}
+  description: 
+  info: 
+  subInfo: 
+  condition:
+    forceDisabled: 0
+    name: condition
+    node: {fileID: 5344728023973732528}
+    _guid: 734d81c5e3d100040aa986d9b55a71c4
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: lookAtSplineDir
+      value: 1
+  a:
+    forceDisabled: 0
+    name: a
+    node: {fileID: 5344728023973732528}
+    _guid: b8c8f080a6abb4044aefc6ba5bce868f
+    connectedPorts:
+    - 72cf69f29af83ad42b21413b523b19f6
+    value: {x: -0.008509998, y: -0.31255177, z: 0.025852788, w: 0.94951075}
+  b:
+    forceDisabled: 0
+    name: b
+    node: {fileID: 5344728023973732528}
+    _guid: 016638f4f6d8a104fb81ba45dd77d1f8
+    connectedPorts:
+    - c12bd8ec4bc72114e830d6e8b0c93439
+    value: {x: 0, y: 0, z: 0, w: 1}
+  output:
+    forceDisabled: 0
+    name: output
+    node: {fileID: 5344728023973732528}
+    _guid: e8b6f7c0b2db9fc4d97f79a70ca3bf63
+    connectedPorts:
+    - 059f10008befe9c458b5080e284f8fb8
+    value: {x: -0.008509998, y: -0.31255177, z: 0.025852788, w: 0.94951075}
+--- !u!114 &5420293101548670934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 216e36dc88f9459da8fd2fa8eaec672f, type: 3}
+  m_Name: QuaternionIdentity
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 0
+  flags: 0
+  _guid: 17ae55578077cb44f94439dcbc8e973e
+  position: {x: 881.33325, y: -358}
+  description: 
+  info: 
+  subInfo: 
+  iden:
+    forceDisabled: 0
+    name: iden
+    node: {fileID: 5420293101548670934}
+    _guid: c12bd8ec4bc72114e830d6e8b0c93439
+    connectedPorts:
+    - 016638f4f6d8a104fb81ba45dd77d1f8
+    value: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &5567803153316517849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2f565384f94e269f70fd835ca89430, type: 3}
+  m_Name: DiscreteSplineToPointCollection
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 1
+  _guid: cfeeca353be924d448941f69eb0f9a3d
+  position: {x: -302.67334, y: -1072.988}
+  description: 
+  info: 
+  subInfo: 
+  discreteSpline:
+    forceDisabled: 0
+    name: discreteSpline
+    node: {fileID: 5567803153316517849}
+    _guid: 64419ec893cd42a41b3f68dd5431ed7f
+    connectedPorts:
+    - 6324d08e625c16c4e875aff9508e5bba
+    value:
+      sourceType: 2
+      sourceName: 
+  positions:
+    forceDisabled: 0
+    name: positions
+    node: {fileID: 5567803153316517849}
+    _guid: 73513d2f8782e5d4cad8e7e20fb6f511
+    connectedPorts:
+    - b4943ee13bac5db43bfbbb4e68a512f2
+  normals:
+    forceDisabled: 0
+    name: normals
+    node: {fileID: 5567803153316517849}
+    _guid: 248824abac4772d44b0b45ed745d986e
+    connectedPorts: []
+  tangents:
+    forceDisabled: 0
+    name: tangents
+    node: {fileID: 5567803153316517849}
+    _guid: 3143bfaca99b551489b0e38f30f93f36
+    connectedPorts:
+    - a9b8cb82cc2275f47a69a3c7d53fe64e
+--- !u!114 &6489584627375606869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc98a94d7c14db4acfa6448fae4ff1a, type: 3}
+  m_Name: NegateNode
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: e9052b3da7f05b848a6eeb4fbb119b29
+  position: {x: 194.71497, y: 3.8933296}
+  description: 
+  info: 
+  subInfo: 
+  boolInput:
+    forceDisabled: 0
+    name: boolInput
+    node: {fileID: 6489584627375606869}
+    _guid: 52c50793cf983e34b8e367279ba83ad6
+    connectedPorts:
+    - 4f9656437f540c14181ae321777a12ad
+    value:
+      sourceType: 2
+      sourceName: 
+      value: 1
+  negateOutput:
+    forceDisabled: 0
+    name: negateOutput
+    node: {fileID: 6489584627375606869}
+    _guid: d229290d87b666b4d9025f2e7680cd3b
+    connectedPorts:
+    - 71da572712ee4a746b07dc4ee824da0c
+    value: 0
+--- !u!114 &7677307564086282803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67689f8371b4050a6c24f2c1bc13519, type: 3}
+  m_Name: BranchNumber
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: 82109932132883f4c880aa019cfb406d
+  position: {x: 1099.3334, y: -327.33328}
+  description: 
+  info: 
+  subInfo: 
+  condition:
+    forceDisabled: 0
+    name: condition
+    node: {fileID: 7677307564086282803}
+    _guid: ac41b77d186f434408247fc49171f67b
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: randomScale
+      value: 1
+  a:
+    forceDisabled: 0
+    name: a
+    node: {fileID: 7677307564086282803}
+    _guid: faa8147a1cc4add428cbfca33e1a3f97
+    connectedPorts:
+    - 178a8790e73c4be459b3f16663e09fac
+    value:
+      sourceType: 2
+      sourceName: constScale
+      value:
+        value: 1.2792268
+  b:
+    forceDisabled: 0
+    name: b
+    node: {fileID: 7677307564086282803}
+    _guid: 6b8156699c0ac124197c50f420d6b12a
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: constScale
+      value:
+        value: 0
+  output:
+    forceDisabled: 0
+    name: output
+    node: {fileID: 7677307564086282803}
+    _guid: 58ec49723fa63d84abb257a8126741f8
+    connectedPorts:
+    - 455a3f3d26b085241bdbaab035958882
+    - ed8db06724589754597db661da502628
+    - 5a92d69bd127d3a4d8de4099b114f8a9
+    value:
+      value: 1.2792268
+--- !u!114 &7706625872873918324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e155d2608fe84e3e98088460ae1abb53, type: 3}
+  m_Name: RandomRange
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 0
+  flags: 0
+  _guid: c343ea0e11f41044caead77b94440b27
+  position: {x: 476.52338, y: -858}
+  description: 
+  info: 
+  subInfo: 
+  minPort:
+    forceDisabled: 0
+    name: minPort
+    node: {fileID: 7706625872873918324}
+    _guid: fc4c8b4da78209548960c7bfee5bb869
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: randomYRotMin
+      value:
+        value: 0
+  maxPort:
+    forceDisabled: 0
+    name: maxPort
+    node: {fileID: 7706625872873918324}
+    _guid: 7246e3863e75ef54abe64851af219d1f
+    connectedPorts: []
+    value:
+      sourceType: 1
+      sourceName: randomYRotMax
+      value:
+        value: 180
+  result:
+    forceDisabled: 0
+    name: result
+    node: {fileID: 7706625872873918324}
+    _guid: 3e0b2006d5d9d6f43aca6d0c71a970a7
+    connectedPorts:
+    - e65ebc74a38090f4f87a5c2dfa9d1393
+    value:
+      sourceType: 2
+      sourceName: 
+      value:
+        value: 95.90892
+--- !u!114 &7836043412632195598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f87baad8ebc46f796a078709f4fdd2d, type: 3}
+  m_Name: ConstructScatterData
+  m_EditorClassIdentifier: 
+  tree: {fileID: 11400000}
+  status: 2
+  flags: 0
+  _guid: cf808f422ae6bba438e82acc366ee86e
+  position: {x: 518.6666, y: 357.3333}
+  description: 
+  info: 
+  subInfo: 
+  isDiscarded:
+    forceDisabled: 0
+    name: isDiscarded
+    node: {fileID: 7836043412632195598}
+    _guid: 71da572712ee4a746b07dc4ee824da0c
+    connectedPorts:
+    - d229290d87b666b4d9025f2e7680cd3b
+    value:
+      sourceType: 2
+      sourceName: 
+      value: 0
+  pos:
+    forceDisabled: 0
+    name: pos
+    node: {fileID: 7836043412632195598}
+    _guid: 0c542570c15391b448cda0eea024851a
+    connectedPorts:
+    - 6a1067f9b7f2a5a4a909bb7da48c28be
+    value:
+      sourceType: 2
+      sourceName: 
+      value: {x: 67.03282, y: 11.917168, z: 76.27965}
+  rot:
+    forceDisabled: 0
+    name: rot
+    node: {fileID: 7836043412632195598}
+    _guid: 3bc4d936254685c41bf7645ab9ab7c7c
+    connectedPorts:
+    - d205ec0fd63528f44885ef6de98d9e2d
+    value:
+      sourceType: 2
+      sourceName: 
+      value: {x: -0.008509998, y: -0.31255177, z: 0.025852788, w: 0.94951075}
+  scale:
+    forceDisabled: 0
+    name: scale
+    node: {fileID: 7836043412632195598}
+    _guid: b41b9692a4ce00047aab15ba599e33fb
+    connectedPorts:
+    - 8044a7ade5358f9439ee8d3fa6c3bab9
+    value:
+      sourceType: 2
+      sourceName: 
+      value: {x: 1.2792268, y: 1.2792268, z: 1.2792268}
+  normal:
+    forceDisabled: 0
+    name: normal
+    node: {fileID: 7836043412632195598}
+    _guid: 7d901b1440bd50c48b2fd74816bc062e
+    connectedPorts:
+    - 60f3b93361daf2a4e888042dba048e9a
+    value:
+      sourceType: 2
+      sourceName: 
+      value: {x: -0.5091924, y: 0.57931244, z: 0.63649046}
+  objectId:
+    forceDisabled: 0
+    name: objectId
+    node: {fileID: 7836043412632195598}
+    _guid: 65f97f5f485c679428a9dc0d37faea37
+    connectedPorts:
+    - fd9f83faa6ce54f4f9b3d6ea61039ae2
+    value:
+      sourceType: 2
+      sourceName: 
+      value: 1
+  data:
+    forceDisabled: 0
+    name: data
+    node: {fileID: 7836043412632195598}
+    _guid: db781f9393dca4145a3254bef3167e25
+    connectedPorts:
+    - 6c5810063d2d0a3488e2d2d58ce89181

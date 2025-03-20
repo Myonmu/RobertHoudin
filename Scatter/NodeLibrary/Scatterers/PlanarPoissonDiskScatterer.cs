@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RobertHoudin.Framework.Core.Ports;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
 using RobertHoudin.Framework.Core.Primitives.Ports;
+using RobertHoudin.Framework.Core.Primitives.Utilities;
 using RobertHoudin.Scatter.Runtime;
 using UnityEngine;
 namespace RobertHoudin.Scatter.NodeLibrary.Scatterers
@@ -21,7 +22,7 @@ namespace RobertHoudin.Scatter.NodeLibrary.Scatterers
         [RhInputPort] public PoissonDiskConstraintPort constraintsPort;
         [RhInputPort] public Vector2PredicatesPort predicatesPort;
         
-        public override List<Vector2> Scatter(RhExecutionContext context)
+        public override NumberBuffer Scatter(RhExecutionContext context)
         {
             var gen = new FastPoissonDiskGenerator()
             {

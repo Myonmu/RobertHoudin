@@ -1,75 +1,36 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using RobertHoudin.Splines.Runtime.SplineInterface;
+using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.Assertions;
 namespace RobertHoudin.Splines.Runtime.Resample
 {
-    public class UniformResamplerEnumerator : IEnumerator<float>
+    public class UniformResamplerEnumerator : SplineResampleEnumerator
     {
-        private float _initialValue;
-        private bool _isInitialMove = true;
-        private bool _prevMoveNextSucceeded = true;
         private float _increment;
-        public UniformResamplerEnumerator(float initialValue, float increment)
+        public UniformResamplerEnumerator(float initialValue, float endValue, float increment):base(initialValue, endValue)
         {
-            _initialValue = initialValue;
-            Current = initialValue;
+            Assert.IsTrue(increment > 0 , "Increment must be greater than zero");
             _increment = increment;
-            _prevMoveNextSucceeded = true;
         }
-        public bool MoveNext()
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected override float GetNextStep()
         {
-            if (_isInitialMove)
-            {
-                _isInitialMove = false;
-                return true;
-            }
-            Current += _increment;
-            if ((Current > 1 || Mathf.Approximately(Current, 1)) && _prevMoveNextSucceeded)
-            {
-                Current = 0.99999999f;
-                _prevMoveNextSucceeded = false;
-                return true;
-            }
-            return _prevMoveNextSucceeded;
-        }
-        public void Reset()
-        {
-            _isInitialMove = true;
-            _prevMoveNextSucceeded = true;
-            Current = _initialValue;
-        }
-        public float Current
-        {
-            get;
-            private set;
-        }
-        object IEnumerator.Current => Current;
-        public void Dispose()
-        {
+            return _increment;
         }
     }
 
     [Serializable]
-    public class UniformResampler : ISplineResampler
+    public class UniformResampler : SplineResampler
     {
         public float resampleFactor = 100;
-        public IEnumerator<float> GenerateResamplePoints(ISpline spline, float start, float end)
+        public override IEnumerator<float> GenerateResamplePoints(ISpline spline, float start = 0, float end = 1)
         {
             var increment = (end - start) / Mathf.Max(1, resampleFactor);
-            return new UniformResamplerEnumerator(start, increment);
-        }
-
-        public List<float> GenerateResamplePointsCollection(ISpline spline, float start, float end)
-        {
-            using var resamplePoints = GenerateResamplePoints(spline, start, end);
-            var result = new List<float>();
-            while (resamplePoints.MoveNext())
-            {
-                result.Add(resamplePoints.Current);
-            }
-            return result;
+            return new UniformResamplerEnumerator(start, end, increment);
         }
     }
 }

@@ -12,4 +12,7 @@ namespace RobertHoudin.Framework.Core.Ports
     [Serializable] public class NumberPort: RhSinglePort<Number> { }
     
     [Serializable] public class MultiNumberPort: RhMultiPort<Number> { }
+    
+    [Serializable] public class NumberBufferPort: RhSinglePortObjectType<NumberBuffer> {}
+    
 }

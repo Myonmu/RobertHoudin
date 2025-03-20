@@ -97,6 +97,7 @@ namespace RobertHoudin.Splines.Runtime.RhSpline
         {
             return rawSpline.GetControlPoints();
         }
+        public int ControlPointCount => rawSpline.ControlPointCount;
         public T1 Evaluate<T1>(string dataKey, float t)
         {
             return Interpolate<T1>(dataKey, t);

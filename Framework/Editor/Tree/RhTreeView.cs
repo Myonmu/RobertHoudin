@@ -118,7 +118,7 @@ namespace RobertHoudin.Framework.Editor.Tree
             if (tree.resultNode == null) return;
             // propagate non-culled state from results node
             // depth-first-search
-            tree.ResetTree();
+            //tree.ResetTree();
             // use hashset to prevent circular dependency
             var path = new HashSet<RhNode>();
             void UpdateCullingStatesRecursive(RhNode cursor)

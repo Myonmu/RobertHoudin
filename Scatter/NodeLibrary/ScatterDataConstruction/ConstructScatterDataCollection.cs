@@ -1,12 +1,12 @@
 ﻿using RobertHoudin.Framework.Core.Ports;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
+using RobertHoudin.Framework.Core.Primitives.Utilities;
 using RobertHoudin.NodeLibrary.Loop;
 using RobertHoudin.Scatter.Runtime;
-using UnityEngine;
 namespace RobertHoudin.Scatter.NodeLibrary.ScatterDataConstruction
 {
     public class ConstructScatterDataCollection: 
-        ForEachNode<Vector2CollectionPort, Vector2Port, ScatterDataPort, ScatterDataCollectionPort, Vector2, ScatterData>
+        ForEachNode<NumberBufferPort, VectorPort, ScatterDataPort, ScatterDataCollectionPort, Vector, ScatterData>
     {
         protected override void OnBeginEvaluate(RhExecutionContext context)
         {
@@ -16,19 +16,19 @@ namespace RobertHoudin.Scatter.NodeLibrary.ScatterDataConstruction
             data.Clear();
         }
 
-        protected override int GetInputCollectionSize(Vector2CollectionPort port)
+        protected override int GetInputCollectionSize(NumberBufferPort port)
         {
-            return port.value.Count;
+            return port.GetValueNoBoxing().Count;
         }
 
-        protected override Vector2 Extract(Vector2CollectionPort input, int i)
+        protected override Vector Extract(NumberBufferPort input, int i)
         {
-            return input.value[i];
+            return input.GetValueNoBoxing()[i];
         }
 
         protected override void Put(ScatterDataCollectionPort outputPort, int i, ScatterData value)
         {
-            outputPort.value.Add(value);
+            outputPort.GetValueNoBoxing().Add(value);
         }
     }
 }

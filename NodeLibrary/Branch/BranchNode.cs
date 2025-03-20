@@ -8,7 +8,7 @@ namespace RobertHoudin.NodeLibrary.Branch
     where TInputPort: RhPort<T>
     where TOutputPort: RhPort<T>
     {
-        [RhInputPort] public BoolPort condition;
+        [RhInputPort] public BoolPortDs condition;
         [RhInputPort] public TInputPort a;
         [RhInputPort] public TInputPort b;
         [RhOutputPort] public TOutputPort output;

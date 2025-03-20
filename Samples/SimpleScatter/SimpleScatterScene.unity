@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 1685806828}
   - component: {fileID: 1685806830}
   m_Layer: 2
-  m_Name: GameObject
+  m_Name: Scatterer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -609,5 +609,5 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 1685806829}
   - {fileID: 631670497}
+  - {fileID: 1685806829}

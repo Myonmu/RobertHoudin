@@ -6,44 +6,47 @@ namespace RobertHoudin.Splines.Runtime.RhSpline
 {
     public class OrderedControlPointCollection
     {
-        private float _accumulatedDistance;
-        private List<ISplineControlPoint> _points = new();
-        private List<float> _distances = new();
-        public int Count => _points.Count;
+        protected float accumulatedDistance;
+        protected List<ISplineControlPoint> points = new();
+        protected List<float> distances = new();
+        public int Count => points.Count;
         public void Update(IEnumerator<ISplineControlPoint> points)
         {
-            _points.Clear();
-            _distances.Clear();
-            _accumulatedDistance = 0;
-            ISplineControlPointWithPosition last = null;
+            this.points.Clear();
+            distances.Clear();
+            accumulatedDistance = 0;
             while (points.MoveNext())
             {
-                var current = points.Current;
-                if (current is not ISplineControlPointWithPosition cpWithPosition)
-                    throw new Exception("All control points must implement ISplineWithPosition");
-                if (last is not null)
-                {
-                    var diff = (cpWithPosition.Position - last.Position).magnitude;
-                    _accumulatedDistance += diff;
-                    _distances.Add(_accumulatedDistance);
-                }
-                else
-                {
-                    _distances.Add(0);
-                }
-                _points.Add(current);
-                last = cpWithPosition;
+                PushPoint(points.Current);
             }
+        }
+        public void PushPoint(ISplineControlPoint p)
+        {
+            if (p is not ISplineControlPointWithPosition cpWithPosition)
+                throw new Exception("All control points must implement ISplineWithPosition");
+            if (points.Count > 0)
+            {
+                var diff = (cpWithPosition.Position - (points[^1] as ISplineControlPointWithPosition).Position).magnitude;
+                accumulatedDistance += diff;
+                distances.Add(accumulatedDistance);
+            }
+            else
+            {
+                distances.Add(0);
+            }
+            points.Add(p);
         }
         public OrderedControlPointCollection(IEnumerator<ISplineControlPoint> points)
         {
             Update(points);
         }
+        
+        public OrderedControlPointCollection(){}
 
         public void SearchClosestControlPointsIndices(float t, out int before, out int after)
         {
             var actualDistance = ConvertToActualDistance(t);
-            ClampSearch.FindClampingIndices(_distances, actualDistance, out before, out after);
+            ClampSearch.FindClampingIndices(distances, actualDistance, out before, out after);
         }
 
         /// <summary>
@@ -56,24 +59,24 @@ namespace RobertHoudin.Splines.Runtime.RhSpline
         public float GetAdjacentControlPoints(float t, out ISplineControlPoint before, out ISplineControlPoint after)
         {
             SearchClosestControlPointsIndices(t, out var beforeIndex, out var afterIndex);
-            before = _points[beforeIndex];
-            after = _points[afterIndex];
-            return (t - _distances[beforeIndex]) / (_distances[afterIndex] - _distances[beforeIndex]);
+            before = points[beforeIndex];
+            after = points[afterIndex];
+            return (t - distances[beforeIndex]) / (distances[afterIndex] - distances[beforeIndex]);
         }
 
         public float GetDistance(int index)
         {
-            return _distances[index];
+            return distances[index];
         }
 
         public ISplineControlPoint GetControlPoint(int index)
         {
-            return _points[index];
+            return points[index];
         }
 
         public float ConvertToActualDistance(float t)
         {
-            return _accumulatedDistance * t;
+            return accumulatedDistance * t;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using RobertHoudin.Framework.Core.Primitives.Nodes;
+using UnityEngine;
 namespace RobertHoudin.Framework.Core.Primitives.Ports
 {
     public static class PortReflection
@@ -17,6 +18,10 @@ namespace RobertHoudin.Framework.Core.Primitives.Ports
                 .Select(x =>
                 {
                     var p = x.GetValue(node) as RhPort;
+                    if (p is null)
+                    {
+                        Debug.LogError($"{x.Name} is not a port");
+                    }
                     p.name = x.Name;
                     return p;
                 }).ToList();

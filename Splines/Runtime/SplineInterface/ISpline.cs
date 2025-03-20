@@ -6,6 +6,7 @@ namespace RobertHoudin.Splines.Runtime.SplineInterface
     {
         public Vector3 ReferencePoint { get; }
         public IEnumerator<ISplineControlPoint> GetControlPoints();
+        public int ControlPointCount { get; }
     }
     public interface ISplineWithPosition: ISpline
     {
