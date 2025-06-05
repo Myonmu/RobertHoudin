@@ -11,6 +11,8 @@ At the moment, the code base contains a minor amount of behaviour tree concepts,
 
 A more extensive documentation can be found [here](https://myonmu.github.io/RobertHoudin-Docs/).
 
+**IMPORTANT NOTE**: The tool is currently in hibernation and waiting for Unity's new graph view solution.
+
 ### Why "Robert Houdin"?
 
 The project is named after the famous French magician, and the reason being, well, Harry *Houdini* is also a famous and remarkable figure in the history of prestidigitation. Plus, *Houdin* is so similar to *Houdini* so I couldn't help it.
