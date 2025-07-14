@@ -1,0 +1,107 @@
+RWTexture2D<float4> _Graph;
+float4 _ClearColor;
+float4 _PlotColor;
+float4 _GraphBounds;
+StructuredBuffer<float2> _OrderedRawDataPoints;
+int _DataPointCount;
+bool _RequireClear;
+
+float _AxisValue;
+float2 _AxisRange;
+int _AxisDirection;
+
+#pragma kernel PlotAxis
+#pragma kernel Plot
+
+uint2 FindClampingIndices(float xVal)
+{
+    uint2 result = uint2(0, _DataPointCount - 1);
+    uint fuse = 0;
+    while (result.y - result.x > 1 && fuse < _DataPointCount)
+    {
+        uint cursor = (result.y + result.x) / 2;
+        if (_OrderedRawDataPoints[cursor].x > xVal)
+        {
+            result.y = cursor;
+        }
+        else
+        {
+            result.x = cursor;
+        }
+        fuse++;
+    }
+    return result;
+}
+
+[numthreads(8,8,1)]
+void PlotAxis(uint3 id : SV_DispatchThreadID)
+{
+    uint width, height;
+    _Graph.GetDimensions(width, height);
+    if (id.x >= width || id.y >= height) return;
+    if (_RequireClear)
+    {
+        _Graph[id.xy] = _ClearColor;
+    }
+    if (_AxisDirection == 0)
+    {
+        int axisPx = (_AxisValue - _AxisRange.x) / (_AxisRange.y - _AxisRange.x) * height;
+        if (id.y == axisPx) _Graph[id.xy] = _PlotColor;
+    }
+    else
+    {
+        int axisPx = (_AxisValue - _AxisRange.x) / (_AxisRange.y - _AxisRange.x) * width;
+        if (id.x == axisPx) _Graph[id.xy] = _PlotColor;
+    }
+}
+
+[numthreads(32,1,1)]
+void Plot(uint3 id : SV_DispatchThreadID)
+{
+    uint column = id.x;
+    uint width, height;
+    _Graph.GetDimensions(width, height);
+    if (column >= width - 1) return; // avoid overflow on last column
+
+    float pxToGraphX = (_GraphBounds.z - _GraphBounds.x) / width;
+    float graphToPxY = height / (_GraphBounds.w - _GraphBounds.y);
+
+    float4 defaultColor = _ClearColor;
+
+    if (_RequireClear)
+    {
+        // Clear column
+        for (uint i = 0; i < height; i++)
+        {
+            _Graph[uint2(column, i)] = defaultColor;
+        }
+    }
+
+    float xInGraph0 = column * pxToGraphX + _GraphBounds.x;
+    float xInGraph1 = (column + 1) * pxToGraphX + _GraphBounds.x;
+
+    // Clamp and interpolate for current column
+    uint2 indices0 = FindClampingIndices(xInGraph0);
+    float2 l0 = _OrderedRawDataPoints[indices0.x];
+    float2 r0 = _OrderedRawDataPoints[indices0.y];
+    float t0 = (xInGraph0 - l0.x) / (r0.x - l0.x + 1e-5);
+    float yGraph0 = lerp(l0.y, r0.y, t0);
+    int yPx0 = round((yGraph0 - _GraphBounds.y) * graphToPxY);
+
+    // Clamp and interpolate for next column
+    uint2 indices1 = FindClampingIndices(xInGraph1);
+    float2 l1 = _OrderedRawDataPoints[indices1.x];
+    float2 r1 = _OrderedRawDataPoints[indices1.y];
+    float t1 = (xInGraph1 - l1.x) / (r1.x - l1.x + 1e-5);
+    float yGraph1 = lerp(l1.y, r1.y, t1);
+    int yPx1 = round((yGraph1 - _GraphBounds.y) * graphToPxY);
+
+    // Draw vertical line between yPx0 and yPx1
+    int yMin = min(yPx0, yPx1);
+    int yMax = max(yPx0, yPx1);
+    for (int y = yMin; y <= yMax; y++)
+    {
+        if (y >= 0 && y < height)
+            _Graph[uint2(column, y)] = _PlotColor;
+    }
+}
